@@ -7,12 +7,12 @@ export function Home() {
 	return (
 		<>
 			<div>
-				<nav class="navbar navbar-light bg-light justify-content-between">
-					<a class="navbar-brand">Home page</a>
+				<nav className="navbar navbar-light bg-light justify-content-between">
+					<i className="navbar brand">Home page</i>
 
-					<div class="form-inline">
+					<div className="form-inline">
 						<button
-							class="btn btn-outline-success my-2 my-sm-0"
+							className="btn btn-outline-success my-2 my-sm-0"
 							id="laptop-home-bt"
 						>
 							<a>
@@ -21,7 +21,7 @@ export function Home() {
 						</button>
 						<button
 							id="Donator-home-bt"
-							class="btn btn-outline-success my-2 my-sm-0"
+							className="btn btn-outline-success my-2 my-sm-0"
 						>
 							<a>
 								<Link to="/create-donator-requests">Donate a laptop</Link>
@@ -30,7 +30,7 @@ export function Home() {
 					</div>
 				</nav>
 			</div>
-			<h4>to see  list-request page: type in the url (/list-requests)</h4>
+			<h4>to see list-request page: type in the url (/list-requests)</h4>
 		</>
 	);
 }

@@ -7,12 +7,12 @@ export function RequestView() {
 	return (
 		<>
 			<div>
-				<nav class="navbar navbar-light bg-light justify-content-between">
-					<a class="navbar-brand">View list table requests</a>
+				<nav className="navbar navbar-light bg-light justify-content-between">
+					<i className="navbar-brand">View list table requests</i>
 
-					<div class="form-inline">
+					<div className="form-inline">
 						<button
-							class="btn btn-outline-success my-2 my-sm-0"
+							className="btn btn-outline-success my-2 my-sm-0"
 							id="laptop-list-bt"
 						>
 							<a>
@@ -21,7 +21,7 @@ export function RequestView() {
 						</button>
 						<button
 							id="Donator-list-bt"
-							class="btn btn-outline-success my-2 my-sm-0"
+							className="btn btn-outline-success my-2 my-sm-0"
 						>
 							<a>
 								<Link to="/list-donator-requests">Donator List Table</Link>
