@@ -5,7 +5,7 @@ function LaptopTable() {
 		<>
 			<div className="laptopForm-card">
 				<p>LaptopTable</p>
-				<p> form for laptop reigsteration </p>
+				<p> Laptop list request  Table</p>
 			</div>
 		</>
 	);

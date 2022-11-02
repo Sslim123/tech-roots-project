@@ -7,7 +7,7 @@ function DonatorTable() {
 				className="DonatorTable-card"
 			>
 				<p>DonatorTable</p>
-				<p> form for laptop reigsteration </p>
+				<p> Dpnator list request Table </p>
 			</div>
 		</>
 	);
