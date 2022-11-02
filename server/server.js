@@ -5,7 +5,6 @@ import { connectDb, disconnectDb } from "./db";
 import config from "./utils/config";
 import logger from "./utils/logger";
 
-const port = parseInt(process.env.PORT || "3000");
 
 const server = http.createServer(app);
 
