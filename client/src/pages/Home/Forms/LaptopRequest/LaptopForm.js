@@ -44,9 +44,12 @@ function LaptopForm() {
 		);
 	}
 	return (
-		<div className="theForm">
+		<div className="form-card">
 			<form onSubmit={submitForm} className="form">
-				<input
+			<div className="form-conatiner">
+			<label>First Name</label>
+				<input 
+				    required
 					type="text"
 					value={firstName}
 					name="firstName"
@@ -54,15 +57,19 @@ function LaptopForm() {
 					className="firstInput"
 					onChange={handleClick}
 				/>
-				<input
+				<label>Last Name</label>
+				<input 
+				    required
 					type="text"
 					value={secondName}
 					name="secondName"
-					placeholder="second name"
+					placeholder="last Name"
 					className="firstInput"
 					onChange={handleClick}
 				/>
+				<label>Email address</label>
 				<input
+				    required
 					type="text"
 					value={email}
 					name="email"
@@ -70,7 +77,9 @@ function LaptopForm() {
 					className="firstInput"
 					onChange={handleClick}
 				/>
+				<label>Phone Number</label>
 				<input
+				    required
 					type="number"
 					value={phoneNumber}
 					name="phoneNumber"
@@ -78,9 +87,12 @@ function LaptopForm() {
 					className="firstInput"
 					onChange={handleClick}
 				/>
-				<button type="submit" className="btn1">
-					request
+				<button type="submit"
+				onClick={messageAlert}
+				className="btn1">
+					Submit
 				</button>
+				</div>
 			</form>
 		</div>
 	);
