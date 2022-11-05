@@ -1,13 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LaptopForm.css";
+
 function LaptopForm() {
+	const [firstName, setFirst] = useState("");
+	const [secondName, setSecond] = useState("");
+	const [email, setEmail] = useState("");
+	const [phoneNumber, setNumber] = useState("");
+
+	function handleClick(e) {
+		if (e.target.name === "firstName") {
+			setFirst(e.target.value);
+		} else if (e.target.name === "secondName") {
+			setSecond(e.target.value);
+		} else if (e.target.name === "email") {
+			setEmail(e.target.value);
+		} else if (e.target.name === "phoneNumber") {
+			setNumber(e.target.value);
+		} else {
+			return null;
+		}
+	}
+	function submitForm(e) {
+		e.preventDefault();
+		setFirst("");
+		setSecond("");
+		setEmail("");
+		setNumber("");
+
+		fetch("/api/laptop_request", {
+			method: "POST",
+			body: JSON.stringify({
+				firstName: firstName,
+				secondName: secondName,
+				email: email,
+				phoneNumber: phoneNumber,
+			}),
+			headers: { "content-type": "application/json" },
+		});
+	}
+	function messageAlert() {
+		alert(
+			"thank you for your completing the request form. your request have been recived "
+		);
+	}
 	return (
-		<>
-			<div className="laptopForm-card">
-				<p>Laptop Form</p>
-				<p> form for laptop reigsteration </p>
-			</div>
-		</>
+		<div className="theForm">
+			<form onSubmit={submitForm} className="form">
+				<input
+					type="text"
+					value={firstName}
+					name="firstName"
+					placeholder="first name"
+					className="firstInput"
+					onChange={handleClick}
+				/>
+				<input
+					type="text"
+					value={secondName}
+					name="secondName"
+					placeholder="second name"
+					className="firstInput"
+					onChange={handleClick}
+				/>
+				<input
+					type="text"
+					value={email}
+					name="email"
+					placeholder="email"
+					className="firstInput"
+					onChange={handleClick}
+				/>
+				<input
+					type="number"
+					value={phoneNumber}
+					name="phoneNumber"
+					placeholder="phon number"
+					className="firstInput"
+					onChange={handleClick}
+				/>
+				<button type="submit" className="btn1">
+					request
+				</button>
+			</form>
+		</div>
 	);
 }
 
