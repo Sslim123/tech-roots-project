@@ -1,54 +1,39 @@
-
 import Table from "react-bootstrap/Table";
-// import React, {useState, useEffect} from "react";
-import User from './fakeData.json'
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+
 function LaptopTable() {
-//   const [data, setData] = useState(null);
-//   const [loading, setLoaing] = useState(true);
-//   const [error, setErros] = useState(null);
+	const [laptopRequests, setLaptopRequests] = useState([]);
 
-//   useEffect(() => {
-//     axios('https://dummyjson.com/users/1')
-//       .then( response => setData(response.data))
-//       .catch(error => {
-//         console.log('error fetching data:', error);
-//         setErros(error)
-//       })
-//       .finally(()=>{
-//         setLoaing(false);
-//       })
-      
-//   }, []);
-//   if (loading) return 'loding....'
-//   if (error) return 'eroor!....'
-  const tabuser = User.map((item) => {
-    return (
-      <tr>
-        <th>{item.id}</th>
-        <th>{item.name}</th>
-        <th>{item.lasteName}</th>
-        <th>{item.email}</th>
-      </tr>
-    );
-  
-  });
+	useEffect(() => {
+		fetch("/api/laptop_request")
+			.then((res) => res.json())
+			.then((data) => setLaptopRequests(data));
+	}, []);
 
+	const tableRows = laptopRequests.map((item) => {
+		return (
+			<tr>
+				<th>{item.firstName}</th>
+				<th>{item.lastName}</th>
+				<th>{item.email}</th>
+				<th>{item.phoneNumber}</th>
+			</tr>
+		);
+	});
 
-
-  return (
-    <Table striped bordered hover size="sm" >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>{tabuser }</tbody>
-    </Table>
-  );
+	return (
+		<Table striped bordered hover size="sm">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+          <th>phone Number</th>
+				</tr>
+			</thead>
+			<tbody>{tableRows}</tbody>
+		</Table>
+	);
 }
 
 export default LaptopTable;

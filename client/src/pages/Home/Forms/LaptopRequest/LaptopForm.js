@@ -3,15 +3,15 @@ import "./LaptopForm.css";
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
-	const [secondName, setSecond] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
 
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
 			setFirst(e.target.value);
-		} else if (e.target.name === "secondName") {
-			setSecond(e.target.value);
+		} else if (e.target.name === "lastName") {
+			setLastName(e.target.value);
 		} else if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else if (e.target.name === "phoneNumber") {
@@ -23,7 +23,7 @@ function LaptopForm() {
 	function submitForm(e) {
 		e.preventDefault();
 		setFirst("");
-		setSecond("");
+		setLastName("");
 		setEmail("");
 		setNumber("");
 
@@ -31,7 +31,7 @@ function LaptopForm() {
 			method: "POST",
 			body: JSON.stringify({
 				firstName: firstName,
-				secondName: secondName,
+				lastName: lastName,
 				email: email,
 				phoneNumber: phoneNumber,
 			}),
@@ -44,9 +44,12 @@ function LaptopForm() {
 		);
 	}
 	return (
-		<div className="theForm">
+		<div className="form-card">
 			<form onSubmit={submitForm} className="form">
-				<input
+			<div className="form-conatiner">
+			<label>First Name</label>
+				<input 
+				    required
 					type="text"
 					value={firstName}
 					name="firstName"
@@ -54,15 +57,19 @@ function LaptopForm() {
 					className="firstInput"
 					onChange={handleClick}
 				/>
-				<input
+				<label>Last Name</label>
+				<input 
+				    required
 					type="text"
-					value={secondName}
-					name="secondName"
-					placeholder="second name"
+					value={lastName}
+					name="lastName"
+					placeholder="lastName"
 					className="firstInput"
 					onChange={handleClick}
 				/>
+				<label>Email address</label>
 				<input
+				    required
 					type="text"
 					value={email}
 					name="email"
@@ -70,7 +77,9 @@ function LaptopForm() {
 					className="firstInput"
 					onChange={handleClick}
 				/>
+				<label>Phone Number</label>
 				<input
+				    required
 					type="number"
 					value={phoneNumber}
 					name="phoneNumber"
@@ -78,9 +87,12 @@ function LaptopForm() {
 					className="firstInput"
 					onChange={handleClick}
 				/>
-				<button type="submit" className="btn1">
-					request
+				<button type="submit"
+				onClick={messageAlert}
+				className="btn1">
+					Submit
 				</button>
+				</div>
 			</form>
 		</div>
 	);
