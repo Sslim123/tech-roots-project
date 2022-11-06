@@ -3,15 +3,15 @@ import "./LaptopForm.css";
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
-	const [secondName, setSecond] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
 
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
 			setFirst(e.target.value);
-		} else if (e.target.name === "secondName") {
-			setSecond(e.target.value);
+		} else if (e.target.name === "lastName") {
+			setLastName(e.target.value);
 		} else if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else if (e.target.name === "phoneNumber") {
@@ -23,7 +23,7 @@ function LaptopForm() {
 	function submitForm(e) {
 		e.preventDefault();
 		setFirst("");
-		setSecond("");
+		setLastName("");
 		setEmail("");
 		setNumber("");
 
@@ -31,7 +31,7 @@ function LaptopForm() {
 			method: "POST",
 			body: JSON.stringify({
 				firstName: firstName,
-				secondName: secondName,
+				lastName: lastName,
 				email: email,
 				phoneNumber: phoneNumber,
 			}),
@@ -61,9 +61,9 @@ function LaptopForm() {
 				<input 
 				    required
 					type="text"
-					value={secondName}
-					name="secondName"
-					placeholder="last Name"
+					value={lastName}
+					name="lastName"
+					placeholder="lastName"
 					className="firstInput"
 					onChange={handleClick}
 				/>
