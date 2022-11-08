@@ -38,7 +38,29 @@ function LaptopForm() {
 			headers: { "content-type": "application/json" },
 		});
 	}
-	
+	const closeModale = document.querySelector('.close_modale');
+			const  btn = document.querySelector('.btn1');
+		const modale = document.querySelector('.modale-content');
+		const form = document.querySelector('.form');
+	//function display greeting after submit the from
+		function messageGreet(){
+		
+			btn.addEventListener("click", messageAlert);
+			function messageAlert() {
+				console.log('heloo');
+				modale.style.display = 'block';
+		};
+		closeModale.addEventListener('click', messageClosed);
+		function messageClosed() {
+			console.log('heloo');
+			modale.style.display = 'none';
+		};
+		btn.addEventListener('click', formApear);
+		function formApear() {
+			console.log('heloo');
+			form.style.display = 'none';			
+				};		
+			};
 	return (
 		<div className="form-card">
 			<div className="modale-content">
