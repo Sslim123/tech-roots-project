@@ -100,7 +100,7 @@ function DonatorForm() {
 						<input
 							type="radio"
 							name="deliveryOption"
-							value="pickup"
+							value="PICKUP"
 							onChange={handleClick}
 						/>
 						<label>I would like someone to come pick it up</label>
@@ -109,7 +109,7 @@ function DonatorForm() {
 						<input
 							type="radio"
 							name="deliveryOption"
-							value="dropOff"
+							value="DROPOFF"
 							onChange={handleClick}
 						/>
 						<label>I would like to drop it off at a collection point</label>
@@ -119,7 +119,7 @@ function DonatorForm() {
 						<input
 							type="radio"
 							name="deliveryOption"
-							value="ship"
+							value="SHIP"
 							onChange={handleClick}
 						/>
 						<label>I would like to ship it via post/courier</label>

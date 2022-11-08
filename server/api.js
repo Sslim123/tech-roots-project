@@ -44,23 +44,30 @@ router.get("/laptop_request", async (req, res) => {
 });
 
 router.post("/laptop_donation", (req, res) => {
-	// create a database table for 
+	// create a database table for
 	let name = req.body.name;
 	let address = req.body.address;
-	let laptops = req.body.numberOfLaptops;
-	let phonenumber = req.body.phoneNumber;
+	let number_of_laptops = req.body.numberOfLaptops;
+	let phone_number = req.body.phoneNumber;
 	let email = req.body.email;
-	let deliveryoption = req.body.deliveryOption;
+	let delivery_option = req.body.deliveryOption;
 
 	const query =
-		" insert into laptop_donations (name, address, laptops, phonenumber, email, deliveryoption) values ($1, $2, $3, $4, $5, $6)";
+		" insert into laptop_donations (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6)";
 
-	db.query(query, [name, address, laptops, phonenumber, email, deliveryoption])
+	db.query(query, [
+		name,
+		address,
+		number_of_laptops,
+		phone_number,
+		email,
+		delivery_option,
+	])
 		.then(() => res.send("result.rows"))
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not   success" });
 		});
-})
+});
 
 export default router;
