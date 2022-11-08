@@ -115,7 +115,7 @@ function LaptopForm() {
 					onChange={handleClick}
 				/>
 				<button type="submit"
-				onClick={messageAlert}
+				onClick={messageGreet}
 				className="btn1">
 					Submit
 				</button>
