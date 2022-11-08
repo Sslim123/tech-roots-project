@@ -10,12 +10,12 @@ router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
 });
 router.post("/laptop_request", (req, res) => {
-	let firstName = req.body.First_Name;
-	let lastName = req.body.Last_Name;
-	let email = req.body.Email_Address;
-	let phoneNumber = req.body.Phone_Number;
+	let firstName = req.body.firstName;
+	let lastName = req.body.lastName;
+	let email = req.body.email;
+	let phoneNumber = req.body.phoneNumber;
 	const query =
-		" insert into laptop_request (First_Name, Last_Name, Email_Address, Phone_Number) values ($1, $2, $3, $4)";
+		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4)";
 	db.query(query, [firstName, lastName, email, phoneNumber])
 		.then(() => res.send("result.rows"))
 		.catch((error) => {
@@ -30,10 +30,10 @@ router.get("/laptop_request", async (req, res) => {
 
 		const laptopRequests = result.rows.map((row) => {
 			return {
-				firstName: row.First_Name,
-				lastName: row.Last-Name,
-				email: row.Email_Address,
-				phoneNumber: row.Phone_Number,
+				firstName: row.firstname,
+				lastName: row.lastname,
+				email: row.email,
+				phoneNumber: row.phonenumber,
 			};
 		});
 		res.json(laptopRequests);
