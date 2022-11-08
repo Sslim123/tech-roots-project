@@ -38,13 +38,18 @@ function LaptopForm() {
 			headers: { "content-type": "application/json" },
 		});
 	}
-	function messageAlert() {
-		alert(
-			"thank you for your completing the request form. your request have been recived "
-		);
-	}
+	
 	return (
 		<div className="form-card">
+			<div className="modale-content">
+              <span className="close_modale">
+               &times;
+			  </span>
+			  <p className="newPragraph">
+							thank you for your completing the request 
+							form. your request have been recived and you 
+							have been added to our waiting list</p>
+			</div>
 			<form onSubmit={submitForm} className="form">
 			<div className="form-conatiner">
 			<label>First Name</label>
