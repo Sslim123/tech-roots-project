@@ -54,7 +54,6 @@ function DonatorForm() {
 		<>
 			<form className="donator_form" onSubmit={submitForm}>
 				<div>
-					{/* add required */}
 					<input
 						placeholder="Name"
 						value={name}

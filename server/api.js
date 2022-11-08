@@ -47,10 +47,10 @@ router.post("/laptop_donation", (req, res) => {
 	// create a database table for
 	let name = req.body.name;
 	let address = req.body.address;
-	let number_of_laptops = req.body.numberOfLaptops;
-	let phone_number = req.body.phoneNumber;
+	let numberOfLaptops = req.body.numberOfLaptops;
+	let phoneNumber = req.body.phoneNumber;
 	let email = req.body.email;
-	let delivery_option = req.body.deliveryOption;
+	let deliveryOption = req.body.deliveryOption;
 
 	const query =
 		" insert into laptop_donations (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6)";
@@ -58,10 +58,10 @@ router.post("/laptop_donation", (req, res) => {
 	db.query(query, [
 		name,
 		address,
-		number_of_laptops,
-		phone_number,
+		numberOfLaptops,
+		phoneNumber,
 		email,
-		delivery_option,
+		deliveryOption,
 	])
 		.then(() => res.send("result.rows"))
 		.catch((error) => {
