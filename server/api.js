@@ -43,4 +43,24 @@ router.get("/laptop_request", async (req, res) => {
 	}
 });
 
+router.post("/laptop_donation", (req, res) => {
+	// create a database table for 
+	let name = req.body.name;
+	let address = req.body.address;
+	let laptops = req.body.numberOfLaptops;
+	let phonenumber = req.body.phoneNumber;
+	let email = req.body.email;
+	let deliveryoption = req.body.deliveryOption;
+
+	const query =
+		" insert into laptop_donations (name, address, laptops, phonenumber, email, deliveryoption) values ($1, $2, $3, $4, $5, $6)";
+
+	db.query(query, [name, address, laptops, phonenumber, email, deliveryoption])
+		.then(() => res.send("result.rows"))
+		.catch((error) => {
+			console.error(error);
+			res.status(400).json({ success: " was not   success" });
+		});
+})
+
 export default router;

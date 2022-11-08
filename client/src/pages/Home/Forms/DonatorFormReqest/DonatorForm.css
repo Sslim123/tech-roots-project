@@ -2,3 +2,7 @@
     text-align: center;
     font-size: 40px;
 }
+/* form */
+input {
+    display: block;
+}
