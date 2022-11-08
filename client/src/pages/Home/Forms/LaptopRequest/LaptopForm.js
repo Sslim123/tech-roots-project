@@ -38,13 +38,40 @@ function LaptopForm() {
 			headers: { "content-type": "application/json" },
 		});
 	}
-	function messageAlert() {
-		alert(
-			"thank you for your completing the request form. your request have been recived "
-		);
-	}
+	const closeModale = document.querySelector('.close_modale');
+			const  btn = document.querySelector('.btn1');
+		const modale = document.querySelector('.modale-content');
+		const form = document.querySelector('.form');
+	//function display greeting after submit the from
+		function messageGreet(){
+		
+			btn.addEventListener("click", messageAlert);
+			function messageAlert() {
+				console.log('heloo');
+				modale.style.display = 'block';
+		};
+		closeModale.addEventListener('click', messageClosed);
+		function messageClosed() {
+			console.log('heloo');
+			modale.style.display = 'none';
+		};
+		btn.addEventListener('click', formApear);
+		function formApear() {
+			console.log('heloo');
+			form.style.display = 'none';			
+				};		
+			};
 	return (
 		<div className="form-card">
+			<div className="modale-content">
+              <span className="close_modale">
+               &times;
+			  </span>
+			  <p className="newPragraph">
+							thank you for your completing the request 
+							form. your request have been recived and you 
+							have been added to our waiting list</p>
+			</div>
 			<form onSubmit={submitForm} className="form">
 			<div className="form-conatiner">
 			<label>First Name</label>
@@ -88,7 +115,7 @@ function LaptopForm() {
 					onChange={handleClick}
 				/>
 				<button type="submit"
-				onClick={messageAlert}
+				onClick={messageGreet}
 				className="btn1">
 					Submit
 				</button>
