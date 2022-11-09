@@ -2,15 +2,17 @@
 	"env": {
 		"browser": true
 	},
-	"extends": ["plugin:jsx-a11y/strict", "plugin:react/recommended"],
-	"plugins": ["react-hooks"],
+	"extends": ["plugin:jsx-a11y/strict", "plugin:react/recommended", "prettier"],
+	"plugins": ["react-hooks", "prettier"],
 	"rules": {
 		"react/jsx-tag-spacing": "error",
 		"react/no-unused-prop-types": "error",
 		"react/prop-types": "off",
 		"react/react-in-jsx-scope": "off",
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "error"
+		"react-hooks/exhaustive-deps": "error",
+		"prettier/prettier": "error",
+		"no-console": "warn"
 	},
 	"settings": {
 		"react": {

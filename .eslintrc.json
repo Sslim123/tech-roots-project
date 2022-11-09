@@ -3,11 +3,12 @@
 		"es6": true,
 		"node": true
 	},
-	"extends": ["@codeyourfuture/standard"],
+	"plugins": ["prettier"],
+	"extends": ["@codeyourfuture/standard", "prettier"],
 	"parser": "@babel/eslint-parser",
 	"root": true,
 	"rules": {
-		"indent": ["error", true],
+		"indent": ["off"],
 		"operator-linebreak": "off"
 	}
 }

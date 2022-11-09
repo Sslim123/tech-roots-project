@@ -5,7 +5,6 @@ import { connectDb, disconnectDb } from "./db";
 import config from "./utils/config";
 import logger from "./utils/logger";
 
-
 const server = http.createServer(app);
 
 server.on("listening", () => {
