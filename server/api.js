@@ -53,7 +53,7 @@ router.post("/laptop_donation", (req, res) => {
 	let deliveryOption = req.body.deliveryOption;
 
 	const query =
-		" insert into laptop_donations (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6)";
+		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6)";
 
 	db.query(query, [
 		name,

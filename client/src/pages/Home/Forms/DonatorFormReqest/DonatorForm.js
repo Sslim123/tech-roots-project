@@ -92,7 +92,7 @@ function DonatorForm() {
 					/>
 				</div>
 
-				<p>How would you like the laptop to be transfered?</p>
+				<p>How would you like the laptop to be transferred?</p>
 
 				<div>
 					<div>
