@@ -27,8 +27,8 @@ function LaptopTable() {
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th>Email</th>
-          <th>phone Number</th>
+					<th>Email Address</th>
+					<th>Phone Number</th>
 				</tr>
 			</thead>
 			<tbody>{tableRows}</tbody>
