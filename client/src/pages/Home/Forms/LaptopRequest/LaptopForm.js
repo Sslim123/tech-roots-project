@@ -38,18 +38,34 @@ function LaptopForm() {
 			headers: { "content-type": "application/json" },
 		});
 	}
+
+	function validateForm(form) {
+		if (
+			form.firstName.value.length === 0 ||
+			form.lastName.value.length === 0 ||
+			form.email.value.length === 0 ||
+			form.phoneNumber.value.length === 0
+		) {
+			return false;
+		}
+
+		return true;
+	}
 	function messageAlert() {
-		alert(
-			"thank you for your completing the request form. your request have been recived "
-		);
+		if (validateForm(document.laptopRequestForm)) {
+			alert(
+				"thank you for your completing the request form. your request have been recived "
+			);
+		}
 	}
 	return (
 		<div className="form-card">
-			<form onSubmit={submitForm} className="form">
+			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
 				<div className="form-container">
 					<label>First Name</label>
 					<input
 						required
+						id="firstName"
 						type="text"
 						value={firstName}
 						name="firstName"
@@ -62,6 +78,7 @@ function LaptopForm() {
 						required
 						type="text"
 						value={lastName}
+						id="lastName"
 						name="lastName"
 						placeholder="Last Name"
 						className="input_field"
@@ -72,6 +89,7 @@ function LaptopForm() {
 						required
 						type="text"
 						value={email}
+						id="email"
 						name="email"
 						placeholder="Email Address"
 						className="input_field"
@@ -82,6 +100,7 @@ function LaptopForm() {
 						required
 						type="number"
 						value={phoneNumber}
+						id="phoneNumber"
 						name="phoneNumber"
 						placeholder="Phone Number"
 						className="input_field"

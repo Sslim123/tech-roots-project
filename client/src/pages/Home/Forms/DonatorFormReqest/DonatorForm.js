@@ -60,6 +60,7 @@ function DonatorForm() {
 						name="name"
 						className="input_field"
 						onChange={handleClick}
+						required
 					/>
 					<input
 						placeholder="Address"
@@ -75,6 +76,7 @@ function DonatorForm() {
 						name="numberOfLaptops"
 						className="input_field"
 						onChange={handleClick}
+						required
 					/>
 					<input
 						placeholder="Phone number"
@@ -82,6 +84,7 @@ function DonatorForm() {
 						name="phoneNumber"
 						className="input_field"
 						onChange={handleClick}
+						required
 					/>
 					<input
 						placeholder="Email"
@@ -89,6 +92,7 @@ function DonatorForm() {
 						name="email"
 						className="input_field"
 						onChange={handleClick}
+						required
 					/>
 
 					<p>How would you like the laptop to be transferred?</p>
