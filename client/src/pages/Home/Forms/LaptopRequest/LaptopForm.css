@@ -4,25 +4,25 @@
     justify-content: center;
 
 }
-.form-conatiner{
+.form-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
 }
-.form-conatiner input{
+.form-container input{
     background-color: rgb(247, 247, 247);
     width: 300px;
     height: 50px;
    font-size: 26px;
    padding-left: 10px;
 }
-.form-conatiner label{
+.form-container label{
     font-size: 15px;
     padding-right: 5cm;
 }
-.form-conatiner button{
+.form-container button{
     width: 300px;
     height: 50px;
     margin-top: 15px;

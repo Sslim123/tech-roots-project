@@ -51,9 +51,9 @@ function DonatorForm() {
 		});
 	}
 	return (
-		<>
-			<form className="donator_form" onSubmit={submitForm}>
-				<div>
+		<div className="form-card">
+			<form className="form" onSubmit={submitForm}>
+				<div className="form-container">
 					<input
 						placeholder="Name"
 						value={name}
@@ -90,44 +90,44 @@ function DonatorForm() {
 						className="input_field"
 						onChange={handleClick}
 					/>
+
+					<p>How would you like the laptop to be transferred?</p>
+
+					<div>
+						<div className="radio-input">
+							<input
+								type="radio"
+								name="deliveryOption"
+								value="PICK UP"
+								onChange={handleClick}
+							/>
+							<label>I would like someone to come pick it up</label>
+						</div>
+						<div className="radio-input">
+							<input
+								type="radio"
+								name="deliveryOption"
+								value="DROP OFF"
+								onChange={handleClick}
+							/>
+							<label>I would like to drop it off at a collection point</label>
+						</div>
+
+						<div className="radio-input">
+							<input
+								type="radio"
+								name="deliveryOption"
+								value="SHIP"
+								onChange={handleClick}
+							/>
+							<label>I would like to ship it via post/courier</label>
+						</div>
+					</div>
+
+					<button>Donate</button>
 				</div>
-
-				<p>How would you like the laptop to be transferred?</p>
-
-				<div>
-					<div>
-						<input
-							type="radio"
-							name="deliveryOption"
-							value="PICKUP"
-							onChange={handleClick}
-						/>
-						<label>I would like someone to come pick it up</label>
-					</div>
-					<div>
-						<input
-							type="radio"
-							name="deliveryOption"
-							value="DROPOFF"
-							onChange={handleClick}
-						/>
-						<label>I would like to drop it off at a collection point</label>
-					</div>
-
-					<div>
-						<input
-							type="radio"
-							name="deliveryOption"
-							value="SHIP"
-							onChange={handleClick}
-						/>
-						<label>I would like to ship it via post/courier</label>
-					</div>
-				</div>
-
-				<button>Donate</button>
 			</form>
-		</>
+		</div>
 	);
 }
 
