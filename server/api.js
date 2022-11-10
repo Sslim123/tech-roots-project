@@ -70,4 +70,25 @@ router.post("/laptop_donation", (req, res) => {
 		});
 });
 
+router.get("/laptop_donation", async (req, res) => {
+	try {
+		const result = await db.query("SELECT * from laptop_donation");
+
+		const laptopDonation = result.rows.map((row) => {
+			return {
+				name: row.name,
+				address: row.address,
+				numberOfLaptops: row.number_of_laptops,
+				phoneNumber: row.phone_number,
+				email: row.email,
+				deliveryOption: row.delivery_option,
+			};
+		});
+		res.json(laptopDonation);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
+});
+
 export default router;
