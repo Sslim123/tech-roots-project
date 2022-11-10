@@ -3,3 +3,5 @@ dist/
 node_modules/
 .DS_Store
 .env
+e2e/screenshots
+e2e/videos
