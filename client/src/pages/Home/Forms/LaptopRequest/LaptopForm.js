@@ -51,15 +51,32 @@ function LaptopForm() {
 
 		return true;
 	}
+	const closeModale = document.querySelector(".close_modale");
+	const modale = document.querySelector(".modale-content");
+	const form = document.querySelector(".form");
+	//function display greeting after submit the from
+
 	function messageAlert() {
-		if (validateForm(document.laptopRequestForm)) {
-			alert(
-				"thank you for your completing the request form. your request have been recived "
-			);
-		}
+		console.log("heloo");
+		document.body.style.backgroundColor = "black";
+		modale.style.display = "block";
+		form.style.display = "none";
+	}
+	function messageClosed() {
+		console.log("heloo");
+		modale.style.display = "none";
 	}
 	return (
 		<div className="form-card">
+			<div className="modale-content">
+				<p className="newPragraph">
+					thank you for your completing the request form. your request have been
+					recived and you have been added to our waiting list
+				</p>
+				<button onClick={messageClosed} className="close_modale">
+					close
+				</button>
+			</div>
 			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
 				<div className="form-container">
 					<label>First Name</label>
