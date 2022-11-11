@@ -1,14 +1,12 @@
 import { request } from "express";
 import { Router } from "express";
-import { restart } from "nodemon";
-import { func } from "prop-types";
 import db from "./db";
 
 import logger from "./utils/logger";
 
 const router = Router();
 
-let fakeRequests = [
+let requests = [
 	{
 		id: 1,
 		firstName: "bob",
@@ -51,29 +49,26 @@ let fakeRequests = [
 	},
 ];
 
-
-router.get("/laptop-request-status/:id",  (req, res) => {
-	let status = fakeRequests.find((item) => item.id === req.params.id);
-	res.send(status);
+router.get("/laptop-request-status/:id", (req, res) => {
+	console.log(req.params.id);
+	let laptopRequest = requests.find((item) => item.id == req.params.id);
+	console.log(laptopRequest);
+	res.send(laptopRequest);
 });
-
 
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
 });
 
-
 router.post("/laptop_request", (req, res) => {
 	let firstName = req.body.firstName;
 	let lastName = req.body.lastName;
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
-	let status = "WAITING";
-	let requestId = req.body.requestId;
 	const query =
-		" insert into laptop_request (firstname, lastname, email, phonenumber, status, requestid) values ($1, $2, $3, $4, $5, $6)";
-	db.query(query, [firstName, lastName, email, phoneNumber, status, requestId])
+		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4)";
+	db.query(query, [firstName, lastName, email, phoneNumber])
 		.then(() => res.send("result.rows"))
 		.catch((error) => {
 			console.error(error);
