@@ -1,21 +1,21 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-const RequestStatusView = () => {
-	const [status, setStatus] = useState(null);
+export function RequestStatus() {
+	const [request, setRequest] = useState(null);
 	// this helps get the id from the router
 	const { id } = useParams();
 
 	useEffect(() => {
-		fetch("/api/laptop-request-status/" + id)
+		fetch(`/api/laptop-request-status/${id}`)
 			.then((res) => res.json())
-			.then((data) => setStatus(data));
+			.then((data) => setRequest(data));
 	}, []);
 
-	if (status !== null) {
-		if (status === "WAITING") {
+	console.log(request);
+	if (request !== null) {
+		if (request.status === "WAITING") {
 			return (
 				<>
 					<div>
@@ -25,23 +25,23 @@ const RequestStatusView = () => {
 					<button>Cancel my request</button>
 				</>
 			);
-		} else if (status === "ASSIGNED") {
+		} else if (request.status === "ASSIGNED") {
 			return (
 				<>
 					You have been assigned a laptop. Please confirm your address can be
 					shared so it can be sent to you."
 				</>
 			);
-		} else if (status === "ACCEPTED") {
+		} else if (request.status === "ACCEPTED") {
 			return (
 				<>
 					Please let us know when you have received your laptop / when you have
 					picked up your laptop at address.
 				</>
 			);
-		} else if (status === "CANCELLED") {
+		} else if (request.status === "CANCELLED") {
 			return <>"This request has been cancelled, as requested."</>;
-		} else if (status === "FULLFILLED") {
+		} else if (request.status === "FULLFILLED") {
 			return (
 				<>
 					Sweet! You now have your laptop. Time to start working on your
@@ -52,7 +52,6 @@ const RequestStatusView = () => {
 	} else {
 		return <>Oops, something went wrong.../ this request doesn't exist</>;
 	}
-	
-};
+}
 
-export default RequestStatusView
+export default RequestStatus;

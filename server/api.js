@@ -8,7 +8,7 @@ import logger from "./utils/logger";
 
 const router = Router();
 
-let requests = [
+let fakeRequests = [
 	{
 		id: 1,
 		firstName: "bob",
@@ -52,20 +52,9 @@ let requests = [
 ];
 
 
-router.get("/laptop-request-status/:id", async (req, res) => {
-	try {
-		const result = await db.query(
-			`select * from laptop_request where requestid = '${req.params.id}' `
-		);
-		let requestStatus = result.rows[0].status;
-		// console.log("............................");
-		// console.log(requestStatus);
-		// console.log("............................");
-		res.send(requestStatus);
-	} catch (e) {
-		console.error(e);
-		res.sendStatus(400);
-	}
+router.get("/laptop-request-status/:id",  (req, res) => {
+	let status = fakeRequests.find((item) => item.id === req.params.id);
+	res.send(status);
 });
 
 
