@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ButtonComponent = (props) => {
 
   return props.validateForm ? (
-		<button type="submit" className="btn1">
+		<button type="submit" className="btn1" onClick={props.handleSubmit}>
 			<Link to="/laptop-request-status/1">
 				<p style={{ color: "white" }}>Submit</p>
 			</Link>

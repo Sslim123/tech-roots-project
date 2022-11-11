@@ -4,7 +4,8 @@ create table laptop_request (
     firstname varchar(100),
     lastname varchar(100),
     email varchar(100),
-    phonenumber varchar(100)
+    phonenumber varchar(100), 
+    status varchar(100)
 );
 
 create table laptop_donation (

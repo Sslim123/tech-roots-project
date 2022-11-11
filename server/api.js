@@ -66,9 +66,10 @@ router.post("/laptop_request", (req, res) => {
 	let lastName = req.body.lastName;
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
+	let status = "WAITING";
 	const query =
-		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4)";
-	db.query(query, [firstName, lastName, email, phoneNumber])
+		" insert into laptop_request (firstname, lastname, email, phonenumber, status) values ($1, $2, $3, $4, $5)";
+	db.query(query, [firstName, lastName, email, phoneNumber, status])
 		.then(() => res.send("result.rows"))
 		.catch((error) => {
 			console.error(error);

@@ -28,6 +28,7 @@ function LaptopForm() {
 		}
 	}
 	function submitForm(e) {
+		console.log("submitting");
 		e.preventDefault();
 		setFirst("");
 		setLastName("");
@@ -112,7 +113,10 @@ function LaptopForm() {
 						onChange={handleClick}
 					/>
 
-					<ButtonComponent validateForm = {formValidation}/>
+					<ButtonComponent
+						validateForm={formValidation}
+						handleSubmit={submitForm}
+					/>
 				</div>
 			</form>
 		</div>
