@@ -1,39 +1,26 @@
-import React, { useState, useEffect } from "react";
-import ButtonComponent from "./ButtonComponent";
+import React, { useState } from "react";
 import "./LaptopForm.css";
-
-function generateRandomId() {
-	return Math.floor(Math.random() * 10000);
-}
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
-	const [formValidation, setFormValidation] = useState(false);
-	const [requestId, setRequestId] = useState(null);
 
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
 			setFirst(e.target.value);
-			validateForm();
 		} else if (e.target.name === "lastName") {
 			setLastName(e.target.value);
-			validateForm();
 		} else if (e.target.name === "email") {
 			setEmail(e.target.value);
-			validateForm();
 		} else if (e.target.name === "phoneNumber") {
 			setNumber(e.target.value);
-			validateForm();
 		} else {
-			validateForm();
 			return null;
 		}
 	}
 	function submitForm(e) {
-		console.log("submitting");
 		e.preventDefault();
 		setFirst("");
 		setLastName("");
@@ -47,30 +34,30 @@ function LaptopForm() {
 				lastName: lastName,
 				email: email,
 				phoneNumber: phoneNumber,
-				requestId : requestId,
 			}),
 			headers: { "content-type": "application/json" },
 		});
 	}
 
-	function validateForm() {
-		let form = document.laptopRequestForm;
+	function validateForm(form) {
 		if (
-			form.firstName.value.length > 0 &&
-			form.lastName.value.length > 0 &&
-			form.email.value.length > 0 &&
-			form.phoneNumber.value.length > 0
+			form.firstName.value.length === 0 ||
+			form.lastName.value.length === 0 ||
+			form.email.value.length === 0 ||
+			form.phoneNumber.value.length === 0
 		) {
-			setFormValidation(true);
-			setRequestId(generateRandomId());
-		}else{
-			setFormValidation(false);
+			return false;
 		}
 
-		
-		console.log(formValidation);
+		return true;
 	}
-
+	function messageAlert() {
+		if (validateForm(document.laptopRequestForm)) {
+			alert(
+				"thank you for your completing the request form. your request have been recived "
+			);
+		}
+	}
 	return (
 		<div className="form-card">
 			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
@@ -119,12 +106,9 @@ function LaptopForm() {
 						className="input_field"
 						onChange={handleClick}
 					/>
-
-					<ButtonComponent
-						validateForm={formValidation}
-						handleSubmit={submitForm}
-						requestId = {requestId}
-					/>
+					<button type="submit" onClick={messageAlert} className="btn1">
+						Submit
+					</button>
 				</div>
 			</form>
 		</div>
