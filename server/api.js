@@ -1,3 +1,4 @@
+import { request } from "express";
 import { Router } from "express";
 import db from "./db";
 
@@ -5,10 +6,61 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+let requests = [
+	{
+		id: 1,
+		firstName: "bob",
+		lastName: "the builder",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "WAITING",
+	},
+	{
+		id: 2,
+		firstName: "hulk",
+		lastName: "the smasher",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ASSIGNED",
+	},
+	{
+		id: 3,
+		firstName: "tony",
+		lastName: "stack",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ACCEPTED",
+	},
+	{
+		id: 4,
+		firstName: "silver",
+		lastName: "surfer",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "CANCELLED",
+	},
+	{
+		id: 5,
+		firstName: "Don",
+		lastName: "Yen",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "FULLFILLED",
+	},
+];
+
+router.get("/laptop-request-status/:id", (req, res) => {
+	console.log(req.params.id);
+	let laptopRequest = requests.find((item) => item.id == req.params.id);
+	console.log(laptopRequest);
+	res.send(laptopRequest);
+});
+
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
 });
+
 router.post("/laptop_request", (req, res) => {
 	let firstName = req.body.firstName;
 	let lastName = req.body.lastName;

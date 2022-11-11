@@ -26,7 +26,7 @@ const App = () => (
 		<Route path="/list-donator-requests" element={<DonatorTable />} />
 
 		{/* request status */}
-		<Route path="//laptop-request-status/" element={<RequestStatus />} />
+		<Route path="/laptop-request-status/:id" element={<RequestStatus />} />
 	</Routes>
 );
 
