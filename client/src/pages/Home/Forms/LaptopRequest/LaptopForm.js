@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ButtonComponent from "./ButtonComponent";
 import "./LaptopForm.css";
 
 function LaptopForm() {
@@ -51,13 +52,7 @@ function LaptopForm() {
 
 		return true;
 	}
-	function messageAlert() {
-		if (validateForm(document.laptopRequestForm)) {
-			alert(
-				"thank you for your completing the request form. your request have been recived "
-			);
-		}
-	}
+
 	return (
 		<div className="form-card">
 			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
@@ -106,9 +101,8 @@ function LaptopForm() {
 						className="input_field"
 						onChange={handleClick}
 					/>
-					<button type="submit" onClick={messageAlert} className="btn1">
-						Submit
-					</button>
+
+					<ButtonComponent handleClick = {validateForm}/>
 				</div>
 			</form>
 		</div>
