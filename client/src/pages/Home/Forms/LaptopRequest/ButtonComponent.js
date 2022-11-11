@@ -5,13 +5,13 @@ const ButtonComponent = (props) => {
 
   return props.validateForm ? (
 		<button type="submit" className="btn1">
-			<Link to="/request-status">
+			<Link to="/laptop-request-status/">
 				<p style={{ color: "white" }}>Submit</p>
 			</Link>
 		</button>
 	) : (
 		<button type="submit" className="btn1">
-				<p style={{ color: "white" }}>Submit</p>
+			<p style={{ color: "white" }}>Submit</p>
 		</button>
 	);
 }
