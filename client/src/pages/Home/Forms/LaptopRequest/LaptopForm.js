@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonComponent from "./ButtonComponent";
 import "./LaptopForm.css";
+
+function generateRandomId() {
+	return Math.floor(Math.random() * 10000);
+}
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
@@ -8,6 +12,7 @@ function LaptopForm() {
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
 	const [formValidation, setFormValidation] = useState(false);
+	const [requestId, setRequestId] = useState(null);
 
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
@@ -42,6 +47,7 @@ function LaptopForm() {
 				lastName: lastName,
 				email: email,
 				phoneNumber: phoneNumber,
+				requestId : requestId,
 			}),
 			headers: { "content-type": "application/json" },
 		});
@@ -56,6 +62,7 @@ function LaptopForm() {
 			form.phoneNumber.value.length > 0
 		) {
 			setFormValidation(true);
+			setRequestId(generateRandomId());
 		}else{
 			setFormValidation(false);
 		}
@@ -116,6 +123,7 @@ function LaptopForm() {
 					<ButtonComponent
 						validateForm={formValidation}
 						handleSubmit={submitForm}
+						requestId = {requestId}
 					/>
 				</div>
 			</form>

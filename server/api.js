@@ -1,5 +1,7 @@
 import { request } from "express";
 import { Router } from "express";
+import { restart } from "nodemon";
+import { func } from "prop-types";
 import db from "./db";
 
 import logger from "./utils/logger";
@@ -49,17 +51,29 @@ let requests = [
 	},
 ];
 
-router.get("/laptop-request-status/:id", (req, res) => {
-	console.log(req.params.id);
-	let laptopRequest = requests.find((item) => item.id == req.params.id);
-	console.log(laptopRequest);
-	res.send(laptopRequest);
+
+router.get("/laptop-request-status/:id", async (req, res) => {
+	try {
+		const result = await db.query(
+			`select * from laptop_request where requestid = '${req.params.id}' `
+		);
+		let requestStatus = result.rows[0].status;
+		// console.log("............................");
+		// console.log(requestStatus);
+		// console.log("............................");
+		res.send(requestStatus);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
+
 
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
 });
+
 
 router.post("/laptop_request", (req, res) => {
 	let firstName = req.body.firstName;
@@ -67,9 +81,10 @@ router.post("/laptop_request", (req, res) => {
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
 	let status = "WAITING";
+	let requestId = req.body.requestId;
 	const query =
-		" insert into laptop_request (firstname, lastname, email, phonenumber, status) values ($1, $2, $3, $4, $5)";
-	db.query(query, [firstName, lastName, email, phoneNumber, status])
+		" insert into laptop_request (firstname, lastname, email, phonenumber, status, requestid) values ($1, $2, $3, $4, $5, $6)";
+	db.query(query, [firstName, lastName, email, phoneNumber, status, requestId])
 		.then(() => res.send("result.rows"))
 		.catch((error) => {
 			console.error(error);
