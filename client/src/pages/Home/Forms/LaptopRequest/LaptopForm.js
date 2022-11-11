@@ -7,17 +7,23 @@ function LaptopForm() {
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
+	const [formValidation, setFormValidation] = useState(false);
 
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
 			setFirst(e.target.value);
+			validateForm();
 		} else if (e.target.name === "lastName") {
 			setLastName(e.target.value);
+			validateForm();
 		} else if (e.target.name === "email") {
 			setEmail(e.target.value);
+			validateForm();
 		} else if (e.target.name === "phoneNumber") {
 			setNumber(e.target.value);
+			validateForm();
 		} else {
+			validateForm();
 			return null;
 		}
 	}
@@ -40,17 +46,21 @@ function LaptopForm() {
 		});
 	}
 
-	function validateForm(form) {
+	function validateForm() {
+		let form = document.laptopRequestForm;
 		if (
-			form.firstName.value.length === 0 ||
-			form.lastName.value.length === 0 ||
-			form.email.value.length === 0 ||
-			form.phoneNumber.value.length === 0
+			form.firstName.value.length > 0 &&
+			form.lastName.value.length > 0 &&
+			form.email.value.length > 0 &&
+			form.phoneNumber.value.length > 0
 		) {
-			return false;
+			setFormValidation(true);
+		}else{
+			setFormValidation(false);
 		}
 
-		return true;
+		
+		console.log(formValidation);
 	}
 
 	return (
@@ -102,7 +112,7 @@ function LaptopForm() {
 						onChange={handleClick}
 					/>
 
-					<ButtonComponent handleClick = {validateForm}/>
+					<ButtonComponent validateForm = {formValidation}/>
 				</div>
 			</form>
 		</div>
