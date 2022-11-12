@@ -55,7 +55,7 @@ function LaptopForm() {
 				<div className="modal-content">
 					<p className="paragraph">
 						Thank you For your completing the Request Form. Your request Have
-						been recived and you have been added to our waiting list
+						been Received and you have been added to our waiting list
 					</p>
 					<button onClick={messageClosed} className="close_modal">
 						close
