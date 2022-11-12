@@ -30,3 +30,40 @@
     font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+.modal-content{
+  width: 500px;
+  height: 330px;
+  font-size: 1.3rem;
+  font-weight: 1.6rem;
+  color: whitesmoke;
+  border-radius: 1.3em;
+  border: solid 1px rgb(63, 7, 7);
+  background-color: rgb(128, 255, 0);
+  padding: 20px;
+  position: absolute;
+  left: 35%;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+  .close_modal button{
+    color: rgb(7, 0, 0);
+    width: 160px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+  }
+   label{
+     color: black;
+     font-size: 1.6em;
+   }
+   .paragraph{
+   color: white;
+   opacity: 1;
+     display: hidden;
+   }.btn1:hover{
+    background-color: black;
+    color: white;
+  }
