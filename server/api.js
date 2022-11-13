@@ -6,9 +6,9 @@ import logger from "./utils/logger";
 
 const router = Router();
 
-let requests = [
+let fakeRequests = [
 	{
-		id: 1,
+		id: 100,
 		firstName: "bob",
 		lastName: "the builder",
 		email: "email@email.com",
@@ -16,7 +16,7 @@ let requests = [
 		status: "WAITING",
 	},
 	{
-		id: 2,
+		id: 110,
 		firstName: "hulk",
 		lastName: "the smasher",
 		email: "email@email.com",
@@ -24,7 +24,7 @@ let requests = [
 		status: "ASSIGNED",
 	},
 	{
-		id: 3,
+		id: 111,
 		firstName: "tony",
 		lastName: "stack",
 		email: "email@email.com",
@@ -32,7 +32,7 @@ let requests = [
 		status: "ACCEPTED",
 	},
 	{
-		id: 4,
+		id: 120,
 		firstName: "silver",
 		lastName: "surfer",
 		email: "email@email.com",
@@ -40,7 +40,7 @@ let requests = [
 		status: "CANCELLED",
 	},
 	{
-		id: 5,
+		id: 121,
 		firstName: "Don",
 		lastName: "Yen",
 		email: "email@email.com",
@@ -50,9 +50,7 @@ let requests = [
 ];
 
 router.get("/laptop-request-status/:id", (req, res) => {
-	console.log(req.params.id);
-	let laptopRequest = requests.find((item) => item.id == req.params.id);
-	console.log(laptopRequest);
+	let laptopRequest = fakeRequests.find((item) => item.id == req.params.id);
 	res.send(laptopRequest);
 });
 
