@@ -6,6 +6,28 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+
+let fakeLaptopAssign = [
+	{
+		laptopId: 1,
+		laptopName: "Dell",
+		deliveryOption: "Pickup",
+		address: "1234 Main St",
+	},
+	{
+		laptopId: 2,
+		laptopName: "Mac",
+		deliveryOption: "ship",
+		address: "1234 Main St",
+	},
+	{
+		laptopId: 3,
+		laptopName: "Dell",
+		deliveryOption: "Pickup",
+		address: "1234 Main St",
+	},
+];
+
 let fakeRequests = [
 	{
 		id: 100,
@@ -14,6 +36,7 @@ let fakeRequests = [
 		email: "email@email.com",
 		phoneNumber: "073820384924",
 		status: "WAITING",
+		laptopAssignment: {},
 	},
 	{
 		id: 110,
@@ -22,6 +45,7 @@ let fakeRequests = [
 		email: "email@email.com",
 		phoneNumber: "073820384924",
 		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[0],
 	},
 	{
 		id: 111,
@@ -29,7 +53,8 @@ let fakeRequests = [
 		lastName: "stack",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "ACCEPTED",
+		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[1],
 	},
 	{
 		id: 120,
@@ -37,7 +62,8 @@ let fakeRequests = [
 		lastName: "surfer",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "CANCELLED",
+		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[2],
 	},
 	{
 		id: 121,

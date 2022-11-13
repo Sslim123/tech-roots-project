@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
+import ButtonComponent from "./ButtonComponent";
 
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
@@ -26,10 +27,28 @@ export function RequestStatus() {
 				</>
 			);
 		} else if (request.status === "ASSIGNED") {
+			if(request.laptopAssignment.deliveryOption === "ship"){
+				return (
+					<>
+						<div>
+							You have been assigned a laptop. Please confirm your address can
+							be shared so it can be sent to you.
+							<div>
+								
+								<ButtonComponent command="Yes please!" />
+								<ButtonComponent command="No thank you!" />
+								
+							</div>
+						</div>
+					</>
+				);
+			}
 			return (
 				<>
-					You have been assigned a laptop. Please confirm your address can be
-					shared so it can be sent to you."
+					You have been assigned a laptop. Please confirm you can pick it up at{" "}
+					<strong> {request.laptopAssignment.address}</strong> .
+					<ButtonComponent command="Yes please!" />
+					<ButtonComponent command="No thank you!" />
 				</>
 			);
 		} else if (request.status === "ACCEPTED") {
