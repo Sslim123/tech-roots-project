@@ -74,6 +74,16 @@ let fakeRequests = [
 		requestAddress: "the users address",
 	},
 	{
+		id: 114,
+		firstName: "hulk",
+		lastName: "the smasher",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "CANCELLED",
+		laptopAssignment: {},
+		requestAddress: "",
+	},
+	{
 		id: 120,
 		firstName: "silver",
 		lastName: "surfer",

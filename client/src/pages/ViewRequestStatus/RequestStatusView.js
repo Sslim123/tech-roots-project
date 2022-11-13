@@ -67,7 +67,7 @@ export function RequestStatus() {
 				</>
 			);
 		} else if (request.status === "CANCELLED") {
-			return <>"This request has been cancelled, as requested."</>;
+			return <>This request has been cancelled, as requested.</>;
 		} else if (request.status === "FULLFILLED") {
 			return (
 				<>
