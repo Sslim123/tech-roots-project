@@ -101,12 +101,12 @@ router.post("/laptop_assignment", (req, res) => {
 	const query =
 		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 )";
 
-	db.query(query, [status, laptopRequestsId, laptopDonationId])
+	db.query(query, [laptopRequestsId, laptopDonationId, status])
 		.then(() => res.send(`assignmentId ${assignmentId} posted!`))
 		.catch((error) => {
 			// eslint-disable-next-line no-console
 			console.error(error);
-			res.status(400).json({ success: " was not   success" });
+			res.status(400).json({ success: " was not success" });
 		});
 });
 
