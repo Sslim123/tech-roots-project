@@ -11,20 +11,14 @@ let fakeLaptopAssign = [
 	{
 		laptopId: 1,
 		laptopName: "Dell",
-		deliveryOption: "Pickup",
-		address: "1234 Main St",
+		deliveryOption: "pickup",
+		address: "donation address",
 	},
 	{
 		laptopId: 2,
 		laptopName: "Mac",
 		deliveryOption: "ship",
-		address: "1234 Main St",
-	},
-	{
-		laptopId: 3,
-		laptopName: "Dell",
-		deliveryOption: "Pickup",
-		address: "1234 Main St",
+		address: "donation address",
 	},
 ];
 
@@ -37,6 +31,7 @@ let fakeRequests = [
 		phoneNumber: "073820384924",
 		status: "WAITING",
 		laptopAssignment: {},
+		requestAddress: "",
 	},
 	{
 		id: 110,
@@ -46,6 +41,7 @@ let fakeRequests = [
 		phoneNumber: "073820384924",
 		status: "ASSIGNED",
 		laptopAssignment: fakeLaptopAssign[0],
+		requestAddress: "the users address",
 	},
 	{
 		id: 111,
@@ -55,6 +51,27 @@ let fakeRequests = [
 		phoneNumber: "073820384924",
 		status: "ASSIGNED",
 		laptopAssignment: fakeLaptopAssign[1],
+		requestAddress: "the users address",
+	},
+	{
+		id: 112,
+		firstName: "hulk",
+		lastName: "the smasher",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ACCEPTED",
+		laptopAssignment: fakeLaptopAssign[0],
+		requestAddress: "the users address",
+	},
+	{
+		id: 113,
+		firstName: "hulk",
+		lastName: "the smasher",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ACCEPTED",
+		laptopAssignment: fakeLaptopAssign[1],
+		requestAddress: "the users address",
 	},
 	{
 		id: 120,
@@ -63,7 +80,7 @@ let fakeRequests = [
 		email: "email@email.com",
 		phoneNumber: "073820384924",
 		status: "ASSIGNED",
-		laptopAssignment: fakeLaptopAssign[2],
+		laptopAssignment: fakeLaptopAssign[1],
 	},
 	{
 		id: 121,

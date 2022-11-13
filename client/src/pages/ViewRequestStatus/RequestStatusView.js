@@ -54,8 +54,16 @@ export function RequestStatus() {
 		} else if (request.status === "ACCEPTED") {
 			return (
 				<>
-					Please let us know when you have received your laptop / when you have
-					picked up your laptop at address.
+					<p>
+						Please let us know when you have received your laptop / when you
+						have picked up your laptop at{" "}
+						<strong>
+							{request.laptopAssignment.deliveryOption === "ship"
+								? request.requestAddress
+								: request.laptopAssignment.address}
+							.
+						</strong>
+					</p>
 				</>
 			);
 		} else if (request.status === "CANCELLED") {
