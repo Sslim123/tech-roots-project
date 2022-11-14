@@ -93,6 +93,16 @@ let fakeRequests = [
 	},
 ];
 
+router.get("/laptop-donation/:id", async (req, res) => {
+	 console.log("here");
+		try {
+			const result = await db.query("SELECT * from laptop_donation WHERE id = $1", [req.params.id]);
+			res.json(result.rows[0]);
+		} catch (e) {
+			console.error(e);
+			res.sendStatus(400);
+		}
+});
 router.get("/laptop-request-status/:id", (req, res) => {
 	let laptopRequest = fakeRequests.find((item) => item.id == req.params.id);
 	res.send(laptopRequest);
