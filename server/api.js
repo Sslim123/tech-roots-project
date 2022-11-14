@@ -97,7 +97,23 @@ router.get("/laptop_donation/:id", async (req, res) => {
 	 console.log("here");
 		try {
 			const result = await db.query("SELECT * from laptop_donation WHERE id = $1", [req.params.id]);
-			res.json(result.rows[0]);
+			let id = result.rows[0].id;
+			let name = result.rows[0].name;
+			let address = result.rows[0].address;
+			let numberOfLaptops = result.rows[0].number_of_laptops;
+			let phoneNumber = result.rows[0].phone_number;
+			let email = result.rows[0].email;
+			let deliveryOption = result.rows[0].delivery_option;
+			let laptopDonation = {
+				id: id,
+				name: name,
+				address: address,
+				numberOfLaptops: numberOfLaptops,
+				phoneNumber: phoneNumber,
+				email: email,
+				deliveryOption: deliveryOption,
+			};
+			res.json(laptopDonation);
 		} catch (e) {
 			console.error(e);
 			res.sendStatus(400);
