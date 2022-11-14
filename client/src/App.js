@@ -9,6 +9,7 @@ import DonatorForm from "./pages/Home/Forms/DonatorFormReqest/DonatorForm";
 import RequestView from "./pages/ViewTableRequest/RequestView";
 import LaptopTable from "./pages/ViewTableRequest/LaptopViewTable/LaptopTable";
 import DonatorTable from "./pages/ViewTableRequest/DonatorViewTable/DonatorTable";
+import RequestStatus from "./pages/ViewRequestStatus/RequestStatusView";
 
 const App = () => (
 	<Routes>
@@ -23,6 +24,9 @@ const App = () => (
 		<Route path="/list-requests" element={<RequestView />} />
 		<Route path="/list-laptop-requests" element={<LaptopTable />} />
 		<Route path="/list-donator-requests" element={<DonatorTable />} />
+
+		{/* request status */}
+		<Route path="/laptop-request-status/:id" element={<RequestStatus />} />
 	</Routes>
 );
 

@@ -1,6 +1,10 @@
+-- laptop request data
 insert into laptop_request (firstname, lastname, email, phonenumber)
 values ('Salem', 'Daifan', 'salem@cyf.com', '0748484877');
 
+
+
+-- laptop donation data
 insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option) 
 values ('Bob','G151SU', 2, '073837837780', 'bob@gmail.com', 'PICK UP');
 

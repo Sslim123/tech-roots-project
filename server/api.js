@@ -1,3 +1,4 @@
+import { request } from "express";
 import { Router } from "express";
 import db from "./db";
 
@@ -5,10 +6,129 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+
+let fakeLaptopAssign = [
+	{
+		laptopId: 1,
+		laptopName: "Dell",
+		deliveryOption: "pickup",
+		address: "donator address: 123 main st",
+	}, 
+	{
+		laptopId: 2,
+		laptopName: "Mac",
+		deliveryOption: "ship",
+		address: "donator address: 124 main st",
+	},
+];
+
+let fakeRequests = [
+	{
+		id: 100,
+		firstName: "bob",
+		lastName: "the builder",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "WAITING",
+		laptopAssignment: {},
+		requestAddress: "",
+	},
+	{
+		id: 110,
+		firstName: "hulk",
+		lastName: "the smasher",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[1],
+		requestAddress: " users address : 123 south street",
+	},
+	{
+		id: 111,
+		firstName: "tony",
+		lastName: "stack",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[0],
+		requestAddress: "users address : 123 south street",
+	},
+	{
+		id: 120,
+		firstName: "silver",
+		lastName: "surfer",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[1],
+	},
+
+	{
+		id: 120,
+		firstName: "silver",
+		lastName: "surfer",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "ASSIGNED",
+		laptopAssignment: fakeLaptopAssign[0],
+	},
+
+	{
+		id: 130,
+		firstName: "hulk",
+		lastName: "the smasher",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "CANCELLED",
+		laptopAssignment: {},
+		requestAddress: "",
+	},
+	{
+		id: 140,
+		firstName: "Don",
+		lastName: "Yen",
+		email: "email@email.com",
+		phoneNumber: "073820384924",
+		status: "FULLFILLED",
+	},
+];
+
+router.get("/laptop_donation/:id", async (req, res) => {
+	 console.log("here");
+		try {
+			const result = await db.query("SELECT * from laptop_donation WHERE id = $1", [req.params.id]);
+			let id = result.rows[0].id;
+			let name = result.rows[0].name;
+			let address = result.rows[0].address;
+			let numberOfLaptops = result.rows[0].number_of_laptops;
+			let phoneNumber = result.rows[0].phone_number;
+			let email = result.rows[0].email;
+			let deliveryOption = result.rows[0].delivery_option;
+			let laptopDonation = {
+				id: id,
+				name: name,
+				address: address,
+				numberOfLaptops: numberOfLaptops,
+				phoneNumber: phoneNumber,
+				email: email,
+				deliveryOption: deliveryOption,
+			};
+			res.json(laptopDonation);
+		} catch (e) {
+			console.error(e);
+			res.sendStatus(400);
+		}
+});
+router.get("/laptop_request/:id", (req, res) => {
+	let laptopRequest = fakeRequests.find((item) => item.id == req.params.id);
+	res.send(laptopRequest);
+});
+
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
 });
+
 router.post("/laptop_request", (req, res) => {
 	let firstName = req.body.firstName;
 	let lastName = req.body.lastName;
