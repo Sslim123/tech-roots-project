@@ -91,4 +91,40 @@ router.get("/laptop_donation", async (req, res) => {
 	}
 });
 
+// post laptop assignment
+router.post("/laptop_assignment", (req, res) => {
+	let laptopRequestId = req.body.laptop_request_id;
+	let laptopDonationId = req.body.laptop_donation_id;
+	let status = req.body.status;
+	
+	const query =
+		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 )";
+
+	db.query(query, [laptopRequestId, laptopDonationId, status])
+	.then((queryResult) => res.send(res.rows[0]))
+		.catch((error) => {
+			console.error(error);
+			res.status(400).json({ success: " was not success" });
+		});
+});
+
+router.put("/laptop_assignment/:assignmentId", function (req, res) {
+	const assignmentId = res.params.assignmentId;
+	const newStatus = req.body.status;
+
+	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [newStatus, assignmentId])
+		.then(() => res.send(`status ${assignmentId} updated!`))
+		.catch((e) => console.error(e));
+
+	res.status(404).send("status not found");
+});
+
+router.delete("/laptop_assignment/:assignmentId", function (request, response) {
+	const assignmentId = request.params.assignmentId;
+
+	db.query("DELETE FROM laptop_assignment WHERE id=$1", [assignmentId])
+		.then(() => response.send("removed"))
+		.catch((e) => console.error(e));
+});
+
 export default router;
