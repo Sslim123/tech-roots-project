@@ -249,11 +249,7 @@ router.post("/laptop_assignment", (req, res) => {
 		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 ) returning id";
 
 	db.query(query, [laptopRequestId, laptopDonationId, status])
-<<<<<<< HEAD
 		.then((queryResult) => res.send(queryResult.rows[0]))
-=======
-		.then((queryResult) => res.send(res.rows[0]))
->>>>>>> 3c7053f (Requested changes)
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not success" });
