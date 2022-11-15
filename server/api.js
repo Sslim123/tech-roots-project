@@ -58,18 +58,20 @@ let fakeRequests = [
 		lastName: "surfer",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "ASSIGNED",
+		status: "ACCEPTED",
 		laptopAssignment: fakeLaptopAssign[1],
+		requestAddress: "users address : 123 south street",
 	},
 
 	{
-		id: 120,
+		id: 121,
 		firstName: "silver",
 		lastName: "surfer",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "ASSIGNED",
+		status: "ACCEPTED",
 		laptopAssignment: fakeLaptopAssign[0],
+		requestAddress: "users address : 123 south street",
 	},
 
 	{
@@ -81,6 +83,7 @@ let fakeRequests = [
 		status: "CANCELLED",
 		laptopAssignment: {},
 		requestAddress: "",
+		requestAddress: "users address : 123 south street",
 	},
 	{
 		id: 140,

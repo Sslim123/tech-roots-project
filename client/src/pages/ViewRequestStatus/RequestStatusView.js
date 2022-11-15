@@ -55,14 +55,11 @@ export function RequestStatus() {
 			return (
 				<>
 					<p>
-						Please let us know when you have received your laptop / when you
-						have picked up your laptop at{" "}
-						<strong>
+						Please let us know
 							{request.laptopAssignment.deliveryOption === "ship"
-								? request.requestAddress
-								: request.laptopAssignment.address}
-							.
-						</strong>
+								? " when you have received your laptop " + request.requestAddress
+								: " when you have picked up your laptop at " +
+								  request.laptopAssignment.address}
 					</p>
 				</>
 			);
