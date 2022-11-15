@@ -6,14 +6,13 @@ import logger from "./utils/logger";
 
 const router = Router();
 
-
 let fakeLaptopAssign = [
 	{
 		laptopId: 1,
 		laptopName: "Dell",
 		deliveryOption: "pickup",
 		address: "donator address: 123 main st",
-	}, 
+	},
 	{
 		laptopId: 2,
 		laptopName: "Mac",
@@ -94,30 +93,33 @@ let fakeRequests = [
 ];
 
 router.get("/laptop_donation/:id", async (req, res) => {
-	 console.log("here");
-		try {
-			const result = await db.query("SELECT * from laptop_donation WHERE id = $1", [req.params.id]);
-			let id = result.rows[0].id;
-			let name = result.rows[0].name;
-			let address = result.rows[0].address;
-			let numberOfLaptops = result.rows[0].number_of_laptops;
-			let phoneNumber = result.rows[0].phone_number;
-			let email = result.rows[0].email;
-			let deliveryOption = result.rows[0].delivery_option;
-			let laptopDonation = {
-				id: id,
-				name: name,
-				address: address,
-				numberOfLaptops: numberOfLaptops,
-				phoneNumber: phoneNumber,
-				email: email,
-				deliveryOption: deliveryOption,
-			};
-			res.json(laptopDonation);
-		} catch (e) {
-			console.error(e);
-			res.sendStatus(400);
-		}
+	console.log("here");
+	try {
+		const result = await db.query(
+			"SELECT * from laptop_donation WHERE id = $1",
+			[req.params.id]
+		);
+		let id = result.rows[0].id;
+		let name = result.rows[0].name;
+		let address = result.rows[0].address;
+		let numberOfLaptops = result.rows[0].number_of_laptops;
+		let phoneNumber = result.rows[0].phone_number;
+		let email = result.rows[0].email;
+		let deliveryOption = result.rows[0].delivery_option;
+		let laptopDonation = {
+			id: id,
+			name: name,
+			address: address,
+			numberOfLaptops: numberOfLaptops,
+			phoneNumber: phoneNumber,
+			email: email,
+			deliveryOption: deliveryOption,
+		};
+		res.json(laptopDonation);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 router.get("/laptop_request/:id", (req, res) => {
 	let laptopRequest = fakeRequests.find((item) => item.id == req.params.id);
@@ -216,12 +218,12 @@ router.post("/laptop_assignment", (req, res) => {
 	let laptopRequestId = req.body.laptop_request_id;
 	let laptopDonationId = req.body.laptop_donation_id;
 	let status = req.body.status;
-	
+
 	const query =
-		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 )";
+		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 ) returning id";
 
 	db.query(query, [laptopRequestId, laptopDonationId, status])
-	.then((queryResult) => res.send(res.rows[0]))
+		.then((queryResult) => res.send(queryResult.rows[0]))
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not success" });
@@ -232,7 +234,10 @@ router.put("/laptop_assignment/:assignmentId", function (req, res) {
 	const assignmentId = res.params.assignmentId;
 	const newStatus = req.body.status;
 
-	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [newStatus, assignmentId])
+	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [
+		newStatus,
+		assignmentId,
+	])
 		.then(() => res.send(`status ${assignmentId} updated!`))
 		.catch((e) => console.error(e));
 
