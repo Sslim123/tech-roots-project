@@ -12,7 +12,7 @@ export function RequestStatus() {
 		fetch(`/api/laptop_request/${id}`)
 			.then((res) => res.json())
 			.then((data) => setRequest(data));
-	}, []);
+	}, [id]);
 
 	console.log(request);
 	if (request !== null) {

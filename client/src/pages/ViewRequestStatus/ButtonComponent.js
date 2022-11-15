@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const ButtonComponent = (props) => {
-  return (
-    <div>
-        <button>{props.command}</button>
-    </div>
-  )
-}
+	return (
+		<div>
+			<button>{props.command}</button>
+		</div>
+	);
+};
 
-export default ButtonComponent
+export default ButtonComponent;
