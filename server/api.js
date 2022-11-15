@@ -293,7 +293,7 @@ router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 		});
 });
 
-router.delete("/laptop_assignment/:assignmentId", function (request, response) {
+router.delete("/laptop_assignment/:assignmentId", async (request, response) => {
 	const assignmentId = request.params.assignmentId;
 
 	db.query("DELETE FROM laptop_assignment WHERE id=$1", [assignmentId])
