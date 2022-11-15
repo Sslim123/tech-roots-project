@@ -48,7 +48,7 @@ let fakeRequests = [
 		lastName: "stack",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "ASSIGNED",
+		status: " ",
 		laptopAssignment: fakeLaptopAssign[0],
 		requestAddress: "users address : 123 south street",
 	},
@@ -122,30 +122,51 @@ router.get("/laptop_donation/:id", async (req, res) => {
 		res.sendStatus(400);
 	}
 });
+
 router.get("/laptop_request/:id", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT id, laptop_request_status from laptop_request WHERE id = $1",
+			"SELECT * from laptop_request WHERE id = $1",
 			[req.params.id]
 		);
 		// let id = result.rows[0].id;
-		let requestStatus = result.rows[0].laptop_request_status;
+		let laptopRequest = {
+			firstName: result.rows[0].firstname,
+			lastName: result.rows[0].lastname,
+			email: result.rows[0].email,
+			phoneNumber: result.rows[0].phonenumber,
+			status: result.rows[0].laptop_request_status,
+		};
 
-		if (requestStatus === "ACTIVE") {
-			const responseStatus = { status: "" };
-			const status = await db.query(
-				"SELECT * from laptop_assignment WHERE id = $1",
+		if (laptopRequest.status === "ACTIVE") {
+			const laptopAssignmentResult = await db.query(
+				"SELECT * from laptop_assignment WHERE laptop_request_id = $1",
 				[req.params.id]
 			);
 
-			let assignmentStatus =
-				status.rows.length > 0 ? status.rows[0].assignment_status : "WAITING";
+			let laptopAssignment = {};
 
-			responseStatus.status = assignmentStatus;
-			res.send(responseStatus);
-		} else {
-			res.send("CANCELLED");
+			if (laptopAssignmentResult.rows.length > 0) {
+				laptopAssignment = {
+					status: laptopAssignmentResult.rows[0].status,
+					assignmentId: laptopAssignmentResult.rows[0].id,
+					donationID: laptopAssignmentResult.rows[0].laptop_donation_id,
+					requestId: laptopAssignmentResult.rows[0].laptop_request_id,
+				};
+			} else {
+				laptopAssignment = {
+					status: "WAITING",
+					assignmentId: null,
+					donationID: null,
+					requestId: null,
+				};
+			}
+			laptopRequest.donationID = laptopAssignment.donationID;
+			laptopRequest.assignmentId = laptopAssignment.assignmentId;
+			laptopRequest.status = laptopAssignment.status;
 		}
+
+		res.send(laptopRequest);
 	} catch (e) {
 		console.error(e);
 		res.sendStatus(400);

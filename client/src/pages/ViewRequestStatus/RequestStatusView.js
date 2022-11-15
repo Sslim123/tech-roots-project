@@ -5,16 +5,28 @@ import ButtonComponent from "./ButtonComponent";
 
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
+	const [donation, setDonation] = useState(null);
 	// this helps get the id from the router
 	const { id } = useParams();
 
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
 			.then((res) => res.json())
-			.then((data) => setRequest(data));
+			.then((laptopRequest) => {
+				setRequest(laptopRequest);
+			});
 	}, [id]);
 
-	console.log(request);
+	useEffect(() => {
+		if (request != null && request.donationID != null) {
+			fetch(`/api/laptop_donation/${request.donationID}`)
+				.then((res) => res.json())
+				.then((laptopDonation) => {
+					setDonation(laptopDonation);
+				});
+		}
+	}, [request]);
+
 	if (request !== null) {
 		if (request.status === "WAITING") {
 			return (
@@ -26,51 +38,67 @@ export function RequestStatus() {
 					<button>Cancel my request</button>
 				</>
 			);
-		} else if (request.status === "ASSIGNED") {
-			if (request.laptopAssignment.deliveryOption === "ship") {
+		}
+		if (donation !== null) {
+			if (request.status === "ASSIGNED") {
+				if (donation.deliveryOption === "SHIP") {
+					return (
+						<>
+							<div>
+								You have been assigned a laptop. Please confirm your address can
+								be shared so it can be sent to you.
+								<div>
+									<ButtonComponent command="Yes please!" />
+									<ButtonComponent command="No thank you!" />
+								</div>
+							</div>
+						</>
+					);
+				}
+				if (donation.deliveryOption === "PICK UP") {
+					return (
+						<>
+							<div>
+								You have been assigned a laptop. Please confirm your address can
+								be shared so it can be sent to you.
+								<div>
+									<ButtonComponent command="Yes please!" />
+									<ButtonComponent command="No thank you!" />
+								</div>
+							</div>
+						</>
+					);
+				}
+			}
+			if (request.status === "ACCEPTED") {
 				return (
 					<>
-						<div>
-							You have been assigned a laptop. Please confirm your address can
-							be shared so it can be sent to you.
-							<div>
-								<ButtonComponent command="Yes please!" />
-								<ButtonComponent command="No thank you!" />
-							</div>
-						</div>
+						<p>
+							Please let us know
+							{donation.deliveryOption === "ship"
+								? " when you have received your laptop at " +
+								  request.requestAddress
+								: " when you have picked up your laptop from " +
+								  donation.address}
+						</p>
 					</>
 				);
 			}
-			return (
-				<>
-					You have been assigned a laptop. Please confirm you can pick it up at{" "}
-					<strong> {request.laptopAssignment.address}</strong> .
-					<ButtonComponent command="Yes please!" />
-					<ButtonComponent command="No thank you!" />
-				</>
-			);
-		} else if (request.status === "ACCEPTED") {
-			return (
-				<>
-					<p>
-						Please let us know
-						{request.laptopAssignment.deliveryOption === "ship"
-							? " when you have received your laptop at " +
-							  request.requestAddress
-							: " when you have picked up your laptop at " +
-							  request.laptopAssignment.address}
-					</p>
-				</>
-			);
-		} else if (request.status === "CANCELLED") {
-			return <>This request has been cancelled, as requested.</>;
-		} else if (request.status === "FULLFILLED") {
-			return (
-				<>
-					Sweet! You now have your laptop. Time to start working on your
-					application to Code Your Future?
-				</>
-			);
+			if (request.status === "FULFILLED") {
+				return (
+					<>
+						Sweet! You now have your laptop. Time to start working on your
+						application to Code Your Future?
+					</>
+				);
+			}
+			if (request.status === "CANCELLED") {
+				return (
+					<>
+						<p>Your request has been cancelled.</p>
+					</>
+				);
+			}
 		}
 	} else {
 		return <>Oops, something went wrong.../ this request doesn't exist</>;

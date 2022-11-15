@@ -22,7 +22,7 @@ create table laptop_donation (
     delivery_option varchar(25)
 );
 
-CREATE TYPE assignment_status AS ENUM ('assigned', 'accepted', 'fulfilled');
+CREATE TYPE assignment_status AS ENUM ('ASSIGNED', 'ACCEPTED', 'FULFILLED', 'CANCELLED');
 create table laptop_assignment (
     id SERIAL PRIMARY KEY,
     laptop_request_id INT REFERENCES laptop_request(id),
