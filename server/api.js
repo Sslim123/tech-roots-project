@@ -164,6 +164,10 @@ router.get("/laptop_request/:id", async (req, res) => {
 			laptopRequest.donationID = laptopAssignment.donationID;
 			laptopRequest.assignmentId = laptopAssignment.assignmentId;
 			laptopRequest.status = laptopAssignment.status;
+		} else {
+			laptopRequest.donationID = null;
+			laptopRequest.assignmentId = null;
+			laptopRequest.status = "CANCELLED";
 		}
 
 		res.send(laptopRequest);
