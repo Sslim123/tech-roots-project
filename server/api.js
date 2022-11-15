@@ -95,7 +95,6 @@ let fakeRequests = [
 ];
 
 router.get("/laptop_donation/:id", async (req, res) => {
-	console.log("here");
 	try {
 		const result = await db.query(
 			"SELECT * from laptop_donation WHERE id = $1",
@@ -123,9 +122,34 @@ router.get("/laptop_donation/:id", async (req, res) => {
 		res.sendStatus(400);
 	}
 });
-router.get("/laptop_request/:id", (req, res) => {
-	let laptopRequest = fakeRequests.find((item) => item.id == req.params.id);
-	res.send(laptopRequest);
+router.get("/laptop_request/:id", async (req, res) => {
+	try {
+		const result = await db.query(
+			"SELECT id, laptop_request_status from laptop_request WHERE id = $1",
+			[req.params.id]
+		);
+		// let id = result.rows[0].id;
+		let requestStatus = result.rows[0].laptop_request_status;
+
+		if (requestStatus === "ACTIVE") {
+			const responseStatus = { status: "" };
+			const status = await db.query(
+				"SELECT * from laptop_assignment WHERE id = $1",
+				[req.params.id]
+			);
+
+			let assignmentStatus =
+				status.rows.length > 0 ? status.rows[0].assignment_status : "WAITING";
+
+			responseStatus.status = assignmentStatus;
+			res.send(responseStatus);
+		} else {
+			res.send("CANCELLED");
+		}
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 
 router.get("/", (_, res) => {
