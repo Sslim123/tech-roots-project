@@ -1,11 +1,15 @@
 DROP Table IF EXISTS laptop_request, laptop_donation, laptop_assignment;
-DROP TYPE IF EXISTS assignment_status;
+DROP TYPE IF EXISTS assignment_status, laptop_request_status;
+
+CREATE TYPE laptop_request_status AS ENUM ('ACTIVE', 'CANCELED');
+
 create table laptop_request (
     id serial primary key,
     firstname varchar(100),
     lastname varchar(100),
     email varchar(100),
-    phonenumber varchar(100)
+    phonenumber varchar(100),
+    laptop_request_status laptop_request_status
 );
 
 create table laptop_donation (
