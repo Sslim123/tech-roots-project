@@ -7,7 +7,6 @@ function LaptopForm() {
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
-	const [showModal, setShowModal] = useState(false);
 	const [requestId, setRequestId] = useState("");
 	const [navigate, setNavigate] = useState(false);
 

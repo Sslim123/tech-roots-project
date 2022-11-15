@@ -27,17 +27,15 @@ export function RequestStatus() {
 				</>
 			);
 		} else if (request.status === "ASSIGNED") {
-			if(request.laptopAssignment.deliveryOption === "ship"){
+			if (request.laptopAssignment.deliveryOption === "ship") {
 				return (
 					<>
 						<div>
 							You have been assigned a laptop. Please confirm your address can
 							be shared so it can be sent to you.
 							<div>
-								
 								<ButtonComponent command="Yes please!" />
 								<ButtonComponent command="No thank you!" />
-								
 							</div>
 						</div>
 					</>
@@ -56,10 +54,11 @@ export function RequestStatus() {
 				<>
 					<p>
 						Please let us know
-							{request.laptopAssignment.deliveryOption === "ship"
-								? " when you have received your laptop " + request.requestAddress
-								: " when you have picked up your laptop at " +
-								  request.laptopAssignment.address}
+						{request.laptopAssignment.deliveryOption === "ship"
+							? " when you have received your laptop at " +
+							  request.requestAddress
+							: " when you have picked up your laptop at " +
+							  request.laptopAssignment.address}
 					</p>
 				</>
 			);

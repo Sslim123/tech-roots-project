@@ -83,7 +83,6 @@ let fakeRequests = [
 		status: "CANCELLED",
 		laptopAssignment: {},
 		requestAddress: "",
-		requestAddress: "users address : 123 south street",
 	},
 	{
 		id: 140,
@@ -154,7 +153,6 @@ router.get("/laptop_request", async (req, res) => {
 		const result = await db.query("SELECT * from laptop_request");
 		const laptopRequests = result.rows.map((row) => {
 			return {
-
 				firstName: row.firstname,
 				lastName: row.lastname,
 				email: row.email,
@@ -227,7 +225,11 @@ router.post("/laptop_assignment", (req, res) => {
 		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 ) returning id";
 
 	db.query(query, [laptopRequestId, laptopDonationId, status])
+<<<<<<< HEAD
 		.then((queryResult) => res.send(queryResult.rows[0]))
+=======
+		.then((queryResult) => res.send(res.rows[0]))
+>>>>>>> 3c7053f (Requested changes)
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not success" });
