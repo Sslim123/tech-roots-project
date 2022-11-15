@@ -277,18 +277,20 @@ router.post("/laptop_assignment", (req, res) => {
 		});
 });
 
-router.put("/laptop_assignment/:assignmentId", function (req, res) {
-	const assignmentId = res.params.assignmentId;
+router.put("/laptop_assignment/:assignmentId", async (req, res) => {
+	const assignmentId = req.params.assignmentId;
 	const newStatus = req.body.status;
+	console.log;
 
 	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [
 		newStatus,
 		assignmentId,
 	])
 		.then(() => res.send(`status ${assignmentId} updated!`))
-		.catch((e) => console.error(e));
-
-	res.status(404).send("status not found");
+		.catch((e) => {
+			console.error(e);
+			res.status(404).send("status not found");
+		});
 });
 
 router.delete("/laptop_assignment/:assignmentId", function (request, response) {
