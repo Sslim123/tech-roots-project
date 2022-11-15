@@ -12,7 +12,7 @@ export function RequestStatus() {
 		fetch(`/api/laptop_request/${id}`)
 			.then((res) => res.json())
 			.then((data) => setRequest(data));
-	}, []);
+	}, [id]);
 
 	console.log(request);
 	if (request !== null) {
@@ -27,17 +27,15 @@ export function RequestStatus() {
 				</>
 			);
 		} else if (request.status === "ASSIGNED") {
-			if(request.laptopAssignment.deliveryOption === "ship"){
+			if (request.laptopAssignment.deliveryOption === "ship") {
 				return (
 					<>
 						<div>
 							You have been assigned a laptop. Please confirm your address can
 							be shared so it can be sent to you.
 							<div>
-								
 								<ButtonComponent command="Yes please!" />
 								<ButtonComponent command="No thank you!" />
-								
 							</div>
 						</div>
 					</>
@@ -55,14 +53,12 @@ export function RequestStatus() {
 			return (
 				<>
 					<p>
-						Please let us know when you have received your laptop / when you
-						have picked up your laptop at{" "}
-						<strong>
-							{request.laptopAssignment.deliveryOption === "ship"
-								? request.requestAddress
-								: request.laptopAssignment.address}
-							.
-						</strong>
+						Please let us know
+						{request.laptopAssignment.deliveryOption === "ship"
+							? " when you have received your laptop at " +
+							  request.requestAddress
+							: " when you have picked up your laptop at " +
+							  request.laptopAssignment.address}
 					</p>
 				</>
 			);

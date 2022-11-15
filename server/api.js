@@ -58,18 +58,20 @@ let fakeRequests = [
 		lastName: "surfer",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "ASSIGNED",
+		status: "ACCEPTED",
 		laptopAssignment: fakeLaptopAssign[1],
+		requestAddress: "users address : 123 south street",
 	},
 
 	{
-		id: 120,
+		id: 121,
 		firstName: "silver",
 		lastName: "surfer",
 		email: "email@email.com",
 		phoneNumber: "073820384924",
-		status: "ASSIGNED",
+		status: "ACCEPTED",
 		laptopAssignment: fakeLaptopAssign[0],
+		requestAddress: "users address : 123 south street",
 	},
 
 	{
@@ -93,7 +95,6 @@ let fakeRequests = [
 ];
 
 router.get("/laptop_donation/:id", async (req, res) => {
-	console.log("here");
 	try {
 		const result = await db.query(
 			"SELECT * from laptop_donation WHERE id = $1",
@@ -121,9 +122,34 @@ router.get("/laptop_donation/:id", async (req, res) => {
 		res.sendStatus(400);
 	}
 });
-router.get("/laptop_request/:id", (req, res) => {
-	let laptopRequest = fakeRequests.find((item) => item.id == req.params.id);
-	res.send(laptopRequest);
+router.get("/laptop_request/:id", async (req, res) => {
+	try {
+		const result = await db.query(
+			"SELECT id, laptop_request_status from laptop_request WHERE id = $1",
+			[req.params.id]
+		);
+		// let id = result.rows[0].id;
+		let requestStatus = result.rows[0].laptop_request_status;
+
+		if (requestStatus === "ACTIVE") {
+			const responseStatus = { status: "" };
+			const status = await db.query(
+				"SELECT * from laptop_assignment WHERE id = $1",
+				[req.params.id]
+			);
+
+			let assignmentStatus =
+				status.rows.length > 0 ? status.rows[0].assignment_status : "WAITING";
+
+			responseStatus.status = assignmentStatus;
+			res.send(responseStatus);
+		} else {
+			res.send("CANCELLED");
+		}
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 
 router.get("/", (_, res) => {
@@ -137,19 +163,18 @@ router.post("/laptop_request", (req, res) => {
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
 	const query =
-		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4)";
+		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4) returning id";
 	db.query(query, [firstName, lastName, email, phoneNumber])
-		.then(() => res.send("result.rows"))
+		.then((queryResult) => res.send(queryResult.rows[0]))
 		.catch((error) => {
 			console.error(error);
-			res.status(400).json({ success: " was not   success" });
+			res.status(400).json({ success: " was not success" });
 		});
 }); //console.lo
 
 router.get("/laptop_request", async (req, res) => {
 	try {
 		const result = await db.query("SELECT * from laptop_request");
-
 		const laptopRequests = result.rows.map((row) => {
 			return {
 				firstName: row.firstname,
@@ -158,6 +183,7 @@ router.get("/laptop_request", async (req, res) => {
 				phoneNumber: row.phonenumber,
 			};
 		});
+
 		res.json(laptopRequests);
 	} catch (e) {
 		console.error(e);

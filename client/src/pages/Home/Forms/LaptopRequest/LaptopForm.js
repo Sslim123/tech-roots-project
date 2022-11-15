@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import "./LaptopForm.css";
 
 function LaptopForm() {
@@ -6,7 +7,8 @@ function LaptopForm() {
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setNumber] = useState("");
-	const [showModal, setShowModal] = useState(false);
+	const [requestId, setRequestId] = useState("");
+	const [navigate, setNavigate] = useState(false);
 
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
@@ -38,83 +40,71 @@ function LaptopForm() {
 				phoneNumber: phoneNumber,
 			}),
 			headers: { "content-type": "application/json" },
-		});
-		messageAlert();
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				setRequestId(data.id);
+				setNavigate(true);
+			});
 	}
 
-	function messageAlert() {
-		setShowModal(true);
-	}
-	function messageClosed() {
-		setShowModal(false);
-	}
-	return (
+	console.log(requestId);
+
+	return navigate ? (
+		<Navigate to={`/laptop-request-status/${requestId}`} />
+	) : (
 		<div className="form-card">
-			(
-			{showModal && (
-				<div className="modal-content">
-					<p className="paragraph">
-						Thank you For your completing the Request Form. Your request Have
-						been Received and you have been added to our waiting list
-					</p>
-					<button onClick={messageClosed} className="close_modal">
-						close
+			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
+				<div className="form-container">
+					<label htmlFor="label1">First Name</label>
+					<input
+						required
+						id="firstName"
+						type="text"
+						value={firstName}
+						name="firstName"
+						placeholder="First Name"
+						className="input_field"
+						onChange={handleClick}
+					/>
+					<label htmlFor="label2">Last Name</label>
+					<input
+						required
+						type="text"
+						value={lastName}
+						id="lastName"
+						name="lastName"
+						placeholder="Last Name"
+						className="input_field"
+						onChange={handleClick}
+					/>
+					<label htmlFor="label3">Email address</label>
+					<input
+						required
+						type="text"
+						value={email}
+						id="email"
+						name="email"
+						placeholder="Email Address"
+						className="input_field"
+						onChange={handleClick}
+					/>
+					<label htmlFor="label4">Phone Number</label>
+					<input
+						required
+						type="number"
+						value={phoneNumber}
+						id="phoneNumber"
+						name="phoneNumber"
+						placeholder="Phone Number"
+						className="input_field"
+						onChange={handleClick}
+					/>
+					<button type="submit" className="btn1">
+						Submit
 					</button>
 				</div>
-			)}
-			{!showModal && (
-				<form onSubmit={submitForm} className="form" name="laptopRequestForm">
-					<div className="form-container">
-						<label htmlFor="label1">First Name</label>
-						<input
-							required
-							id="firstName"
-							type="text"
-							value={firstName}
-							name="firstName"
-							placeholder="First Name"
-							className="input_field"
-							onChange={handleClick}
-						/>
-						<label htmlFor="label2">Last Name</label>
-						<input
-							required
-							type="text"
-							value={lastName}
-							id="lastName"
-							name="lastName"
-							placeholder="Last Name"
-							className="input_field"
-							onChange={handleClick}
-						/>
-						<label htmlFor="label3">Email address</label>
-						<input
-							required
-							type="text"
-							value={email}
-							id="email"
-							name="email"
-							placeholder="Email Address"
-							className="input_field"
-							onChange={handleClick}
-						/>
-						<label htmlFor="label4">Phone Number</label>
-						<input
-							required
-							type="number"
-							value={phoneNumber}
-							id="phoneNumber"
-							name="phoneNumber"
-							placeholder="Phone Number"
-							className="input_field"
-							onChange={handleClick}
-						/>
-						<button type="submit" className="btn1">
-							Submit
-						</button>
-					</div>
-				</form>
-			)}
+			</form>
 		</div>
 	);
 }
