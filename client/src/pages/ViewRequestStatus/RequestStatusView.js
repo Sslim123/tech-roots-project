@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
@@ -7,7 +7,10 @@ import ButtonComponent from "./ButtonComponent";
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
-	const [cancelled, setCancelled] = useState(false);
+	const [isCancelled, setIsCancelled] = useState(false);
+	const [isAccepted, setIsAccepted] = useState(false);
+	const [isReject, setIsRejected] = useState(false);
+	const [isReceived, setIsReceived] = useState(false);
 	// this helps get the id from the router
 	const { id } = useParams();
 
@@ -17,7 +20,7 @@ export function RequestStatus() {
 			.then((laptopRequest) => {
 				setRequest(laptopRequest);
 			});
-	}, [id, cancelled]);
+	}, [id, isCancelled, isAccepted, isReject, isReceived]);
 
 	useEffect(() => {
 		if (request != null && request.donationID != null) {
@@ -33,7 +36,39 @@ export function RequestStatus() {
 		fetch(`/api/laptop_request/${id}`, {
 			method: "PUT",
 		}).then(() => {
-			setCancelled(true);
+			setIsCancelled(true);
+		});
+	};
+
+	const acceptRequest = () => {
+		fetch(`/api/laptop_assignment/${request.assignmentId}`, {
+			method: "PUT",
+			body: JSON.stringify({
+				status: "ACCEPTED",
+			}),
+			headers: { "content-type": "application/json" },
+		}).then(() => {
+			setIsAccepted(true);
+		});
+	};
+
+	const rejectRequest = () => {
+		fetch(`/api/laptop_assignment/${request.assignmentId}`, {
+			method: "delete",
+		}).then(() => {
+			setIsRejected(true);
+		});
+	};
+
+	const receivedRequest = () => {
+		fetch(`/api/laptop_assignment/${request.assignmentId}`, {
+			method: "PUT",
+			body: JSON.stringify({
+				status: "FULFILLED",
+			}),
+			headers: { "content-type": "application/json" },
+		}).then(() => {
+			setIsReceived(true);
 		});
 	};
 
@@ -58,8 +93,14 @@ export function RequestStatus() {
 								You have been assigned a laptop. Please confirm your address can
 								be shared so it can be sent to you.
 								<div>
-									<ButtonComponent command="Yes please!" />
-									<ButtonComponent command="No thank you!" />
+									<ButtonComponent
+										handleClick={acceptRequest}
+										command="Yes please!"
+									/>
+									<ButtonComponent
+										handleClick={rejectRequest}
+										command="No thank you!"
+									/>
 								</div>
 							</div>
 						</>
@@ -69,11 +110,17 @@ export function RequestStatus() {
 					return (
 						<>
 							<div>
-								You have been assigned a laptop. Please confirm your address can
-								be shared so it can be sent to you.
+								You have been assigned a laptop. Please confirm you can pick it
+								up at {donation.address}.
 								<div>
-									<ButtonComponent command="Yes please!" />
-									<ButtonComponent command="No thank you!" />
+									<ButtonComponent
+										command="Yes please!"
+										handleClick={acceptRequest}
+									/>
+									<ButtonComponent
+										handleClick={rejectRequest}
+										command="No thank you!"
+									/>
 								</div>
 							</div>
 						</>
@@ -85,12 +132,16 @@ export function RequestStatus() {
 					<>
 						<p>
 							Please let us know
-							{donation.deliveryOption === "ship"
+							{donation.deliveryOption === "SHIP"
 								? " when you have received your laptop at " +
 								  request.requestAddress
 								: " when you have picked up your laptop from " +
 								  donation.address}
 						</p>
+						<ButtonComponent
+							command="Thanks, I've got it"
+							handleClick={receivedRequest}
+						/>
 					</>
 				);
 			}
