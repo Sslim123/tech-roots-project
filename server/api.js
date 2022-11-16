@@ -196,7 +196,6 @@ router.post("/laptop_assignment", (req, res) => {
 router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 	const assignmentId = req.params.assignmentId;
 	const newStatus = req.body.status;
-	console.log;
 
 	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [
 		newStatus,
@@ -206,6 +205,23 @@ router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 		.catch((e) => {
 			console.error(e);
 			res.status(404).send("status not found");
+		});
+});
+
+router.put("/laptop_request/:id", async (req, res) => {
+	const laptopRequest = {
+		id: req.params.id,
+		status: "CANCELLED",
+	};
+
+	db.query(
+		"UPDATE laptop_request SET laptop_request_status = $1 WHERE id = $2",
+		[laptopRequest.status, laptopRequest.id]
+	)
+		.then(() => res.send(`status ${laptopRequest.id} updated!`))
+		.catch((e) => {
+			console.error(e);
+			res.status(404).send("Request not found");
 		});
 });
 

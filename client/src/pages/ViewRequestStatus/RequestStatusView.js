@@ -27,6 +27,12 @@ export function RequestStatus() {
 		}
 	}, [request]);
 
+	const cancelRequest = () => {
+		fetch(`/api/laptop_request/${id}`, {
+			method: "PUT",
+		});
+	};
+
 	if (request !== null) {
 		if (request.status === "WAITING") {
 			return (
@@ -35,7 +41,7 @@ export function RequestStatus() {
 						Thank you for your laptop request. You are on the waiting list. We
 						will send you an notification when this changes
 					</div>
-					<button>Cancel my request</button>
+					<button onClick={cancelRequest}>Cancel my request</button>
 				</>
 			);
 		}
@@ -92,13 +98,14 @@ export function RequestStatus() {
 					</>
 				);
 			}
-			if (request.status === "CANCELLED") {
-				return (
-					<>
-						<p>Your request has been cancelled.</p>
-					</>
-				);
-			}
+		}
+		if (request.status === "CANCELLED") {
+			console.log(request);
+			return (
+				<>
+					<p>Your request has been cancelled.</p>
+				</>
+			);
 		}
 	} else {
 		return <>Oops, something went wrong.../ this request doesn't exist</>;
