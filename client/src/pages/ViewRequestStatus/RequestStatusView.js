@@ -7,10 +7,7 @@ import ButtonComponent from "./ButtonComponent";
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
-	const [isCancelled, setIsCancelled] = useState(false);
-	const [isAccepted, setIsAccepted] = useState(false);
-	const [isReject, setIsRejected] = useState(false);
-	const [isReceived, setIsReceived] = useState(false);
+	const [needsReloading, setNeedsReloading] = useState(false);
 	// this helps get the id from the router
 	const { id } = useParams();
 
@@ -20,7 +17,7 @@ export function RequestStatus() {
 			.then((laptopRequest) => {
 				setRequest(laptopRequest);
 			});
-	}, [id, isCancelled, isAccepted, isReject, isReceived]);
+	}, [id, needsReloading]);
 
 	useEffect(() => {
 		if (request != null && request.donationID != null) {
@@ -36,7 +33,7 @@ export function RequestStatus() {
 		fetch(`/api/laptop_request/${id}`, {
 			method: "PUT",
 		}).then(() => {
-			setIsCancelled(true);
+			setNeedsReloading(!needsReloading);
 		});
 	};
 
@@ -48,7 +45,7 @@ export function RequestStatus() {
 			}),
 			headers: { "content-type": "application/json" },
 		}).then(() => {
-			setIsAccepted(true);
+			setNeedsReloading(!needsReloading);
 		});
 	};
 
@@ -56,7 +53,7 @@ export function RequestStatus() {
 		fetch(`/api/laptop_assignment/${request.assignmentId}`, {
 			method: "delete",
 		}).then(() => {
-			setIsRejected(true);
+			setNeedsReloading(!needsReloading);
 		});
 	};
 
@@ -68,7 +65,7 @@ export function RequestStatus() {
 			}),
 			headers: { "content-type": "application/json" },
 		}).then(() => {
-			setIsReceived(true);
+			setNeedsReloading(!needsReloading);
 		});
 	};
 
