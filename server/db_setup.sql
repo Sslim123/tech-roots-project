@@ -1,5 +1,5 @@
 DROP Table IF EXISTS laptop_request, laptop_donation, laptop_assignment;
-DROP TYPE IF EXISTS assignment_status, laptop_request_status;
+DROP TYPE IF EXISTS assignment_status, laptop_request_status, delivery_option;
 
 CREATE TYPE laptop_request_status AS ENUM ('ACTIVE', 'CANCELLED');
 CREATE TYPE delivery_option AS ENUM ('SHIP', 'PICKUP');
