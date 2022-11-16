@@ -2,7 +2,9 @@ const { Pool } = require("pg");
 const { config } = require("./config");
 const fs = require("fs");
 
-const createNanoid = fs.readFileSync("server/nanoid.sql").toString();
+const createNanoid = fs
+	.readFileSync(require.resolve("./db_nanoid.sql"))
+	.toString();
 
 const createSchema = fs
 	.readFileSync(require.resolve("./db_setup.sql"))
