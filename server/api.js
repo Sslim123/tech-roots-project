@@ -109,8 +109,6 @@ router.post("/laptop_request", async (req, res) => {
 			id: laptopDonationResult.rows[0].id,
 		};
 	}
-
-	console.log(laptopDonation);
 	const query =
 		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4) returning id";
 	db.query(query, [firstName, lastName, email, phoneNumber])
@@ -167,7 +165,34 @@ router.post("/laptop_donation", (req, res) => {
 		email,
 		deliveryOption,
 	])
-		.then(() => res.send("result.rows"))
+		.then(async () => {
+			let laptopDonationResult = await db.query(
+				"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
+			);
+			let laptopDonation = {};
+			if (laptopDonationResult.rows.length > 0) {
+				laptopDonation = {
+					id: laptopDonationResult.rows[0].id,
+				};
+			}
+			if (laptopDonation.id) {
+				const requestIDResult = await db.query(
+					"SELECT id FROM laptop_request where id is not null AND id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
+				);
+				let requestID = {};
+				if (requestIDResult.rows.length > 0) {
+					requestID = {
+						id: requestIDResult.rows[0].id,
+					};
+				}
+				if (requestID.id) {
+					const assignmentQuery =
+						" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
+					db.query(assignmentQuery, [laptopDonation.id, requestID.id]);
+				}
+				res.status(200).json({ success: " was success" });
+			}
+		})
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not   success" });

@@ -106,7 +106,7 @@ export function RequestStatus() {
 						</>
 					);
 				}
-				if (donation.deliveryOption === "PICK UP") {
+				if (donation.deliveryOption === "PICKUP") {
 					return (
 						<>
 							<div>
