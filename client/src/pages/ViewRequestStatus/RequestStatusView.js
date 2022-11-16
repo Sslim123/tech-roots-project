@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
@@ -6,6 +7,7 @@ import ButtonComponent from "./ButtonComponent";
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
+	const [cancelled, setCancelled] = useState(false);
 	// this helps get the id from the router
 	const { id } = useParams();
 
@@ -15,7 +17,7 @@ export function RequestStatus() {
 			.then((laptopRequest) => {
 				setRequest(laptopRequest);
 			});
-	}, [id]);
+	}, [id, cancelled]);
 
 	useEffect(() => {
 		if (request != null && request.donationID != null) {
@@ -30,6 +32,8 @@ export function RequestStatus() {
 	const cancelRequest = () => {
 		fetch(`/api/laptop_request/${id}`, {
 			method: "PUT",
+		}).then(() => {
+			setCancelled(true);
 		});
 	};
 
