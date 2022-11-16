@@ -2,6 +2,15 @@
 insert into laptop_request (firstname, lastname, email, phonenumber)
 values ('Salem', 'Daifan', 'salem@cyf.com', '0748484877');
 
+insert into laptop_request (firstname, lastname, email, phonenumber)
+values ('Fareedh', 'Yawe', 'yawe@cyf.com', '0748484877');
+
+insert into laptop_request (firstname, lastname, email, phonenumber)
+values ('Abed', 'Abed', 'abed@cyf.com', '0748484877');
+
+insert into laptop_request (firstname, lastname, email, phonenumber)
+values ('Tandy', 'Nicole', 'tandy@cyf.com', '0748484877');
+
 
 
 -- laptop donation data

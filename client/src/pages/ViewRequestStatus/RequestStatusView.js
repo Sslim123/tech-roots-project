@@ -100,10 +100,9 @@ export function RequestStatus() {
 			}
 		}
 		if (request.status === "CANCELLED") {
-			console.log(request);
 			return (
 				<>
-					<p>Your request has been cancelled.</p>
+					<p>This request has been cancelled, as requested.</p>
 				</>
 			);
 		}
