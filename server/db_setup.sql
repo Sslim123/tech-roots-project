@@ -5,7 +5,7 @@ CREATE TYPE laptop_request_status AS ENUM ('ACTIVE', 'CANCELLED');
 CREATE TYPE delivery_option AS ENUM ('SHIP', 'PICKUP');
 
 create table laptop_request (
-    id serial primary key,
+    id char(10) DEFAULT nanoid(10) PRIMARY KEY,
     firstname varchar(100),
     lastname varchar(100),
     email varchar(100),
@@ -14,7 +14,7 @@ create table laptop_request (
 );
 
 create table laptop_donation (
-    id serial primary key,
+    id char(10) DEFAULT nanoid(10) PRIMARY KEY,
     name varchar(100),
     address varchar(200),
     number_of_laptops INT,
@@ -25,9 +25,9 @@ create table laptop_donation (
 
 CREATE TYPE assignment_status AS ENUM ('ASSIGNED', 'ACCEPTED', 'FULFILLED');
 create table laptop_assignment (
-    id SERIAL PRIMARY KEY,
-    laptop_request_id INT REFERENCES laptop_request(id),
-    laptop_donation_id INT REFERENCES laptop_donation(id),
+    id char(10) DEFAULT nanoid(10) PRIMARY KEY,
+    laptop_request_id char(10) REFERENCES laptop_request(id),
+    laptop_donation_id char(10) REFERENCES laptop_donation(id),
     status assignment_status DEFAUlT 'ASSIGNED'
 
 );
