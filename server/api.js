@@ -94,20 +94,39 @@ router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
-router.post("/laptop_request", (req, res) => {
+router.post("/laptop_request", async (req, res) => {
 	let firstName = req.body.firstName;
 	let lastName = req.body.lastName;
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
+
+	let laptopDonationResult = await db.query(
+		"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
+	);
+	let laptopDonation = {};
+	if (laptopDonationResult.rows.length > 0) {
+		laptopDonation = {
+			id: laptopDonationResult.rows[0].id,
+		};
+	}
+
+	console.log(laptopDonation);
 	const query =
 		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4) returning id";
 	db.query(query, [firstName, lastName, email, phoneNumber])
-		.then((queryResult) => res.send(queryResult.rows[0]))
+		.then((queryResult) => {
+			if (laptopDonation.id) {
+				const assignmentQuery =
+					" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
+				db.query(assignmentQuery, [laptopDonation.id, queryResult.rows[0].id]);
+			}
+			res.send(queryResult.rows[0]);
+		})
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not success" });
 		});
-}); //console.lo
+});
 
 router.get("/laptop_request", async (req, res) => {
 	try {

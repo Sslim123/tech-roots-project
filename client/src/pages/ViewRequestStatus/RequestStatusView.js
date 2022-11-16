@@ -8,6 +8,7 @@ export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
+
 	// this helps get the id from the router
 	const { id } = useParams();
 
@@ -18,6 +19,8 @@ export function RequestStatus() {
 				setRequest(laptopRequest);
 			});
 	}, [id, needsReloading]);
+
+	// gets laptop donation from the request
 
 	useEffect(() => {
 		if (request != null && request.donationID != null) {

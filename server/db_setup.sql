@@ -27,7 +27,7 @@ create table laptop_assignment (
     id SERIAL PRIMARY KEY,
     laptop_request_id INT REFERENCES laptop_request(id),
     laptop_donation_id INT REFERENCES laptop_donation(id),
-    status assignment_status 
+    status assignment_status DEFAUlT 'ASSIGNED'
 
 
  
