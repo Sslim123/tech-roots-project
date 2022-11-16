@@ -9,7 +9,7 @@ create table laptop_request (
     lastname varchar(100),
     email varchar(100),
     phonenumber varchar(100),
-    laptop_request_status laptop_request_status DEFAUlT 'ACTIVE'
+    laptop_request_status  DEFAUlT 'ACTIVE'
 );
 
 create table laptop_donation (
