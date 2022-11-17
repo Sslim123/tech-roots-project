@@ -155,7 +155,7 @@ router.post("/laptop_donation", (req, res) => {
 	let deliveryOption = req.body.deliveryOption;
 
 	const query =
-		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6)";
+		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6) returning id";
 
 	db.query(query, [
 		name,
@@ -165,37 +165,23 @@ router.post("/laptop_donation", (req, res) => {
 		email,
 		deliveryOption,
 	])
-		.then(async () => {
-			let laptopDonationResult = await db.query(
-				"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
+		.then(async (queryResult) => {
+			const requestIDResult = await db.query(
+				"SELECT id FROM laptop_request WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
 			);
-			let laptopDonation = {};
-			if (laptopDonationResult.rows.length > 0) {
-				laptopDonation = {
-					id: laptopDonationResult.rows[0].id,
-				};
-			}
-			if (laptopDonation.id) {
-				const requestIDResult = await db.query(
-					"SELECT id FROM laptop_request where id is not null AND id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
-				);
-				let requestID = {};
-				if (requestIDResult.rows.length > 0) {
-					requestID = {
-						id: requestIDResult.rows[0].id,
-					};
-				}
-				if (requestID.id) {
-					const assignmentQuery =
-						" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-					db.query(assignmentQuery, [laptopDonation.id, requestID.id]);
-				}
+			if (requestIDResult.rows.length > 0) {
+				const assignmentQuery =
+					" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
+				db.query(assignmentQuery, [
+					queryResult.rows[0].id,
+					requestIDResult.rows[0].id,
+				]);
 				res.status(200).json({ success: " was success" });
 			}
 		})
 		.catch((error) => {
 			console.error(error);
-			res.status(400).json({ success: " was not   success" });
+			res.status(400).json({ success: " was not success" });
 		});
 });
 

@@ -2,10 +2,6 @@ const { Pool } = require("pg");
 const { config } = require("./config");
 const fs = require("fs");
 
-const createNanoid = fs
-	.readFileSync(require.resolve("./db_nanoid.sql"))
-	.toString();
-
 const createSchema = fs
 	.readFileSync(require.resolve("./db_setup.sql"))
 	.toString();
@@ -16,8 +12,6 @@ const pool = new Pool(config);
 
 queryDb(createSchema)
 	.then(() => console.log("schema created successfully"))
-	.then(() => queryDb(createNanoid))
-	.then(() => console.log("nanoid created"))
 	.then(() => queryDb(populateDb))
 	.then(() => console.log("data populated successfully"))
 	.then(() => process.exit(0));

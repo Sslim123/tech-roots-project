@@ -54,7 +54,7 @@ export function RequestStatus() {
 
 	const rejectRequest = () => {
 		fetch(`/api/laptop_assignment/${request.assignmentId}`, {
-			method: "delete",
+			method: "DELETE",
 		}).then(() => {
 			setNeedsReloading(!needsReloading);
 		});

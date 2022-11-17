@@ -102,7 +102,7 @@ function DonatorForm() {
 							<input
 								type="radio"
 								name="deliveryOption"
-								value="PICKßUP"
+								value="PICKUP"
 								onChange={handleClick}
 							/>
 							<label>I would like someone to come pick it up</label>
