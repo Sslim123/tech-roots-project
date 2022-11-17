@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
+
 import "./DonatorForm.css";
 
 function DonatorForm() {
@@ -9,6 +11,9 @@ function DonatorForm() {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [email, setEmail] = useState("");
 	const [deliveryOption, setDeliveryOption] = useState("");
+
+
+	const [navigate, setNavigate] = useState(false);
 
 	function handleClick(e) {
 		if (e.target.name === "name") {
@@ -48,9 +53,15 @@ function DonatorForm() {
 				deliveryOption: deliveryOption,
 			}),
 			headers: { "content-type": "application/json" },
-		});
+		})
+		.then(
+			setNavigate(true)
+		);
 	}
-	return (
+	
+	return navigate ? (
+		<Navigate to={`/laptop-donation-status/:id`} />
+	) : (
 		<div className="form-card">
 			<form className="form" onSubmit={submitForm}>
 				<div className="form-container">
