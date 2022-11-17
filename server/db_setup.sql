@@ -1,7 +1,8 @@
 DROP Table IF EXISTS laptop_request, laptop_donation, laptop_assignment;
-DROP TYPE IF EXISTS assignment_status, laptop_request_status;
+DROP TYPE IF EXISTS assignment_status, laptop_request_status, delivery_option;
 
 CREATE TYPE laptop_request_status AS ENUM ('ACTIVE', 'CANCELLED');
+CREATE TYPE delivery_option AS ENUM ('SHIP', 'PICKUP');
 
 create table laptop_request (
     id serial primary key,
@@ -19,17 +20,14 @@ create table laptop_donation (
     number_of_laptops INT,
     phone_number varchar(100),
     email varchar(100), 
-    delivery_option varchar(25)
+    delivery_option delivery_option
 );
 
-CREATE TYPE assignment_status AS ENUM ('assigned', 'accepted', 'fulfilled');
+CREATE TYPE assignment_status AS ENUM ('ASSIGNED', 'ACCEPTED', 'FULFILLED');
 create table laptop_assignment (
-    id SERIAL PRIMARY KEY,
-    laptop_request_id INT REFERENCES laptop_request(id),
-    laptop_donation_id INT REFERENCES laptop_donation(id),
-    status assignment_status 
-
-
- 
+    id serial primary key,
+    laptop_request_id int REFERENCES laptop_request(id),
+    laptop_donation_id int  REFERENCES laptop_donation(id),
+    status assignment_status DEFAUlT 'ASSIGNED'
 
 );

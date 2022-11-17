@@ -3,7 +3,7 @@ import React from "react";
 const ButtonComponent = (props) => {
 	return (
 		<div>
-			<button>{props.command}</button>
+			<button onClick={props.handleClick}>{props.command}</button>
 		</div>
 	);
 };
