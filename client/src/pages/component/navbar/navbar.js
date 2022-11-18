@@ -1,35 +1,48 @@
-import React from 'react'
+import React from "react";
+import svg from "./logo block.svg";
+import "./navbar.css";
 
 import { Link } from "react-router-dom";
 
 function Navbar() {
-    return ( <>
-  
+	return (
+		<header className="header">
+			<img src={svg} />
+			<nav className="navbar navbar-light  justify-content-centre">
+				<button id="Page-home-bt">
+					<Link className="link1" to="/meet-team-request">
+						Home page
+					</Link>
+				</button>
+				<button id="Meet-home-bt">
+					<Link className="link1" to="/meet-team-request">
+						Meet the Team
+					</Link>
+				</button>
+				<button id="Meet-home-bt">
+					<Link
+						className="link1"
+						to="/create-donator-requests
+"
+					>
+						Donate
+					</Link>
+				</button>
 
+				<button id="Meet-home-bt">
+					<Link className="link1" to="/create-laptop-requests">
+						Request
+					</Link>
+				</button>
 
-<nav className="navbar navbar-light bg-light justify-content-between">
-					<i className="navbar brand">Home page</i>
-
-					<div className="form-inline">
-						<button
-							className="btn btn-outline-success my-2 my-sm-0"
-							id="laptop-home-bt"
-						>
-							<a>
-								<Link to="/create-laptop-requests"> Register for a laptop</Link>
-							</a>
-						</button>
-						<button
-							id="Donator-home-bt"
-							className="btn btn-outline-success my-2 my-sm-0"
-						>
-							<a>
-								<Link to="/create-donator-requests">Donate a laptop</Link>
-							</a>
-						</button>
-					</div>
-				</nav>
-    </> );
+				<button id="Meet-home-bt">
+					<Link className="link1" to="/meet-team-request">
+						Contact us
+					</Link>
+				</button>
+			</nav>
+		</header>
+	);
 }
 
 export default Navbar;
