@@ -4,12 +4,8 @@
 	width: 100%;
 	height: 650px;
 	background-size: contain;
-	background-position: cover;
 }
-.body-main-container {
-	position: relative;
-	height: 100vh;
-}
+
 .body-main-card {
 	max-width: 1000px;
 	width: 100%;
