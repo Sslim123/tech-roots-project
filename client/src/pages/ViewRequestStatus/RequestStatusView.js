@@ -10,8 +10,8 @@ export function RequestStatus() {
 	const [needsReloading, setNeedsReloading] = useState(false);
 
 	// this helps get the id from the router
-	const { id } = useParams();
 
+	const { id } = useParams();
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
 			.then((res) => res.json())
@@ -29,6 +29,13 @@ export function RequestStatus() {
 				.then((laptopDonation) => {
 					setDonation(laptopDonation);
 				});
+		}
+		if (request != null && request.status == "CANCELLED") {
+			Notification.requestPermission().then((prem) => {
+				const notifyCancceled = new Notification(
+					"your request has been cancelled "
+				);
+			});
 		}
 	}, [request]);
 
