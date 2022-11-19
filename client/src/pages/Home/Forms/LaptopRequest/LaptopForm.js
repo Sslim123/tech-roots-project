@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import "./LaptopForm.css";
+import { nanoid } from "nanoid";
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
@@ -38,6 +39,7 @@ function LaptopForm() {
 				lastName: lastName,
 				email: email,
 				phoneNumber: phoneNumber,
+				uuid: nanoid(10),
 			}),
 			headers: { "content-type": "application/json" },
 		})

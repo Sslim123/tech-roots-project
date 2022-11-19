@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 import "./DonatorForm.css";
 
@@ -11,7 +12,6 @@ function DonatorForm() {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [email, setEmail] = useState("");
 	const [deliveryOption, setDeliveryOption] = useState("");
-
 
 	const [navigate, setNavigate] = useState(false);
 
@@ -51,14 +51,12 @@ function DonatorForm() {
 				phoneNumber: phoneNumber,
 				numberOfLaptops: numberOfLaptops,
 				deliveryOption: deliveryOption,
+				uuid: nanoid(10),
 			}),
 			headers: { "content-type": "application/json" },
-		})
-		.then(
-			setNavigate(true)
-		);
+		}).then(setNavigate(true));
 	}
-	
+
 	return navigate ? (
 		<Navigate to={`/laptop-donation-status/:id`} />
 	) : (
