@@ -14,6 +14,7 @@ function DonatorForm() {
 	const [deliveryOption, setDeliveryOption] = useState("");
 
 	const [navigate, setNavigate] = useState(false);
+	const [donationId, setDonationId] = useState("");
 
 	function handleClick(e) {
 		if (e.target.name === "name") {
@@ -54,11 +55,16 @@ function DonatorForm() {
 				uuid: nanoid(10),
 			}),
 			headers: { "content-type": "application/json" },
-		}).then(setNavigate(true));
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setDonationId(data.id);
+				setNavigate(true);
+			});
 	}
 
 	return navigate ? (
-		<Navigate to={`/laptop-donation-status/:id`} />
+		<Navigate to={`/laptop-donation-status/${donationId}`} />
 	) : (
 		<div className="form-card">
 			<form className="form" onSubmit={submitForm}>

@@ -162,9 +162,10 @@ router.post("/laptop_donation", (req, res) => {
 	let phoneNumber = req.body.phoneNumber;
 	let email = req.body.email;
 	let deliveryOption = req.body.deliveryOption;
+	let uuid = req.body.uuid;
 
 	const query =
-		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6) returning id, number_of_laptops";
+		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option, uuid) values ($1, $2, $3, $4, $5, $6, $7) returning id, number_of_laptops, uuid";
 
 	db.query(query, [
 		name,
@@ -173,8 +174,10 @@ router.post("/laptop_donation", (req, res) => {
 		phoneNumber,
 		email,
 		deliveryOption,
+		uuid,
 	])
 		.then(async (queryResult) => {
+			console.log(queryResult.rows[0]);
 			const requestIDResult = await db.query(
 				"SELECT id FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
 			);
@@ -191,9 +194,10 @@ router.post("/laptop_donation", (req, res) => {
 						numberOfLaptops--;
 					}
 				});
-				res.status(200).json({ success: " was success" });
+
+				res.status(200).json({ id: queryResult.rows[0].uuid });
 			} else {
-				res.status(404).json({ success: "No unassigned laptop_requests" });
+				res.status(404).json({ id: queryResult.rows[0].uuid });
 			}
 		})
 		.catch((error) => {
