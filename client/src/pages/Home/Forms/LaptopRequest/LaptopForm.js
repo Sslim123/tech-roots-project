@@ -45,10 +45,6 @@ function LaptopForm() {
 			.then((data) => {
 				setRequestId(data.id);
 				setNavigate(true);
-				const welcomeNotify = "We have received you request ";
-				Notification.requestPermission().then((prem) => {
-					const notification = new Notification(`${welcomeNotify}`);
-				});
 			});
 	}
 
