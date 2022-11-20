@@ -65,6 +65,7 @@
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.3.0",
 		"rimraf": "^3.0.2",
+		"socket.io-client": "^4.5.3",
 		"style-loader": "^3.3.1",
 		"wait-on": "^6.0.1",
 		"webpack": "^5.74.0",

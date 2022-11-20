@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
 // import { Navigate } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
+const socket = io(window.origin, { path: "/api/socket.io" });
 
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
+	// const [isConnected, setIsConnected] = useState(socket.connected);
 
 	// this helps get the id from the router
-
 	const { id } = useParams();
+	useEffect(() => {
+		socket.on("connect", () => {
+			console.log("conncted");
+		});
+		socket.on("laptop_request:statusChanged", ({ laptopRequestId }) => {
+			setNeedsReloading((previousNeedsReloading) => {
+				return !previousNeedsReloading;
+			});
+			console.log("statusChanged", laptopRequestId);
+		});
+		socket.emit("test", { requestId: id });
+		return () => {
+			socket.off("connect");
+			socket.off("chat message");
+		};
+	}, [id]);
+
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
 			.then((res) => res.json())
@@ -30,11 +49,9 @@ export function RequestStatus() {
 					setDonation(laptopDonation);
 				});
 		}
-		if (request != null && request.status == "CANCELLED") {
+		if (request != null && request.status == "WAITING") {
 			Notification.requestPermission().then((prem) => {
-				const notifyCancceled = new Notification(
-					"your request has been cancelled "
-				);
+				new Notification("your request has been cancelled ");
 			});
 		}
 	}, [request]);

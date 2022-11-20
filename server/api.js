@@ -1,5 +1,6 @@
 import { request } from "express";
 import { Router } from "express";
+import { io } from "./socket";
 import db from "./db";
 
 import logger from "./utils/logger";
@@ -178,7 +179,14 @@ router.post("/laptop_donation", (req, res) => {
 					if (numberOfLaptops > 0) {
 						const assignmentQuery =
 							" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-						db.query(assignmentQuery, [queryResult.rows[0].id, row.id]);
+						db.query(assignmentQuery, [queryResult.rows[0].id, row.id]).then(
+							() => {
+								// emit event
+								io.emit("laptop_request:statusChanged", {
+									laptopRequestId: row.id,
+								});
+							}
+						);
 						numberOfLaptops--;
 					}
 				});
