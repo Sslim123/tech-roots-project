@@ -9,25 +9,18 @@ const router = Router();
 router.get("/laptop_donation/:id", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * from laptop_donation WHERE id = $1",
+			"SELECT * from laptop_donation WHERE uuid = $1",
 			[req.params.id]
 		);
-		let id = result.rows[0].uuid;
-		let name = result.rows[0].name;
-		let address = result.rows[0].address;
-		let numberOfLaptops = result.rows[0].number_of_laptops;
-		let phoneNumber = result.rows[0].phone_number;
-		let email = result.rows[0].email;
-		let deliveryOption = result.rows[0].delivery_option;
 
 		let laptopDonation = {
-			id: id,
-			name: name,
-			address: address,
-			numberOfLaptops: numberOfLaptops,
-			phoneNumber: phoneNumber,
-			email: email,
-			deliveryOption: deliveryOption,
+			id: result.rows[0].uuid,
+			name: result.rows[0].name,
+			address: result.rows[0].address,
+			numberOfLaptops: result.rows[0].number_of_laptops,
+			phoneNumber: result.rows[0].phone_number,
+			email: result.rows[0].email,
+			deliveryOption: result.rows[0].delivery_option,
 		};
 		res.json(laptopDonation);
 	} catch (e) {
@@ -178,22 +171,26 @@ router.post("/laptop_donation", (req, res) => {
 	])
 		.then(async (queryResult) => {
 			console.log(queryResult.rows[0]);
-			const requestIDResult = await db.query(
+			const unAssignedRequests = await db.query(
 				"SELECT id FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
 			);
 
 			let numberOfLaptops = queryResult.rows[0].number_of_laptops;
 			/* comparing the number of requests to the number of laptops donated 
 			Then mapping the number of requests the available laptops*/
-			if (requestIDResult.rows.length > 0) {
-				requestIDResult.rows.map((row) => {
+			if (unAssignedRequests.rows.length > 0) {
+				for (let requestId in unAssignedRequests.rows) {
+					console.log(requestId);
 					if (numberOfLaptops > 0) {
 						const assignmentQuery =
 							" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-						db.query(assignmentQuery, [queryResult.rows[0].id, row.id]);
+						await db.query(assignmentQuery, [
+							queryResult.rows[0].id,
+							requestId.id,
+						]);
 						numberOfLaptops--;
 					}
-				});
+				}
 			}
 			res.status(200).json({ id: queryResult.rows[0].uuid });
 		})
