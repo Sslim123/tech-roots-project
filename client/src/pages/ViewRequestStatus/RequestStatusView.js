@@ -22,6 +22,11 @@ export function RequestStatus() {
 			setNeedsReloading((previousNeedsReloading) => {
 				return !previousNeedsReloading;
 			});
+			if (request != null && request.status == "WAITING") {
+				Notification.requestPermission().then((prem) => {
+					new Notification("Good news, we've found you a laptop!");
+				});
+			}
 			console.log("statusChanged", laptopRequestId);
 		});
 		socket.emit("test", { requestId: id });
@@ -29,7 +34,7 @@ export function RequestStatus() {
 			socket.off("connect");
 			socket.off("laptop_request:statusChanged");
 		};
-	}, [id]);
+	}, [id, request]);
 
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
@@ -48,11 +53,6 @@ export function RequestStatus() {
 				.then((laptopDonation) => {
 					setDonation(laptopDonation);
 				});
-		}
-		if (request != null && request.status == "WAITING") {
-			Notification.requestPermission().then((prem) => {
-				new Notification("your request has been cancelled ");
-			});
 		}
 	}, [request]);
 
