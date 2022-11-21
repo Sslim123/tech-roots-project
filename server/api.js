@@ -194,11 +194,8 @@ router.post("/laptop_donation", (req, res) => {
 						numberOfLaptops--;
 					}
 				});
-
-				res.status(200).json({ id: queryResult.rows[0].uuid });
-			} else {
-				res.status(404).json({ id: queryResult.rows[0].uuid });
 			}
+			res.status(200).json({ id: queryResult.rows[0].uuid });
 		})
 		.catch((error) => {
 			console.error(error);
