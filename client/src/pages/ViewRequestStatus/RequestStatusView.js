@@ -11,7 +11,6 @@ export function RequestStatus() {
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
 
-
 	// this helps get the id from the router
 	const { id } = useParams();
 	useEffect(() => {
@@ -20,13 +19,14 @@ export function RequestStatus() {
 		});
 		socket.on("laptop_request:statusChanged", ({ laptopRequestId }) => {
 			setNeedsReloading((previousNeedsReloading) => {
-				return !previousNeedsReloading;
+				return (
+					!previousNeedsReloading,
+					Notification.requestPermission().then(() => {
+						new Notification("Good news, we've found you a laptop!");
+					})
+				);
 			});
-			if (request != null && request.status == "WAITING") {
-				Notification.requestPermission().then((prem) => {
-					new Notification("Good news, we've found you a laptop!");
-				});
-			}
+
 			console.log("statusChanged", laptopRequestId);
 		});
 		socket.emit("test", { requestId: id });
