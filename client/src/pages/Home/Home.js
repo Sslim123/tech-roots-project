@@ -5,13 +5,14 @@ import Footer from "../component/footer/Footer";
 import "./Home.css";
 import Mission from "../component/Mission/Mission";
 import ContactUs from "../component/ContactUs/ContactUs";
+import HowIsWORK from "../component/HowItIsWork/HowIsWork";
 
 export function Home() {
 	return (
 		<>
 			<Navbar />
 			<Homebody />
-
+            <HowIsWORK />
 			<Mission />
 			<ContactUs />
 			<Footer />

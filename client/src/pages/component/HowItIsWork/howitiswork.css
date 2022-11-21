@@ -1,0 +1,84 @@
+body{
+    margin: 0;
+    height: 0;
+    box-sizing: border-box;
+}
+.howitwork-container{
+    width: 100vw;
+    height: 50vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.howItWorkCard {
+    width: 90vw;
+    height: 50vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.h2{
+    text-align: center;
+}
+.body-span .imgSvg{
+    width: 100px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: green;
+    margin-left: 125px;
+    margin-bottom: -40px;
+    position: relative;
+    z-index: 2;
+}
+.body-span p{
+    width: 80vw;
+    height: 40vh;
+   margin-right: 60px ;
+    text-align:center;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 55px -10px rgba(0, 0, 0, 0.25);
+    height: 204px;
+    width: 366px;
+    left: 1100px;
+    top: 1060px;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 120px 40px;
+    color: rgba(0, 0, 0, 1);
+}
+/* @media screen and (max-width: 544px) {
+    .home-container{
+        width: 500px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        background-color: black;
+    }.homebody{
+        align-items: center;
+        flex-direction: column;
+        width: 500px;
+        height: auto;       
+        margin: 0 auto; */
+   
+/*@media screen and (min-width: 767px) {
+    .home-container{
+        width: 766px;
+        margin: 0 auto;
+    }
+    .homebody{
+        display: grid;
+        gap: 10px;
+        width: 760;
+        background-color: gray;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 auto;
+    }.body-span{
+        width: 300px; 
+        height: 300px;
+    }
+}*/
