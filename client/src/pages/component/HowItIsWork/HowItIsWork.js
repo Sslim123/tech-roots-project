@@ -1,8 +1,8 @@
 import React from "react";
-import Img from "./How it works.jpg";
-import Svg3 from "./clarity_form-line.svg";
-import Svg2 from "./image2.svg";
-import Svg1 from "./image1.svg";
+import Img from "./icon-laptop.jpg";
+import Svg3 from "./icon-contact-detail.svg";
+import Svg2 from "./icon-team-detail.svg";
+import Svg1 from "./icon-pick-up.svg";
 
 import "./howitiswork.css";
 
