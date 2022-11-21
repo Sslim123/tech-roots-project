@@ -10,7 +10,7 @@ export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
-	// const [isConnected, setIsConnected] = useState(socket.connected);
+
 
 	// this helps get the id from the router
 	const { id } = useParams();
@@ -27,7 +27,7 @@ export function RequestStatus() {
 		socket.emit("test", { requestId: id });
 		return () => {
 			socket.off("connect");
-			socket.off("chat message");
+			socket.off("laptop_request:statusChanged");
 		};
 	}, [id]);
 

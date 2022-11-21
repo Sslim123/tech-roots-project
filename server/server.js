@@ -4,10 +4,9 @@ import app from "./app";
 import { connectDb, disconnectDb } from "./db";
 import config from "./utils/config";
 import logger from "./utils/logger";
-import { Logger, LogOutput } from "concurrently";
-import { init } from "./socket";
+import { initSocket } from "./socket";
 const server = http.createServer(app);
-init(server);
+initSocket(server);
 
 
 server.on("listening", () => {
