@@ -1,6 +1,7 @@
 import { request } from "express";
 import { Router } from "express";
 import db from "./db";
+import { nanoid } from "nanoid";
 
 import logger from "./utils/logger";
 
@@ -94,7 +95,7 @@ router.post("/laptop_request", async (req, res) => {
 	let lastName = req.body.lastName;
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
-	let uuid = req.body.uuid;
+	let uuid = nanoid(10);
 
 	let laptopDonationResult = await db.query(
 		"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
@@ -155,7 +156,7 @@ router.post("/laptop_donation", (req, res) => {
 	let phoneNumber = req.body.phoneNumber;
 	let email = req.body.email;
 	let deliveryOption = req.body.deliveryOption;
-	let uuid = req.body.uuid;
+	let uuid = nanoid(10);
 
 	const query =
 		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option, uuid) values ($1, $2, $3, $4, $5, $6, $7) returning id, number_of_laptops, uuid";

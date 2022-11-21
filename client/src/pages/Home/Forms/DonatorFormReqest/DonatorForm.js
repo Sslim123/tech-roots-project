@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { nanoid } from "nanoid";
 
 import "./DonatorForm.css";
 
@@ -52,7 +51,6 @@ function DonatorForm() {
 				phoneNumber: phoneNumber,
 				numberOfLaptops: numberOfLaptops,
 				deliveryOption: deliveryOption,
-				uuid: nanoid(10),
 			}),
 			headers: { "content-type": "application/json" },
 		})
