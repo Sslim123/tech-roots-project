@@ -1,0 +1,43 @@
+.header{
+    width: 90vw;
+    height: 20vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+}.form-inline{
+    margin: 30px;
+    width: auto;
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    outline: none;
+    width: 161px;
+    height: 29;
+    margin-left: 25px;
+    border: none;
+    font-family: Fredoka;
+font-size: 24px;
+font-weight: 500;
+line-height: 29px;
+letter-spacing: 0em;
+text-align: center;
+color:  rgba(62, 62, 62, 1);
+background-color: white;
+}
+button:hover{
+    background-color: green;
+}
+#Page-home-bt a{
+    color: green;
+}
+.link1{
+    list-style: none;
+    text-decoration: none;
+}
