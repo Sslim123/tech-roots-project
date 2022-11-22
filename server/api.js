@@ -36,7 +36,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 			"SELECT * from laptop_request WHERE uuid = $1",
 			[req.params.id]
 		);
-		// let id = result.rows[0].id;
+		let laptopRequestId = result.rows[0].id;
 		let laptopRequest = {
 			id: result.rows[0].uuid,
 			firstName: result.rows[0].firstname,
@@ -49,7 +49,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 		if (laptopRequest.status === "ACTIVE") {
 			const laptopAssignmentResult = await db.query(
 				"SELECT laptop_assignment.*, laptop_donation.uuid FROM laptop_assignment, laptop_donation WHERE laptop_request_id = $1 and laptop_donation.id = laptop_assignment.laptop_donation_id",
-				[laptopRequest.id]
+				[laptopRequestId]
 			);
 
 			let laptopAssignment = {};
