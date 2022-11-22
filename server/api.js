@@ -38,7 +38,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 		);
 		// let id = result.rows[0].id;
 		let laptopRequest = {
-			id: result.rows[0].id,
+			id: result.rows[0].uuid,
 			firstName: result.rows[0].firstname,
 			lastName: result.rows[0].lastname,
 			email: result.rows[0].email,
@@ -59,14 +59,12 @@ router.get("/laptop_request/:id", async (req, res) => {
 					status: laptopAssignmentResult.rows[0].status,
 					assignmentId: laptopAssignmentResult.rows[0].id,
 					donationID: laptopAssignmentResult.rows[0].uuid,
-					requestId: laptopAssignmentResult.rows[0].laptop_request_id,
 				};
 			} else {
 				laptopAssignment = {
 					status: "WAITING",
 					assignmentId: null,
 					donationID: null,
-					requestId: null,
 				};
 			}
 			laptopRequest.donationID = laptopAssignment.donationID;
