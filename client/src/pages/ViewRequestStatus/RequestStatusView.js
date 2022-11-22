@@ -14,6 +14,7 @@ export function RequestStatus() {
 	// this helps get the id from the router
 	const { id } = useParams();
 	useEffect(() => {
+		Notification.requestPermission();
 		socket.on("connect", () => {
 			console.log("conncted");
 		});
@@ -21,9 +22,7 @@ export function RequestStatus() {
 			setNeedsReloading((previousNeedsReloading) => {
 				return (
 					!previousNeedsReloading,
-					Notification.requestPermission().then(() => {
-						new Notification("Good news, we've found you a laptop!");
-					})
+					new Notification("Good news, we've found you a laptop!")
 				);
 			});
 
