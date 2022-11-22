@@ -78,6 +78,7 @@
 		"express": "^4.18.1",
 		"helmet": "^6.0.0",
 		"morgan": "^1.10.0",
+		"nanoid": "^3.0.0",
 		"pg": "^8.8.0",
 		"react-icons": "^4.6.0",
 		"redirect": "^0.2.0",
