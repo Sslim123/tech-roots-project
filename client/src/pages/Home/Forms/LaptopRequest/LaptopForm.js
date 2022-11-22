@@ -49,7 +49,6 @@ function LaptopForm() {
 	}
 
 	console.log(requestId);
-
 	return navigate ? (
 		<Navigate to={`/laptop-request-status/${requestId}`} />
 	) : (
@@ -100,7 +99,7 @@ function LaptopForm() {
 						className="input_field"
 						onChange={handleClick}
 					/>
-					<button type="submit" className="btn1">
+					<button  type="submit" className="btn1">
 						Submit
 					</button>
 				</div>

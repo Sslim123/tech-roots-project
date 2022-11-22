@@ -18,21 +18,23 @@ function HowIsWORK() {
 						<img src={Svg3} />
 					</div>
 					<p>
-						First you fill out the form on our website and leave your contact
-						details
+						Fill out a form to request a laptop<br/>
+						or <br/>Fill out a form to donate some laptops
 					</p>
 				</div>
 				<div className="body-span">
 					<div className="imgSvg">
 						<img src={Svg2} />
 					</div>
-					<p>Our team contacts you to clarify all the details</p>
+					<p>If you requested a laptop you will be notified as soon as you
+						are matched with a donor
+					</p>
 				</div>
 				<div className="body-span">
 					<div className="imgSvg">
 						<img src={Svg1} />
 					</div>
-					<p>On a pre-agreed day, the laptop is delivered or picked up</p>
+					<p> The laptop is delivered to the requestor or picked up at the donor's address</p>
 				</div>
 			</div>
 		</div>

@@ -11,7 +11,9 @@ function Navbar() {
 			<nav className="navbar navbar-light  justify-content-centre">
 				<button id="Page-home-bt">
 					<Link className="link1" to="/meet-team-request">
-						Home page
+						
+							Home Page
+				
 					</Link>
 				</button>
 				<button id="Meet-home-bt">
@@ -19,7 +21,7 @@ function Navbar() {
 						Meet the Team
 					</Link>
 				</button>
-				<button id="Meet-home-bt">
+				<button id="Donate-home-bt">
 					<Link
 						className="link1"
 						to="/create-donator-requests
@@ -29,15 +31,9 @@ function Navbar() {
 					</Link>
 				</button>
 
-				<button id="Meet-home-bt">
+				<button id="Register-home-bt">
 					<Link className="link1" to="/create-laptop-requests">
 						Request
-					</Link>
-				</button>
-
-				<button id="Meet-home-bt">
-					<Link className="link1" to="/meet-team-request">
-						Contact us
 					</Link>
 				</button>
 			</nav>
