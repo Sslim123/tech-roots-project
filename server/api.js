@@ -1,5 +1,6 @@
 import { request } from "express";
 import { Router } from "express";
+import { io } from "./socket";
 import db from "./db";
 import { nanoid } from "nanoid";
 
@@ -184,10 +185,16 @@ router.post("/laptop_donation", (req, res) => {
 						// console.log(requestId.id);
 						const assignmentQuery =
 							" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-						await db.query(assignmentQuery, [
-							queryResult.rows[0].id,
-							unAssignedRequests.rows[requestId].id,
-						]);
+
+						db.query(assignmentQuery, [queryResult.rows[0].id, row.id]).then(
+							() => {
+								// emit event
+								io.emit("laptop_request:statusChanged", {
+									laptopRequestId: row.id,
+								});
+							}
+						);
+
 						numberOfLaptops--;
 					}
 				}
