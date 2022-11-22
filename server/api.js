@@ -48,7 +48,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 
 		if (laptopRequest.status === "ACTIVE") {
 			const laptopAssignmentResult = await db.query(
-				"SELECT * from laptop_assignment WHERE laptop_request_id = $1",
+				"SELECT laptop_assignment.*, laptop_donation.uuid FROM laptop_assignment, laptop_donation WHERE laptop_request_id = $1 and laptop_donation.id = laptop_assignment.laptop_donation_id",
 				[laptopRequest.id]
 			);
 
@@ -58,7 +58,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 				laptopAssignment = {
 					status: laptopAssignmentResult.rows[0].status,
 					assignmentId: laptopAssignmentResult.rows[0].id,
-					donationID: laptopAssignmentResult.rows[0].laptop_donation_id,
+					donationID: laptopAssignmentResult.rows[0].uuid,
 					requestId: laptopAssignmentResult.rows[0].laptop_request_id,
 				};
 			} else {
