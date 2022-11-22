@@ -10,7 +10,8 @@ create table laptop_request (
     lastname varchar(100),
     email varchar(100),
     phonenumber varchar(100),
-    laptop_request_status laptop_request_status DEFAUlT 'ACTIVE'
+    laptop_request_status laptop_request_status DEFAUlT 'ACTIVE',
+    uuid text NOT NULL UNIQUE
 );
 
 create table laptop_donation (
@@ -20,7 +21,8 @@ create table laptop_donation (
     number_of_laptops INT,
     phone_number varchar(100),
     email varchar(100), 
-    delivery_option delivery_option
+    delivery_option delivery_option,
+    uuid text NOT NULL UNIQUE
 );
 
 CREATE TYPE assignment_status AS ENUM ('ASSIGNED', 'ACCEPTED', 'FULFILLED');

@@ -1,6 +1,7 @@
 import { request } from "express";
 import { Router } from "express";
 import db from "./db";
+import { nanoid } from "nanoid";
 
 import logger from "./utils/logger";
 
@@ -9,24 +10,18 @@ const router = Router();
 router.get("/laptop_donation/:id", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * from laptop_donation WHERE id = $1",
+			"SELECT * from laptop_donation WHERE uuid = $1",
 			[req.params.id]
 		);
-		let id = result.rows[0].id;
-		let name = result.rows[0].name;
-		let address = result.rows[0].address;
-		let numberOfLaptops = result.rows[0].number_of_laptops;
-		let phoneNumber = result.rows[0].phone_number;
-		let email = result.rows[0].email;
-		let deliveryOption = result.rows[0].delivery_option;
+
 		let laptopDonation = {
-			id: id,
-			name: name,
-			address: address,
-			numberOfLaptops: numberOfLaptops,
-			phoneNumber: phoneNumber,
-			email: email,
-			deliveryOption: deliveryOption,
+			id: result.rows[0].uuid,
+			name: result.rows[0].name,
+			address: result.rows[0].address,
+			numberOfLaptops: result.rows[0].number_of_laptops,
+			phoneNumber: result.rows[0].phone_number,
+			email: result.rows[0].email,
+			deliveryOption: result.rows[0].delivery_option,
 		};
 		res.json(laptopDonation);
 	} catch (e) {
@@ -38,11 +33,12 @@ router.get("/laptop_donation/:id", async (req, res) => {
 router.get("/laptop_request/:id", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * from laptop_request WHERE id = $1",
+			"SELECT * from laptop_request WHERE uuid = $1",
 			[req.params.id]
 		);
 		// let id = result.rows[0].id;
 		let laptopRequest = {
+			id: result.rows[0].id,
 			firstName: result.rows[0].firstname,
 			lastName: result.rows[0].lastname,
 			email: result.rows[0].email,
@@ -53,7 +49,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 		if (laptopRequest.status === "ACTIVE") {
 			const laptopAssignmentResult = await db.query(
 				"SELECT * from laptop_assignment WHERE laptop_request_id = $1",
-				[req.params.id]
+				[laptopRequest.id]
 			);
 
 			let laptopAssignment = {};
@@ -99,6 +95,7 @@ router.post("/laptop_request", async (req, res) => {
 	let lastName = req.body.lastName;
 	let email = req.body.email;
 	let phoneNumber = req.body.phoneNumber;
+	let uuid = nanoid(10);
 
 	let laptopDonationResult = await db.query(
 		"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
@@ -110,15 +107,21 @@ router.post("/laptop_request", async (req, res) => {
 		};
 	}
 	const query =
-		" insert into laptop_request (firstname, lastname, email, phonenumber) values ($1, $2, $3, $4) returning id";
-	db.query(query, [firstName, lastName, email, phoneNumber])
-		.then((queryResult) => {
+		" insert into laptop_request (firstname, lastname, email, phonenumber, uuid) values ($1, $2, $3, $4, $5) returning id, uuid";
+	db.query(query, [firstName, lastName, email, phoneNumber, uuid])
+		.then(async (queryResult) => {
 			if (laptopDonation.id) {
 				const assignmentQuery =
 					" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-				db.query(assignmentQuery, [laptopDonation.id, queryResult.rows[0].id]);
+				await db.query(assignmentQuery, [
+					laptopDonation.id,
+					queryResult.rows[0].id,
+				]);
 			}
-			res.send(queryResult.rows[0]);
+			let laptopRequest = {
+				id: queryResult.rows[0].uuid,
+			};
+			res.send(laptopRequest);
 		})
 		.catch((error) => {
 			console.error(error);
@@ -153,9 +156,10 @@ router.post("/laptop_donation", (req, res) => {
 	let phoneNumber = req.body.phoneNumber;
 	let email = req.body.email;
 	let deliveryOption = req.body.deliveryOption;
+	let uuid = nanoid(10);
 
 	const query =
-		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option) values ($1, $2, $3, $4, $5, $6) returning id, number_of_laptops";
+		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option, uuid) values ($1, $2, $3, $4, $5, $6, $7) returning id, number_of_laptops, uuid";
 
 	db.query(query, [
 		name,
@@ -164,28 +168,33 @@ router.post("/laptop_donation", (req, res) => {
 		phoneNumber,
 		email,
 		deliveryOption,
+		uuid,
 	])
 		.then(async (queryResult) => {
-			const requestIDResult = await db.query(
+			console.log(queryResult.rows[0]);
+			const unAssignedRequests = await db.query(
 				"SELECT id FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
 			);
+			console.log(unAssignedRequests.rows);
 
 			let numberOfLaptops = queryResult.rows[0].number_of_laptops;
 			/* comparing the number of requests to the number of laptops donated 
 			Then mapping the number of requests the available laptops*/
-			if (requestIDResult.rows.length > 0) {
-				requestIDResult.rows.map((row) => {
+			if (unAssignedRequests.rows.length > 0) {
+				for (let requestId in unAssignedRequests.rows) {
 					if (numberOfLaptops > 0) {
+						// console.log(requestId.id);
 						const assignmentQuery =
 							" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-						db.query(assignmentQuery, [queryResult.rows[0].id, row.id]);
+						await db.query(assignmentQuery, [
+							queryResult.rows[0].id,
+							unAssignedRequests.rows[requestId].id,
+						]);
 						numberOfLaptops--;
 					}
-				});
-				res.status(200).json({ success: " was success" });
-			} else {
-				res.status(404).json({ success: "No unassigned laptop_requests" });
+				}
 			}
+			res.status(200).json({ id: queryResult.rows[0].uuid });
 		})
 		.catch((error) => {
 			console.error(error);
@@ -253,7 +262,7 @@ router.put("/laptop_request/:id", async (req, res) => {
 	};
 
 	db.query(
-		"UPDATE laptop_request SET laptop_request_status = $1 WHERE id = $2",
+		"UPDATE laptop_request SET laptop_request_status = $1 WHERE uuid = $2",
 		[laptopRequest.status, laptopRequest.id]
 	)
 		.then(() => res.send(`status ${laptopRequest.id} updated!`))

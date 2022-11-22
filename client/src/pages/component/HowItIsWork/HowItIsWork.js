@@ -18,6 +18,7 @@ function HowIsWORK() {
 						<img src={Svg3} />
 					</div>
 					<p>
+
 						Fill out a form to request a laptop<br/>
 						or <br/>Fill out a form to donate some laptops
 					</p>
@@ -35,6 +36,7 @@ function HowIsWORK() {
 						<img src={Svg1} />
 					</div>
 					<p> The laptop is delivered to the requestor or picked up at the donor's address</p>
+
 				</div>
 			</div>
 		</div>
