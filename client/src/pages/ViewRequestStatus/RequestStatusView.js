@@ -34,7 +34,7 @@ export function RequestStatus() {
 			socket.off("connect");
 			socket.off("laptop_request:statusChanged");
 		};
-	}, [id, request]);
+	}, [id]);
 
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
