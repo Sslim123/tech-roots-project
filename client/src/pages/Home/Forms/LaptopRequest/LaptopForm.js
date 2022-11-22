@@ -48,8 +48,6 @@ function LaptopForm() {
 			});
 	}
 
-	console.log(requestId);
-
 	return navigate ? (
 		<Navigate to={`/laptop-request-status/${requestId}`} />
 	) : (

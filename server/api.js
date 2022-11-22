@@ -36,9 +36,9 @@ router.get("/laptop_request/:id", async (req, res) => {
 			"SELECT * from laptop_request WHERE uuid = $1",
 			[req.params.id]
 		);
-		// let id = result.rows[0].id;
+		let laptopRequestId = result.rows[0].id;
 		let laptopRequest = {
-			id: result.rows[0].id,
+			id: result.rows[0].uuid,
 			firstName: result.rows[0].firstname,
 			lastName: result.rows[0].lastname,
 			email: result.rows[0].email,
@@ -48,8 +48,8 @@ router.get("/laptop_request/:id", async (req, res) => {
 
 		if (laptopRequest.status === "ACTIVE") {
 			const laptopAssignmentResult = await db.query(
-				"SELECT * from laptop_assignment WHERE laptop_request_id = $1",
-				[laptopRequest.id]
+				"SELECT laptop_assignment.*, laptop_donation.uuid FROM laptop_assignment, laptop_donation WHERE laptop_request_id = $1 and laptop_donation.id = laptop_assignment.laptop_donation_id",
+				[laptopRequestId]
 			);
 
 			let laptopAssignment = {};
@@ -58,15 +58,13 @@ router.get("/laptop_request/:id", async (req, res) => {
 				laptopAssignment = {
 					status: laptopAssignmentResult.rows[0].status,
 					assignmentId: laptopAssignmentResult.rows[0].id,
-					donationID: laptopAssignmentResult.rows[0].laptop_donation_id,
-					requestId: laptopAssignmentResult.rows[0].laptop_request_id,
+					donationID: laptopAssignmentResult.rows[0].uuid,
 				};
 			} else {
 				laptopAssignment = {
 					status: "WAITING",
 					assignmentId: null,
 					donationID: null,
-					requestId: null,
 				};
 			}
 			laptopRequest.donationID = laptopAssignment.donationID;
