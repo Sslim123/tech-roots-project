@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import ButtonComponent from "../../../component/ButtonComponent/ButtonComponent";
-import Navbar from "../../../component/navbar/Navbar";
+import Navbar from "../../../component/navbar/navbar";
 
 import "./DonatorForm.css";
 
@@ -66,7 +66,7 @@ function DonatorForm() {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar isActive="donationPage" />
 			{navigate ? (
 				<Navigate to={`/laptop-donation-status/${donationId}`} />
 			) : (

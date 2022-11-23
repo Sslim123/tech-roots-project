@@ -10,7 +10,7 @@ import HowItIsWORK from "../component/HowItIsWork/HowItIsWork";
 export function Home() {
 	return (
 		<>
-			<Navbar />
+			<Navbar isActive="homePage" />
 			<Homebody />
 			<HowItIsWORK />
 			<Mission />
