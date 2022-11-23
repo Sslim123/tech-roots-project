@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Navbar from "../component/navbar/navbar";
 import Footer from "../component/footer/Footer";
+import { Link } from "react-router-dom";
 import "./StatusView.css";
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
@@ -112,9 +113,16 @@ export function RequestStatus() {
 							list. We will send you a notification when a laptop becomes
 							available.
 						</h1>
-						
 					</div>
-					<button onClick={cancelRequest}>Cancel my request</button>
+					<div className="status-bt">
+						<div>
+							<Link className="status-but-link" to="/">
+								<button id="tr">Back Home </button>
+							</Link>
+						</div>
+
+						<button onClick={cancelRequest}>Cancel my request</button>
+					</div>
 				</div>
 			);
 		}

@@ -1,6 +1,5 @@
 import React from "react";
 import "./StatusView.css";
-import Footer from "../component/footer/Footer";
 import { Link } from "react-router-dom";
 
 function DonationRequestStatues() {
@@ -16,11 +15,12 @@ function DonationRequestStatues() {
 					Thank you for your donation. We will notify you when you have been
 					matched with someone who has requested a laptop.
 				</h1>
+			</div>
+			<div className="status-bt">
 				<button>
 					<Link to="/">Back Home</Link>
 				</button>
 			</div>
-			<Footer />
 		</div>
 	);
 }
