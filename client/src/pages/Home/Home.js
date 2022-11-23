@@ -6,6 +6,7 @@ import "./Home.css";
 import Mission from "../component/Mission/Mission";
 import ContactUs from "../component/ContactUs/ContactUs";
 import HowItIsWORK from "../component/HowItIsWork/HowItIsWork";
+//import MeetTheTeam from "../meetTheTeam/MeetTheTeam";
 
 export function Home() {
 	return (
@@ -13,6 +14,7 @@ export function Home() {
 			<Navbar />
 			<Homebody />
             <HowItIsWORK />
+			{/* <MeetTheTeam/> */}
 			<Mission />
 			<ContactUs />
 			<Footer />
