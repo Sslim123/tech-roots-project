@@ -4,8 +4,10 @@ import app from "./app";
 import { connectDb, disconnectDb } from "./db";
 import config from "./utils/config";
 import logger from "./utils/logger";
-
+import { initSocket } from "./socket";
 const server = http.createServer(app);
+initSocket(server);
+
 
 server.on("listening", () => {
 	const addr = server.address();
