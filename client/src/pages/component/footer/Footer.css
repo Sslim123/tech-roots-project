@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 .footer-container{
-  
+        margin-top: 5%;
         background-image: url(../image/footer.jpg);
         background-repeat: no-repeat;
         width: 100%;
