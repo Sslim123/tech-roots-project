@@ -9,7 +9,7 @@ function Navbar(props) {
 
 	return (
 		<header className="header">
-			<img src={svg} />
+			<img src={svg} alt="logo" />
 			<nav className="navbar navbar-light  justify-content-centre">
 				<button id={props.isActive === "homePage" ? "active" : undefined}>
 					<Link className="link1" to="/">
