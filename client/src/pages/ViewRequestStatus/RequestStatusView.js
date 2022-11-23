@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-// import { Navigate } from "react-router-dom";
-
+import Navbar from "../component/navbar/navbar";
+import Footer from "../component/footer/Footer";
+import "./StatusView.css";
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
+
 const socket = io(window.origin, { path: "/api/socket.io" });
 
 export function RequestStatus() {
@@ -98,13 +100,22 @@ export function RequestStatus() {
 	if (request !== null) {
 		if (request.status === "WAITING") {
 			return (
-				<>
-					<div>
-						Thank you for your laptop request. You are on the waiting list. We
-						will send you an notification when this changes
+				<div>
+					<div className="status-thankYou-main-picture">
+						<div className="thankYou-p">
+							<h1>Thank you!</h1>
+						</div>
+					</div>
+					<div className="text-status">
+						<h1>
+							Thank you for your laptop request. You are now on the waiting
+							list. We will send you a notification when a laptop becomes
+							available.
+						</h1>
+						
 					</div>
 					<button onClick={cancelRequest}>Cancel my request</button>
-				</>
+				</div>
 			);
 		}
 		if (donation !== null) {
