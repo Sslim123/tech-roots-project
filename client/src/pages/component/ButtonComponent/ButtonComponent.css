@@ -1,0 +1,21 @@
+#button-component{
+    border: none;
+	height: 57px;
+	width: 303px;
+	left: 562px;
+	top: 586px;
+	border-radius: 28px;
+	background-color: #0fa10c;
+	border-radius: 28px;
+	font-family: Fredoka;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 27px;
+	letter-spacing: 0em;
+	text-align: center;
+	color: #ffffff;
+}
+
+#button-component:hover{
+    background-color: #2693F9;
+}

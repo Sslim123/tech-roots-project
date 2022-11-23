@@ -12,7 +12,7 @@ export function Home() {
 		<>
 			<Navbar />
 			<Homebody />
-            <HowItIsWORK />
+			<HowItIsWORK />
 			<Mission />
 			<ContactUs />
 			<Footer />

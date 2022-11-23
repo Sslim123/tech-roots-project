@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import Navbar from "../../../component/navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import "./LaptopForm.css";
+import BackgroundImage from "../../../component/BackgroundImageComponent/BackgroundImage";
+import ButtonComponent from "../../../component/ButtonComponent/ButtonComponent";
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
@@ -49,61 +52,74 @@ function LaptopForm() {
 	}
 
 	return navigate ? (
-		<Navigate to={`/laptop-request-status/${requestId}`} />
+		<>
+			<Navbar />
+			<Navigate to={`/laptop-request-status/${requestId}`} />
+		</>
 	) : (
-		<div className="form-card">
-			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
-				<div className="form-container">
-					<label htmlFor="label1">First Name</label>
-					<input
-						required
-						id="firstName"
-						type="text"
-						value={firstName}
-						name="firstName"
-						placeholder="First Name"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<label htmlFor="label2">Last Name</label>
-					<input
-						required
-						type="text"
-						value={lastName}
-						id="lastName"
-						name="lastName"
-						placeholder="Last Name"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<label htmlFor="label3">Email address</label>
-					<input
-						required
-						type="text"
-						value={email}
-						id="email"
-						name="email"
-						placeholder="Email Address"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<label htmlFor="label4">Phone Number</label>
-					<input
-						required
-						type="number"
-						value={phoneNumber}
-						id="phoneNumber"
-						name="phoneNumber"
-						placeholder="Phone Number"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<button type="submit" className="btn1">
-						Submit
-					</button>
-				</div>
-			</form>
-		</div>
+		<>
+			<Navbar />
+			<BackgroundImage primaryText="Request a laptop" />
+			<div className="form-card">
+				<form onSubmit={submitForm} className="form" name="laptopRequestForm">
+					<div className="form-container">
+						<div>
+							<label htmlFor="label1">First Name</label>
+							<input
+								required
+								id="firstName"
+								type="text"
+								value={firstName}
+								name="firstName"
+								placeholder="Enter your first name"
+								className="input_field"
+								onChange={handleClick}
+							/>
+						</div>
+						<div>
+							<label htmlFor="label2">Last Name</label>
+							<input
+								required
+								type="text"
+								value={lastName}
+								id="lastName"
+								name="lastName"
+								placeholder="Enter your second name"
+								className="input_field"
+								onChange={handleClick}
+							/>
+						</div>
+						<div>
+							<label htmlFor="label3">Email address</label>
+							<input
+								required
+								type="text"
+								value={email}
+								id="email"
+								name="email"
+								placeholder="Enter your email address"
+								className="input_field"
+								onChange={handleClick}
+							/>
+						</div>
+						<div>
+							<label htmlFor="label4">Phone Number</label>
+							<input
+								required
+								type="number"
+								value={phoneNumber}
+								id="phoneNumber"
+								name="phoneNumber"
+								placeholder="Enter your phone number"
+								className="input_field"
+								onChange={handleClick}
+							/>
+						</div>
+						<ButtonComponent handleClick={submitForm} text="Submit" />
+					</div>
+				</form>
+			</div>
+		</>
 	);
 }
 export default LaptopForm;
