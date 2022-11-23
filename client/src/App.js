@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import LaptopForm from "./pages/Home/Forms/LaptopRequest/LaptopForm";
 import DonatorForm from "./pages/Home/Forms/DonatorFormReqest/DonatorForm";
+//navbar links
+import MeetTheTeam from "./pages/meetTheTeam/MeetTheTeam";
 
 // Table View
 
@@ -23,6 +25,8 @@ const App = () => (
 		{/* Home- laptop & Dontor form */}
 		<Route path="/create-laptop-requests" element={<LaptopForm />} />
 		<Route path="/create-donator-requests" element={<DonatorForm />} />
+		{/* nav-links */}
+		<Route path="/meet-the-team" element={<MeetTheTeam />} />
 
 		{/* Table view page */}
 		<Route path="/list-requests" element={<RequestView />} />

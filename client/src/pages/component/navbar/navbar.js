@@ -10,14 +10,12 @@ function Navbar() {
 			<img src={svg} />
 			<nav className="navbar navbar-light  justify-content-centre">
 				<button id="Page-home-bt">
-					<Link className="link1" to="/meet-team-request">
-						
-							Home Page
-				
+					<Link className="link1" to="/">
+						Home Page
 					</Link>
 				</button>
 				<button id="Meet-home-bt">
-					<Link className="link1" to="/meet-team-request">
+					<Link className="link1" to="/meet-the-team">
 						Meet the Team
 					</Link>
 				</button>

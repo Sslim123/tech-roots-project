@@ -4,13 +4,14 @@
 	box-sizing: border-box;
 }
 .mission-constrainer {
-	width: 100vw;
+	width: 100%;
 	position: relative;
 	top: 120px;
 	background-image: url(../image/mission.jpg);
 	background-repeat: no-repeat;
 	height: 315px;
-	background-size: 100vw;
+	background-size: 100%;
+	background-position: center;
 	margin: 0 auto;
 	box-sizing: border-box;
 	
