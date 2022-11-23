@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
 // import { Navigate } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
+const socket = io(window.origin, { path: "/api/socket.io" });
 
 export function RequestStatus() {
 	const [request, setRequest] = useState(null);
@@ -11,6 +13,27 @@ export function RequestStatus() {
 
 	// this helps get the id from the router
 	const { id } = useParams();
+	useEffect(() => {
+		Notification.requestPermission();
+		socket.on("connect", () => {
+			console.log("conncted");
+		});
+		socket.on("laptop_request:statusChanged", ({ laptopRequestId }) => {
+			setNeedsReloading((previousNeedsReloading) => {
+				return (
+					!previousNeedsReloading,
+					new Notification("Good news, we've found you a laptop!")
+				);
+			});
+
+			console.log("statusChanged", laptopRequestId);
+		});
+		socket.emit("test", { requestId: id });
+		return () => {
+			socket.off("connect");
+			socket.off("laptop_request:statusChanged");
+		};
+	}, [id]);
 
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
