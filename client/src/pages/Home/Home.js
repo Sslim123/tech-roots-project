@@ -9,14 +9,15 @@ import HowItIsWORK from "../component/HowItIsWork/HowItIsWork";
 
 export function Home() {
 	return (
-		<>
-			<Navbar />
+
+		<main role="main">
+			<Navbar isActive="homePage"/>
 			<Homebody />
 			<HowItIsWORK />
 			<Mission />
 			<ContactUs />
 			<Footer />
-		</>
+		</main>
 	);
 }
 

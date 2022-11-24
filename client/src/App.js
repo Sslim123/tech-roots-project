@@ -12,7 +12,7 @@ import MeetTheTeam from "./pages/meetTheTeam/MeetTheTeam";
 import LaptopTable from "./pages/ViewTableRequest/LaptopViewTable/LaptopTable";
 import DonatorTable from "./pages/ViewTableRequest/DonatorViewTable/DonatorTable";
 
-// Status request view 
+// Status request view
 import RequestView from "./pages/ViewTableRequest/RequestView";
 import RequestStatus from "./pages/ViewRequestStatus/RequestStatusView";
 import DonationRequestStatues from "./pages/ViewRequestStatus/DonationRequestStatus";
@@ -22,7 +22,7 @@ const App = () => (
 		{/* Home */}
 		<Route path="/" element={<Home />} />
 
-		{/* Home- laptop & Dontor form */}
+		{/* Home- laptop & Donator form */}
 		<Route path="/create-laptop-requests" element={<LaptopForm />} />
 		<Route path="/create-donator-requests" element={<DonatorForm />} />
 		{/* nav-links */}
@@ -35,7 +35,10 @@ const App = () => (
 
 		{/* request status */}
 		<Route path="/laptop-request-status/:id" element={<RequestStatus />} />
-		<Route path="/laptop-donation-status/:id" element={<DonationRequestStatues />} />
+		<Route
+			path="/laptop-donation-status/:id"
+			element={<DonationRequestStatues />}
+		/>
 	</Routes>
 );
 
