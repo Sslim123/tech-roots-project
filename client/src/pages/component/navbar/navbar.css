@@ -47,6 +47,8 @@ background-color: white;
     letter-spacing: 2px;
 }#Register-home-bt a:hover{
     color: white;
+#active a{
+    color: green;
 }
  button:hover{
     width: 160px;

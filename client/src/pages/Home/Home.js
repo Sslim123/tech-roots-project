@@ -9,8 +9,9 @@ import HowItIsWORK from "../component/HowItIsWork/HowItIsWork";
 
 export function Home() {
 	return (
+
 		<main role="main">
-			<Navbar />
+			<Navbar isActive="homePage"/>
 			<Homebody />
 			<HowItIsWORK />
 			<Mission />

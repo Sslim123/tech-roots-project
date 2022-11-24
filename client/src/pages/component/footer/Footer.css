@@ -6,6 +6,8 @@
 .footer-container{
   position: relative;
   top: 100px;
+        margin-top: 5%;
+
         background-image: url(../image/footer.jpg);
         background-repeat: no-repeat;
         background-size: 100%;

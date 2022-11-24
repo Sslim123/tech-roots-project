@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import Navbar from "../../../component/navbar/navbar";
 import { Navigate } from "react-router-dom";
 import "./LaptopForm.css";
+import BackgroundImage from "../../../component/BackgroundImageComponent/BackgroundImage";
+import ButtonComponent from "../../../component/ButtonComponent/ButtonComponent";
+import Footer from "../../../component/footer/Footer";
 
 function LaptopForm() {
 	const [firstName, setFirst] = useState("");
@@ -102,9 +106,75 @@ function LaptopForm() {
 					<button  type="submit" className="btn1">
 						Submit
 					</button>
+	return (
+		<>
+			<Navbar isActive="requestPage" />
+			<BackgroundImage primaryText="Request a laptop" />
+			{navigate ? (
+				<Navigate to={`/laptop-request-status/${requestId}`} />
+			) : (
+				<div className="form-card">
+					<form onSubmit={submitForm} className="form" name="laptopRequestForm">
+						<div className="form-container">
+							<div>
+								<label htmlFor="label1">First Name</label>
+								<input
+									required
+									id="firstName"
+									type="text"
+									value={firstName}
+									name="firstName"
+									placeholder="Enter your first name"
+									className="input_field"
+									onChange={handleClick}
+								/>
+							</div>
+							<div>
+								<label htmlFor="label2">Surname</label>
+								<input
+									required
+									type="text"
+									value={lastName}
+									id="lastName"
+									name="lastName"
+									placeholder="Enter your surname"
+									className="input_field"
+									onChange={handleClick}
+								/>
+							</div>
+							<div>
+								<label htmlFor="label3">Email address</label>
+								<input
+									required
+									type="text"
+									value={email}
+									id="email"
+									name="email"
+									placeholder="Enter your email address"
+									className="input_field"
+									onChange={handleClick}
+								/>
+							</div>
+							<div>
+								<label htmlFor="label4">Phone Number</label>
+								<input
+									required
+									type="number"
+									value={phoneNumber}
+									id="phoneNumber"
+									name="phoneNumber"
+									placeholder="Enter your phone number"
+									className="input_field"
+									onChange={handleClick}
+								/>
+							</div>
+							<ButtonComponent handleClick={submitForm} text="Submit" />
+						</div>
+					</form>
 				</div>
-			</form>
-		</div>
+			)}
+			<Footer />
+		</>
 	);
 }
 export default LaptopForm;
