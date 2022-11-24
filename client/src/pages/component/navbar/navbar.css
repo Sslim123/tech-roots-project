@@ -1,5 +1,10 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
 .header{
-    width: 90vw;
+    width: 80vw;
     height: 20vh;
     margin: 0 auto;
     display: flex;
@@ -7,14 +12,10 @@
     align-items: center ;
 }
 .navbar{
+    width: 60vw;
     display: flex;
     justify-content: space-between;
     margin-left: 100px;
-}.form-inline{
-    margin: 30px;
-    width: auto;
-    display: flex;
-    justify-content: space-around;
 }
 button{
     outline: none;
@@ -28,16 +29,49 @@ font-weight: 500;
 line-height: 29px;
 letter-spacing: 0em;
 text-align: center;
-color:  rgba(62, 62, 62, 1);
 background-color: white;
+}#Page-home-bt a{
+    color: green;
 }
-button:hover{
-    background-color: green;
+#Meet-home-bt a:hover{
+    border: none;
+    color: white;
+    width: 120px;
+    letter-spacing: -1px;
 }
+#Page-home-bt a:hover{
+    color: white;
+}
+#Donate-home-bt a:hover{
+    color: white;
+    letter-spacing: 2px;
+}#Register-home-bt a:hover{
+    color: white;
 #active a{
     color: green;
 }
-.link1{
+ button:hover{
+    width: 160px;
+    height: 45px;
+    background-color: green;
+        border-radius: 1.3rem;
+    color: white;
+    
+}.link1:hover{
     list-style: none;
     text-decoration: none;
+    color: white;
+
+}
+.link1::before{
+    content: "";
+    position: absolute;
+    background-color: black;
+    height: 4px;
+    width: 0;
+    bottom: -10px;   
+    transition: 0.3s;
+}
+.link1:hover::before{
+    width: 110px;
 }

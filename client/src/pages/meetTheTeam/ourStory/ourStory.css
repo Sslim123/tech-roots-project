@@ -1,0 +1,15 @@
+.div_container{
+    width: 75vw;
+    height: 70vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.our_story{
+    margin-top:  15px;
+}
+.our_story p{
+    margin: 45px;
+}.get-touch{
+    margin-top: 20px;
+}

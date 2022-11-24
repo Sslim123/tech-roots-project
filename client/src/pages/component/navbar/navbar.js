@@ -11,6 +11,23 @@ function Navbar(props) {
 		<header className="header">
 			<img src={svg} alt="logo" />
 			<nav className="navbar navbar-light  justify-content-centre">
+				<button id="Page-home-bt">
+					<Link className="link1" to="/">
+						Home Page
+					</Link>
+				</button>
+				<button id="Meet-home-bt">
+					<Link className="link1" to="/meet-the-team">
+						Meet the Team
+					</Link>
+				</button>
+				<button id="Donate-home-bt">
+					<Link
+						className="link1"
+						to="/create-donator-requests
+"
+					>
+
 				<button id={props.isActive === "homePage" ? "active" : undefined}>
 					<Link className="link1" to="/">
 						Home page
@@ -27,11 +44,14 @@ function Navbar(props) {
 					</Link>
 				</button>
 
+
+				<button id="Register-home-bt">
 				<button id={props.isActive === "requestPage" ? "active" : undefined}>
 					<Link className="link1" to="/create-laptop-requests">
 						Request
 					</Link>
 				</button>
+
 
 				<button id={props.isActive === "contactUs" ? "contactUs" : undefined}>
 					<Link className="link1" to="/meet-team-request">
