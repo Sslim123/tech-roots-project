@@ -12,11 +12,13 @@
     margin-top: 50px;
 }
 .form-container input{
-    background-color: rgb(247, 247, 247);
-    width: 300px;
-    height: 50px;
-   font-size: 26px;
-   padding-left: 10px;
+    box-sizing: border-box;
+    width: 426px;
+    height: 45px;
+    left: 648px;
+    border: 1px solid #3A3A3A;
+    border-radius: 8px;
+    padding: 10px;
 }
 .form-container label{
     font-size: 15px;
