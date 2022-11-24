@@ -9,14 +9,14 @@ import HowItIsWORK from "../component/HowItIsWork/HowItIsWork";
 
 export function Home() {
 	return (
-		<>
+		<main role="main">
 			<Navbar />
 			<Homebody />
 			<HowItIsWORK />
 			<Mission />
 			<ContactUs />
 			<Footer />
-		</>
+		</main>
 	);
 }
 

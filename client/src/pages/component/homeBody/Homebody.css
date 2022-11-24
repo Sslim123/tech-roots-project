@@ -23,6 +23,14 @@
 .body-main-card {
 	position: relative;
     box-sizing: border-box;
+    }
+.body-main-container {
+	display: flex;
+}
+
+.body-main-card {
+	box-sizing: border-box;
+
 	display: flex;
 	max-width: 800px;
 	width: 100vw;
@@ -31,7 +39,7 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	margin-top: 50px;	
+	margin-top: 50px;
 }
 .Home-main-text {
 	color: #ffffff;
@@ -76,22 +84,19 @@
 	margin-right: 30px;
 }
 #home-left-bt:hover {
-
-	background-color: #2693F9;
-    
+	background-color: #2693f9;
 }
 #home-right-bt {
 	margin-left: 30px;
 }
 #home-right-bt:hover {
-	background-color: #2693F9;
+	background-color: #2693f9;
 }
-.home-link{
-    text-decoration: none;
-    color: #ffffff;
+.home-link {
+	text-decoration: none;
+	color: #ffffff;
 }
-.home-link:hover{
-    text-decoration: none;
-   color: #ffffff;
-   
+.home-link:hover {
+	text-decoration: none;
+	color: #ffffff;
 }
