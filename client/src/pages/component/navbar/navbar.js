@@ -1,5 +1,6 @@
 import React from "react";
 import svg from "./logo block.svg";
+import { AiOutlineBars } from "react-icons/ai";
 import "./navbar.css";
 
 import { Link } from "react-router-dom";
@@ -9,17 +10,17 @@ function Navbar() {
 		<header className="header">
 			<img src={svg} />
 			<nav className="navbar navbar-light  justify-content-centre">
-				<button id="Page-home-bt">
+				<button className="nav-btn" id="Page-home-bt">
 					<Link className="link1" to="/">
 						Home Page
 					</Link>
 				</button>
-				<button id="Meet-home-bt">
+				<button className="nav-btn" id="Meet-home-bt">
 					<Link className="link1" to="/meet-the-team">
 						Meet the Team
 					</Link>
 				</button>
-				<button id="Donate-home-bt">
+				<button className="nav-btn" id="Donate-home-bt">
 					<Link
 						className="link1"
 						to="/create-donator-requests
@@ -29,12 +30,13 @@ function Navbar() {
 					</Link>
 				</button>
 
-				<button id="Register-home-bt">
+				<button className="nav-btn" id="Register-home-bt">
 					<Link className="link1" to="/create-laptop-requests">
 						Request
 					</Link>
 				</button>
 			</nav>
+			<AiOutlineBars className="nav-icon" />
 		</header>
 	);
 }

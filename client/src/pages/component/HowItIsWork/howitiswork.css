@@ -7,18 +7,17 @@ body{
     position: relative;
     top: 100px;
     width: 80vw;
-    height: 50vh;
+    height: 60vh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 .howItWorkCard {
     width: 80vw;
-    height: 50vh;
+    height: 40vh;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
+
 }
 .h2{
     text-align: center;
@@ -59,35 +58,25 @@ body{
     padding: 120px 40px;
     color: rgba(0, 0, 0, 1);
 }
-/* @media screen and (max-width: 544px) {
-    .home-container{
-        width: 500px;
+ @media screen and (max-width: 544px) {
+    .howitwork-container{
+        width: 350px;
         height: auto;
         display: flex;
         flex-direction: column;
         margin: 0 auto;
-        background-color: black;
-    }.homebody{
-        align-items: center;
-        flex-direction: column;
+    }.howItWorkCard{
+        display: grid;
+        grid-template-columns: 1fr;
         width: 500px;
         height: auto;       
-        margin: 0 auto; */
+        margin: 0 auto; 
    
-/*@media screen and (min-width: 767px) {
-    .home-container{
-        width: 766px;
-        margin: 0 auto;
-    }
-    .homebody{
-        display: grid;
-        gap: 10px;
-        width: 760;
-        background-color: gray;
-        grid-template-columns: 1fr 1fr;
-        margin: 0 auto;
     }.body-span{
-        width: 300px; 
-        height: 300px;
+        width: 500px;
+        height: 400px;
+    }.h2{
+        position: relative;
+        width: 320px;
     }
-}*/
+}

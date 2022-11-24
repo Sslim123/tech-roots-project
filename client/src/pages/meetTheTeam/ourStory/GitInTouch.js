@@ -17,7 +17,7 @@ function GitInTouch() {
 							<div>
 								<ul className="getTouch-ul-link">
 									<li className="fa-brands fa-linkedin">
-										<FaGithub className="getTouch-icon" />
+										<FaLinkedin className="getTouch-icon" />
 										<a
 											target="_blank"
 											href="https://www.linkedin.com/in/salem-dayfan-0a9399206"
@@ -26,8 +26,8 @@ function GitInTouch() {
 											linked.in/salem-dayfan
 										</a>
 									</li>
-									<li className="fa-brands fa-linkedin">
-										<FaLinkedin className="getTouch-icon" />
+									<li className="fa-brands fa-github">
+										<FaGithub className="getTouch-icon" />
 										<a
 											target="_blank"
 											href="https://github.com/Sslim123"
@@ -41,7 +41,7 @@ function GitInTouch() {
 							<div>
 								<ul className="getTouch-ul-link">
 									<li className="fa-brands fa-linkedin">
-										<FaGithub className="getTOUCH-icon" />
+										<FaLinkedin className="getTouch-icon" />
 										<a
 											target="_blank"
 											href="https://www.linkedin.com/in/yawe-fareed"
@@ -51,7 +51,7 @@ function GitInTouch() {
 										</a>
 									</li>
 									<li className="fa-brands fa-linkedin">
-										<FaLinkedin className="getTouch-icon" />
+										<FaGithub className="getTouch-icon" />
 										<a
 											target="_blank"
 											href="https://github.com/Fareedh-12"
@@ -63,9 +63,9 @@ function GitInTouch() {
 								</ul>
 							</div>
 							<div>
-								<ul className="contact-ul-link">
+								<ul className="getTouch-ul-link">
 									<li className="fa-brands fa-linkedin">
-										<FaGithub className="contact-icon" />
+										<FaLinkedin className="getTouch-icon" />
 										<a
 											target="_blank"
 											href="https://www.linkedin.com/in/abdalrazaq94t/"
@@ -75,7 +75,7 @@ function GitInTouch() {
 										</a>
 									</li>
 									<li className="fa-brands fa-linkedin">
-										<FaLinkedin className="contact-icon" />
+										<FaGithub className="getTouch-icon" />
 										<a
 											target="_blank"
 											href="https://github.com/Abdalrazaq94"
