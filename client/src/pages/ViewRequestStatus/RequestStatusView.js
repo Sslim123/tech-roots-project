@@ -115,11 +115,9 @@ export function RequestStatus() {
 						</h1>
 					</div>
 					<div className="status-bt">
-						<div>
-							<Link className="status-but-link" to="/">
-								<button id="tr">Back Home </button>
-							</Link>
-						</div>
+						<Link className="status-but-link" to="/">
+							<button id="tr">Back Home </button>
+						</Link>
 
 						<button onClick={cancelRequest}>Cancel my request</button>
 					</div>
@@ -131,19 +129,27 @@ export function RequestStatus() {
 				if (donation.deliveryOption === "SHIP") {
 					return (
 						<>
-							<div>
-								You have been assigned a laptop. Please confirm your address can
-								be shared so it can be sent to you.
-								<div>
-									<ButtonComponent
-										handleClick={acceptRequest}
-										command="Yes please!"
-									/>
-									<ButtonComponent
-										handleClick={rejectRequest}
-										command="No thank you!"
-									/>
+							<div className="status-thankYou-main-picture">
+								<div className="thankYou-p">
+									<h1>Thank you!</h1>
 								</div>
+							</div>
+							<div className="text-status">
+								<h1>
+									You have been assigned a laptop. Please confirm your address
+									can be shared so it can be sent to you.
+								</h1>
+							</div>
+
+							<div className="status-bt">
+								<ButtonComponent
+									handleClick={acceptRequest}
+									command="Yes please!"
+								/>
+								<ButtonComponent
+									handleClick={rejectRequest}
+									command="No thank you!"
+								/>
 							</div>
 						</>
 					);
@@ -151,19 +157,26 @@ export function RequestStatus() {
 				if (donation.deliveryOption === "PICKUP") {
 					return (
 						<>
-							<div>
-								You have been assigned a laptop. Please confirm you can pick it
-								up at {donation.address}.
-								<div>
-									<ButtonComponent
-										command="Yes please!"
-										handleClick={acceptRequest}
-									/>
-									<ButtonComponent
-										handleClick={rejectRequest}
-										command="No thank you!"
-									/>
+							<div className="status-thankYou-main-picture">
+								<div className="thankYou-p">
+									<h1>Thank you!</h1>
 								</div>
+							</div>
+							<div className="text-status">
+								<h1>
+									You have been assigned a laptop. Please confirm you can pick
+									it up at {donation.address}.
+								</h1>
+							</div>
+							<div className="status-bt">
+								<ButtonComponent
+									command="Yes please!"
+									handleClick={acceptRequest}
+								/>
+								<ButtonComponent
+									handleClick={rejectRequest}
+									command="No thank you!"
+								/>
 							</div>
 						</>
 					);
@@ -172,26 +185,53 @@ export function RequestStatus() {
 			if (request.status === "ACCEPTED") {
 				return (
 					<>
-						<p>
-							Please let us know
-							{donation.deliveryOption === "SHIP"
-								? " when you have received your laptop at " +
-								  request.requestAddress
-								: " when you have picked up your laptop from " +
-								  donation.address}
-						</p>
-						<ButtonComponent
-							command="Thanks, I've got it"
-							handleClick={receivedRequest}
-						/>
+						<div className="status-thankYou-main-picture">
+							<div className="thankYou-p">
+								<h1>Thank you!</h1>
+							</div>
+						</div>
+						<div className="text-status">
+							<h1>
+								Please let us know
+								{donation.deliveryOption === "SHIP"
+									? " when you have received your laptop at " +
+									  request.requestAddress
+									: " when you have picked up your laptop from " +
+									  donation.address}
+							</h1>
+						</div>
+						<div className="status-bt">
+							<Link className="status-but-link" to="/">
+								<button id="tr">Back Home </button>
+							</Link>
+
+							<ButtonComponent
+								command="Thanks, I've got it"
+								handleClick={receivedRequest}
+							/>
+						</div>
 					</>
 				);
 			}
 			if (request.status === "FULFILLED") {
 				return (
 					<>
-						Sweet! You now have your laptop. Time to start working on your
-						application to Code Your Future?
+						<div className="status-thankYou-main-picture">
+							<div className="thankYou-p">
+								<h1>Thank you!</h1>
+							</div>
+						</div>
+						<div className="text-status">
+							<h1>
+								Sweet! You now have your laptop. Time to start working on your
+								application to Code Your Future?
+							</h1>
+						</div>
+						<div className="status-bt">
+							<Link className="status-but-link" to="/">
+								<button id="tr">Back Home </button>
+							</Link>
+						</div>
 					</>
 				);
 			}
@@ -199,12 +239,39 @@ export function RequestStatus() {
 		if (request.status === "CANCELLED") {
 			return (
 				<>
-					<p>This request has been cancelled, as requested.</p>
+					<div className="status-thankYou-main-picture">
+						<div className="thankYou-p">
+							<h1>Thank you!</h1>
+						</div>
+					</div>
+					<div className="text-status">
+						<h1> This request has been cancelled, as requested.</h1>
+					</div>
+					<div className="status-bt">
+						<Link className="status-but-link" to="/">
+							<button id="tr">Back Home </button>
+						</Link>
+					</div>
 				</>
 			);
 		}
 	} else {
-		return <>Oops, something went wrong.../ this request doesn't exist</>;
+		return (
+			<>
+				<div className="status-thankYou-main-picture">
+					<div className="thankYou-p" id="not-exist">
+						<h1>Oops, something went wrong</h1>
+						<h1>this request doesn't exist</h1>
+					</div>
+				</div>
+
+				<div className="status-bt">
+					<Link className="status-but-link" to="/">
+						<button id="tr">Back Home </button>
+					</Link>
+				</div>
+			</>
+		);
 	}
 }
 
