@@ -54,7 +54,7 @@ function LaptopForm() {
 
 	return (
 		<>
-			<Navbar isActive="requestPage" />
+			{/* <Navbar isActive="requestPage" /> */}
 			<BackgroundImage primaryText="Request a laptop" />
 			{navigate ? (
 				<Navigate to={`/laptop-request-status/${requestId}`} />

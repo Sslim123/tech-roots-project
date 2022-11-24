@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import BackgroundImage from "../../../component/BackgroundImageComponent/BackgroundImage";
 import ButtonComponent from "../../../component/ButtonComponent/ButtonComponent";
 import Footer from "../../../component/footer/Footer";
 import Navbar from "../../../component/navbar/navbar";
@@ -68,6 +69,7 @@ function DonatorForm() {
 	return (
 		<>
 			<Navbar isActive="donationPage" />
+			<BackgroundImage primaryText="Donate a Laptop" />
 			{navigate ? (
 				<Navigate to={`/laptop-donation-status/${donationId}`} />
 			) : (
