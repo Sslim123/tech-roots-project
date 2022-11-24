@@ -47,17 +47,20 @@ background-color: white;
     letter-spacing: 2px;
 }#Register-home-bt a:hover{
     color: white;
-#active a{
+}
+.active a{
     color: green;
 }
- button:hover{
+ button:hover {
     width: 160px;
     height: 45px;
     background-color: green;
-        border-radius: 1.3rem;
+    border-radius: 1.3rem;
     color: white;
     
-}.link1:hover{
+}
+
+.link1:hover{
     list-style: none;
     text-decoration: none;
     color: white;

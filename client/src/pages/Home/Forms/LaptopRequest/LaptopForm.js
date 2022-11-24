@@ -53,59 +53,6 @@ function LaptopForm() {
 	}
 	console.log(requestId);
 
-	return navigate ? (
-		<Navigate to={`/laptop-request-status/${requestId}`} />
-	) : (
-		<div className="form-card">
-			<form onSubmit={submitForm} className="form" name="laptopRequestForm">
-				<div className="form-container">
-					<label htmlFor="label1">First Name</label>
-					<input
-						required
-						id="firstName"
-						type="text"
-						value={firstName}
-						name="firstName"
-						placeholder="First Name"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<label htmlFor="label2">Last Name</label>
-					<input
-						required
-						type="text"
-						value={lastName}
-						id="lastName"
-						name="lastName"
-						placeholder="Last Name"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<label htmlFor="label3">Email address</label>
-					<input
-						required
-						type="text"
-						value={email}
-						id="email"
-						name="email"
-						placeholder="Email Address"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<label htmlFor="label4">Phone Number</label>
-					<input
-						required
-						type="number"
-						value={phoneNumber}
-						id="phoneNumber"
-						name="phoneNumber"
-						placeholder="Phone Number"
-						className="input_field"
-						onChange={handleClick}
-					/>
-					<button  type="submit" className="btn1">
-						Submit
-					</button>
 	return (
 		<>
 			<Navbar isActive="requestPage" />

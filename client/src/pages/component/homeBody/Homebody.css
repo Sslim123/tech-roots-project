@@ -85,12 +85,14 @@
 }
 #home-left-bt:hover {
 	background-color: #2693f9;
+	color: #ffffff;
 }
 #home-right-bt {
 	margin-left: 30px;
 }
 #home-right-bt:hover {
 	background-color: #2693f9;
+	color: #ffffff;
 }
 .home-link {
 	text-decoration: none;
