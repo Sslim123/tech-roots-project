@@ -3,14 +3,14 @@ import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-import { Nav } from "react-bootstrap";
+import svg from "./logo block.svg";
 
 const Navbar = (props) => {
 	const [Mobile, setMobile] = useState(false);
 	return (
 		<>
 			<nav className="navbar">
-				<h3 className="logo">Logo</h3>
+				<img className="logo" src={svg} alt="logo" />
 
 				<ul
 					className={Mobile ? "nav-links-mobile" : "nav-links"}
@@ -20,7 +20,9 @@ const Navbar = (props) => {
 						exact
 						to="/"
 						className="home"
-						activeClassName="active-nav-links"
+						activeClassName={
+							props.isActive === "homePage" ? "active" : undefined
+						}
 					>
 						<li>Home</li>
 					</NavLink>
@@ -39,7 +41,7 @@ const Navbar = (props) => {
 						<li>Requests</li>
 					</NavLink>
 					<NavLink
-						to="/skills"
+						to="/meat-the-team"
 						className="skills"
 						activeClassName="active-nav-links"
 					>
