@@ -1,15 +1,23 @@
-.div_container{
-    width: 75vw;
-    height: 70vh;
+.our_container{
+    position: relative;
+    top: 160px;
+    width: 80vw;
+    height: 35vh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 .our_story{
-    margin-top:  15px;
+    margin-top:  80px;
+}.our_story p{
+    font-size: 1.2rem;
+    padding-top: 30px;
 }
-.our_story p{
-    margin: 45px;
-}.get-touch{
-    margin-top: 20px;
+@media  screen and (max-width: 350px) {
+    .our_container{
+        width: 330px;
+        height: auto;
+    }.our_story{
+        padding: 8px;
+    }
 }

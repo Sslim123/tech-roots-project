@@ -7,18 +7,20 @@ body{
     position: relative;
     top: 100px;
     width: 80vw;
-    height: 50vh;
+    height: 60vh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 .howItWorkCard {
     width: 80vw;
-    height: 50vh;
-    margin: 0 auto;
+    height: 40vh;
     display: flex;
-    justify-content: center;
+    margin: 0 auto;
     align-items: center;
+
 }
 .h2{
     text-align: center;
@@ -27,6 +29,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 90vw;
     height: 40vh;
 }
@@ -38,7 +41,6 @@ body{
     justify-content: center;
     border-radius: 50%;
     background-color: green;
-    margin-left: 125px;
     margin-bottom: -40px;
     position: relative;
     z-index: 2;
@@ -46,7 +48,6 @@ body{
 .body-span p{
     width: 80vw;
     height: 40vh;
-   margin-right: 60px ;
     text-align:center;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 0px 55px -10px rgba(0, 0, 0, 0.25);
@@ -59,35 +60,34 @@ body{
     padding: 120px 40px;
     color: rgba(0, 0, 0, 1);
 }
-/* @media screen and (max-width: 544px) {
-    .home-container{
-        width: 500px;
+ @media screen and (max-width: 350px) {
+    .howitwork-container{
+        width: 350px;
         height: auto;
         display: flex;
         flex-direction: column;
         margin: 0 auto;
-        background-color: black;
-    }.homebody{
-        align-items: center;
-        flex-direction: column;
-        width: 500px;
-        height: auto;       
-        margin: 0 auto; */
-   
-/*@media screen and (min-width: 767px) {
-    .home-container{
-        width: 766px;
-        margin: 0 auto;
-    }
-    .homebody{
+    }.howItWorkCard{
         display: grid;
-        gap: 10px;
-        width: 760;
-        background-color: gray;
-        grid-template-columns: 1fr 1fr;
-        margin: 0 auto;
+        grid-template-columns: 1fr;
+        width: 350px;
+        height: auto;       
+        margin: 0 auto; 
+   
     }.body-span{
-        width: 300px; 
-        height: 300px;
+        width: 350px;
+        height: 400px;
     }
-}*/
+
+    .body-span p{
+        width: 330px;
+        height: 180px;
+    }
+    .h2 img{
+        position: relative;
+        width: 270px;
+        height: 30px;
+    }.body-span .imgSvg{
+        width: 70px;
+        height: 60px;
+}}

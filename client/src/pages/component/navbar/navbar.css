@@ -17,7 +17,7 @@
     justify-content: space-between;
     margin-left: 100px;
 }
-button{
+.nav-btn{
     outline: none;
     width: 161px;
     height: 29;
@@ -48,6 +48,8 @@ background-color: white;
 }#Register-home-bt a:hover{
     color: white;
 }
+ .nav-btn:hover{
+
 .active a{
     color: green;
 }
@@ -77,4 +79,8 @@ background-color: white;
 }
 .link1:hover::before{
     width: 110px;
+}.nav-icon{
+    width: 60px;
+    height: 50px;
+    display: none;
 }
