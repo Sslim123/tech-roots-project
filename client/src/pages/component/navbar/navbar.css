@@ -66,6 +66,11 @@ li {
     top: 15px;
     left: 35px;
   }
+  
+  .active-nav-links{
+    color: red;
+  }
+ 
   .nav-links {
     display: none;
   }

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import { Nav } from "react-bootstrap";
 
-const Navbar = () => {
+const Navbar = (props) => {
 	const [Mobile, setMobile] = useState(false);
 	return (
 		<>
@@ -15,18 +16,35 @@ const Navbar = () => {
 					className={Mobile ? "nav-links-mobile" : "nav-links"}
 					onClick={() => setMobile(false)}
 				>
-					<Link to="/" className="home">
+					<NavLink
+						exact
+						to="/"
+						className="home"
+						activeClassName="active-nav-links"
+					>
 						<li>Home</li>
-					</Link>
-					<Link to="/about" className="about">
+					</NavLink>
+					<NavLink
+						to="/create-donator-requests"
+						className="about"
+						activeClassName="active-nav-links"
+					>
 						<li>Donate</li>
-					</Link>
-					<Link to="/services" className="services">
+					</NavLink>
+					<NavLink
+						to="/create-laptop-requests"
+						className="services"
+						activeClassName="active-nav-links"
+					>
 						<li>Requests</li>
-					</Link>
-					<Link to="/skills" className="skills">
+					</NavLink>
+					<NavLink
+						to="/skills"
+						className="skills"
+						activeClassName="active-nav-links"
+					>
 						<li>Meet the team</li>
-					</Link>
+					</NavLink>
 				</ul>
 
 				<button className="mobile-menu-icon" onClick={() => setMobile(!Mobile)}>
