@@ -27,6 +27,13 @@ const Navbar = (props) => {
 						<li>Home</li>
 					</NavLink>
 					<NavLink
+						to="/meat-the-team"
+						className="skills"
+						activeClassName="active-nav-links"
+					>
+						<li>Meet the team</li>
+					</NavLink>
+					<NavLink
 						to="/create-donator-requests"
 						className="about"
 						activeClassName="active-nav-links"
@@ -39,13 +46,6 @@ const Navbar = (props) => {
 						activeClassName="active-nav-links"
 					>
 						<li>Requests</li>
-					</NavLink>
-					<NavLink
-						to="/meat-the-team"
-						className="skills"
-						activeClassName="active-nav-links"
-					>
-						<li>Meet the team</li>
 					</NavLink>
 				</ul>
 
