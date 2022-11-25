@@ -3,7 +3,7 @@ import "./BackgroundImage.css";
 
 const BackgroundImage = (props) => {
 	return (
-		<div className="background-image-container">
+		<div className="status-thankYou-main-picture">
 			<div className="main-container">
 				<div className="main-card">
 					<p className="primary-text">{props.primaryText}</p>

@@ -1,63 +1,63 @@
-import React, { useEffect, useState } from "react";
-import svg from "./logo block.svg";
-import { AiOutlineBars } from "react-icons/ai";
+
+import React, { useState } from "react";
+
 import "./navbar.css";
+import { NavLink, Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
+import svg from "./logo block.svg";
 
-import { Link } from "react-router-dom";
-
-function Navbar(props) {
-	/*I am using props to change the color of the navbar when the user vists a different page page*/
-
+const Navbar = (props) => {
+	const [Mobile, setMobile] = useState(false);
 	return (
-		<header className="header">
-			<img src={svg} alt="logo" />
-			<nav className="navbar navbar-light  justify-content-centre">
-				<button className="nav-btn" id="Page-home-bt">
-				<button
-					className={props.isActive === "homePage" ? "active" : undefined}
-				>
-					<Link className="link1" to="/">
-						Home page
-					</Link>
-				</button>
-				<button className="nav-btn" id="Meet-home-bt">
-					<Link className="link1" to="/meet-the-team">
-						Meet the Team
-					</Link>
-				</button>
-				<button className="nav-btn" id="Donate-home-bt">
-					<Link
-						className="link1"
-						to="/create-donator-requests
-"
-					>
-				<button
-					className={props.isActive === "meetTheTeam" ? "active" : undefined}
-				>
-					<Link className="link1" to="/meet-team-request">
-						Meet the Team
-					</Link>
-				</button>
-				<button
-					className={props.isActive === "donationPage" ? "active" : undefined}
-				>
-					<Link className="link1" to="/create-donator-requests">
-						Donate
-					</Link>
-				</button>
 
-				<button className="nav-btn" id="Register-home-bt">
-<button
-					className={props.isActive === "requestPage" ? "active" : undefined}
+		<>
+			<nav className="navbar">
+				<img className="logo" src={svg} alt="logo" />
+
+				<ul
+					className={Mobile ? "nav-links-mobile" : "nav-links"}
+					onClick={() => setMobile(false)}
 				>
-					<Link className="link1" to="/create-laptop-requests">
-						Request
-					</Link>
+					<NavLink
+						exact
+						to="/"
+						className="home"
+						activeClassName={
+							props.isActive === "homePage" ? "active" : undefined
+						}
+					>
+						<li>Home</li>
+					</NavLink>
+					<NavLink
+						to="/meat-the-team"
+						className="skills"
+						activeClassName="active-nav-links"
+					>
+						<li>Meet the team</li>
+					</NavLink>
+					<NavLink
+						to="/create-donator-requests"
+						className="about"
+						activeClassName="active-nav-links"
+					>
+						<li>Donate</li>
+					</NavLink>
+					<NavLink
+						to="/create-laptop-requests"
+						className="services"
+						activeClassName="active-nav-links"
+					>
+						<li>Requests</li>
+					</NavLink>
+				</ul>
+
+				<button className="mobile-menu-icon" onClick={() => setMobile(!Mobile)}>
+					{Mobile ? <ImCross /> : <FaBars />}
 				</button>
 			</nav>
-			<AiOutlineBars className="nav-icon" />
-		</header>
+		</>
+		
 	);
-}
-
+};
 export default Navbar;

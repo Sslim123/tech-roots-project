@@ -1,15 +1,16 @@
 import React from "react";
 import "./StatusView.css";
 import { Link } from "react-router-dom";
+import BackgroundImage from "../component/BackgroundImageComponent/BackgroundImage";
 
 function DonationRequestStatues() {
 	return (
 		<div>
-			<div className="status-thankYou-main-picture">
-				<div className="thankYou-p">
-					<h1>Thank you!</h1>
-				</div>
-			</div>
+			<BackgroundImage
+				primaryText="Thank you for your donation"
+				secondaryText="You are on the waiting list"
+			/>
+
 			<div className="text-status">
 				<h1>
 					Thank you for your donation. We will notify you when you have been

@@ -51,7 +51,7 @@
 	align-items: center;
 }
 .text-status h1 {
-	margin: 30px;
+	margin: 80px;
 	display: flex;
 	text-align: center;
 	width: 600px;
@@ -109,12 +109,22 @@
 	}
 }
 
-@media screen and (max-width: 1500px) {
+
+@media screen and (max-width: 1600px) {
 	.status-thankYou-main-picture {
 		width: 100%;
-		height: 330px;
+		height: 370px;
 	}
 }
+
+@media screen and (max-width: 1000px) {
+	.status-thankYou-main-picture {
+		width: 100%;
+		height: 230px;
+	}
+}
+
+
 
 @media screen and (max-width: 740px) {
 	.status-thankYou-main-picture {
@@ -139,7 +149,7 @@
 
 @media screen and (max-width: 450px) {
 	.status-thankYou-main-picture {
-		height: 90px;
+		height: 150px;
 		width: 100%;
 	}
 	.thankYou-p h1 {

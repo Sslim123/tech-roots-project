@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import Navbar from "../component/navbar/navbar";
 import Footer from "../component/footer/Footer";
 import { Link } from "react-router-dom";
+import BackgroundImage from "../component/BackgroundImageComponent/BackgroundImage";
 import "./StatusView.css";
 import { useParams } from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
@@ -102,11 +103,7 @@ export function RequestStatus() {
 		if (request.status === "WAITING") {
 			return (
 				<div>
-					<div className="status-thankYou-main-picture">
-						<div className="thankYou-p">
-							<h1>Thank you!</h1>
-						</div>
-					</div>
+					<BackgroundImage primaryText="Thank you for your request" />
 					<div className="text-status">
 						<h1>
 							Thank you for your laptop request. You are now on the waiting
@@ -129,11 +126,7 @@ export function RequestStatus() {
 				if (donation.deliveryOption === "SHIP") {
 					return (
 						<>
-							<div className="status-thankYou-main-picture">
-								<div className="thankYou-p">
-									<h1>Thank you!</h1>
-								</div>
-							</div>
+							<BackgroundImage primaryText="Good News" />
 							<div className="text-status">
 								<h1>
 									You have been assigned a laptop. Please confirm your address
@@ -157,11 +150,7 @@ export function RequestStatus() {
 				if (donation.deliveryOption === "PICKUP") {
 					return (
 						<>
-							<div className="status-thankYou-main-picture">
-								<div className="thankYou-p">
-									<h1>Thank you!</h1>
-								</div>
-							</div>
+							<BackgroundImage primaryText="Good News" />
 							<div className="text-status">
 								<h1>
 									You have been assigned a laptop. Please confirm you can pick
@@ -185,11 +174,7 @@ export function RequestStatus() {
 			if (request.status === "ACCEPTED") {
 				return (
 					<>
-						<div className="status-thankYou-main-picture">
-							<div className="thankYou-p">
-								<h1>Thank you!</h1>
-							</div>
-						</div>
+						<BackgroundImage primaryText="Thank You" />
 						<div className="text-status">
 							<h1>
 								Please let us know
@@ -239,11 +224,7 @@ export function RequestStatus() {
 		if (request.status === "CANCELLED") {
 			return (
 				<>
-					<div className="status-thankYou-main-picture">
-						<div className="thankYou-p">
-							<h1>Thank you!</h1>
-						</div>
-					</div>
+					<BackgroundImage primaryText="This request has been canceled" />
 					<div className="text-status">
 						<h1> This request has been cancelled, as requested.</h1>
 					</div>
@@ -258,12 +239,7 @@ export function RequestStatus() {
 	} else {
 		return (
 			<>
-				<div className="status-thankYou-main-picture">
-					<div className="thankYou-p" id="not-exist">
-						<h1>Oops, something went wrong</h1>
-						<h1>this request doesn't exist</h1>
-					</div>
-				</div>
+				<BackgroundImage primaryText="Ops! this page does not exist " />
 
 				<div className="status-bt">
 					<Link className="status-but-link" to="/">
