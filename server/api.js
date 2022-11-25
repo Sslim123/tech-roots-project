@@ -262,20 +262,34 @@ router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 });
 
 router.put("/laptop_request/:id", async (req, res) => {
-	const laptopRequest = {
-		id: req.params.id,
-		status: "CANCELLED",
-	};
-
-	db.query(
-		"UPDATE laptop_request SET laptop_request_status = $1 WHERE uuid = $2",
-		[laptopRequest.status, laptopRequest.id]
-	)
-		.then(() => res.send(`status ${laptopRequest.id} updated!`))
-		.catch((e) => {
-			console.error(e);
-			res.status(404).send("Request not found");
-		});
+	if (req.body.status !== undefined) {
+		const laptopRequest = {
+			id: req.params.id,
+			status: "CANCELLED",
+		};
+		db.query(
+			"UPDATE laptop_request SET laptop_request_status = $1 WHERE uuid = $2",
+			[laptopRequest.status, laptopRequest.id]
+		)
+			.then(() => res.send(`status ${laptopRequest.id} updated!`))
+			.catch((e) => {
+				console.error(e);
+				res.status(404).send("Request not found");
+			});
+	} else if (req.body.address !== undefined) {
+		// console.log("update address");
+		db.query(
+			"UPDATE laptop_request SET laptop_request_address = $1 WHERE uuid = $2",
+			[req.body.address, req.params.id]
+		)
+			.then(() =>
+				res.send({ message: `address ${req.params.id} has been set!` })
+			)
+			.catch((e) => {
+				console.error(e);
+				res.status(404).send("Request not found");
+			});
+	}
 });
 
 router.delete("/laptop_assignment/:assignmentId", async (request, response) => {

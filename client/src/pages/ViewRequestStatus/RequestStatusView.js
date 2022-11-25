@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import Navbar from "../component/navbar/navbar";
-import Footer from "../component/footer/Footer";
 import { Link } from "react-router-dom";
 import BackgroundImage from "../component/BackgroundImageComponent/BackgroundImage";
 import "./StatusView.css";
 import { useParams } from "react-router-dom";
-import ButtonComponent from "./ButtonComponent";
+import ButtonComponent from "../component/ButtonComponent/ButtonComponent";
 
 const socket = io(window.origin, { path: "/api/socket.io" });
 
@@ -14,6 +12,7 @@ export function RequestStatus() {
 	const [request, setRequest] = useState(null);
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
+	const [laptopRequestAddress, setLaptopRequestAddress] = useState(null);
 
 	// this helps get the id from the router
 	const { id } = useParams();
@@ -62,6 +61,10 @@ export function RequestStatus() {
 	const cancelRequest = () => {
 		fetch(`/api/laptop_request/${id}`, {
 			method: "PUT",
+			body: JSON.stringify({
+				status: "CANCELLED",
+			}),
+			headers: { "content-type": "application/json" },
 		}).then(() => {
 			setNeedsReloading(!needsReloading);
 		});
@@ -99,6 +102,25 @@ export function RequestStatus() {
 		});
 	};
 
+	const handleChange = (event) => {
+		setLaptopRequestAddress(event.target.value);
+	};
+
+	const submitAddress = () => {
+		fetch(`/api/laptop_request/${id}`, {
+			method: "PUT",
+			body: JSON.stringify({
+				address: laptopRequestAddress,
+			}),
+			headers: { "content-type": "application/json" },
+		});
+	};
+
+	const submitAndAccept = () => {
+		submitAddress();
+		acceptRequest();
+	};
+
 	if (request !== null) {
 		if (request.status === "WAITING") {
 			return (
@@ -133,15 +155,26 @@ export function RequestStatus() {
 									can be shared so it can be sent to you.
 								</h1>
 							</div>
+							<div style={{ display: "flex" }}>
+								<label htmlFor="addressField">Please enter your address:</label>
+								<input
+									name="addressField"
+									id="addressField"
+									value={laptopRequestAddress}
+									placeholder="Please enter your address"
+									className="input_field"
+									onChange={handleChange}
+								/>
+							</div>
 
 							<div className="status-bt">
 								<ButtonComponent
-									handleClick={acceptRequest}
-									command="Yes please!"
+									handleClick={submitAndAccept}
+									text="Yes please!"
 								/>
 								<ButtonComponent
 									handleClick={rejectRequest}
-									command="No thank you!"
+									text="No thank you!"
 								/>
 							</div>
 						</>
@@ -159,12 +192,12 @@ export function RequestStatus() {
 							</div>
 							<div className="status-bt">
 								<ButtonComponent
-									command="Yes please!"
+									text="Yes please!"
 									handleClick={acceptRequest}
 								/>
 								<ButtonComponent
 									handleClick={rejectRequest}
-									command="No thank you!"
+									text="No thank you!"
 								/>
 							</div>
 						</>
@@ -191,7 +224,7 @@ export function RequestStatus() {
 							</Link>
 
 							<ButtonComponent
-								command="Thanks, I've got it"
+								text="Thanks, I've got it"
 								handleClick={receivedRequest}
 							/>
 						</div>
