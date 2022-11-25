@@ -77,31 +77,3 @@ background-color: white;
     height: 50px;
     display: none;
 }
-@media  screen and (max-width: 350px){
-    .header img{
-        margin: 10px;
-        width: 300px;
-    }
-.header{
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    height: 300px;
-} .navbar{
-    width: 300px;
-    height: 120px;
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 0 auto;
-} .nav-btn{
-    position: relative;
-    width: 100px;
-}#Meet-home-bt{
-    width: 100px;
-font-size: 1rem;
-}#Page-home-bt{
-    width: 100px;
-    font-size: 1.2rem;
-}
-}

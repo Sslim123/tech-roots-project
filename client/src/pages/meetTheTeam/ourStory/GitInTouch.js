@@ -71,7 +71,7 @@ function GitInTouch() {
 											href="https://www.linkedin.com/in/abdalrazaq94t/"
 											rel="noreferrer"
 										>
-											linked.in/abdalrazaq-altaih
+											linked.in/abdalrazaq
 										</a>
 									</li>
 									<li className="fa-brands fa-linkedin">
@@ -81,7 +81,7 @@ function GitInTouch() {
 											href="https://github.com/Abdalrazaq94"
 											rel="noreferrer"
 										>
-											github.com/abdalrazaq-altaih
+											github.com/abdalrazaq
 										</a>
 									</li>
 								</ul>

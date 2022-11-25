@@ -12,32 +12,56 @@ export default function AboutUs() {
 				<img src={Img} />
 			</div>
 			<div className="card-img">
-				<Card
-					style={{ width: "21rem", borderRadius: "1.3rem" }}
-				>
-					<Card.Img variant="top" src={Svg}  style={{ borderRadius: "1.3rem"}}/>
-					{/* holder.js/100px180 */}
-					<Card.Body>
-						<Card.Text>Salem Dayfan</Card.Text>
-						<Card.Title>Full stack developer</Card.Title>
-					</Card.Body>
-				</Card>
-				<Card style={{ width: "21rem",  borderRadius: "1.3rem" }}>
-					<Card.Img variant="top" src={Svg2} style={{ borderRadius: "1.3rem"}} />
-					{/* holder.js/100px180 */}
-					<Card.Body>
-						<Card.Text>Abdalrazaq Altaih</Card.Text>
-						<Card.Title>Full stack developer</Card.Title>
-					</Card.Body>
-				</Card>
-				<Card style={{ width: "21rem",  borderRadius: "1.3rem" }}>
-					<Card.Img variant="top" src={Svg} style={{ borderRadius: "1.3rem"}} />
-					{/* holder.js/100px180 */}
-					<Card.Body>
-						<Card.Text>Salem Dayfan</Card.Text>
-						<Card.Title>Full stack developer</Card.Title>
-					</Card.Body>
-				</Card>
+				<div className="card1">
+					<Card style={{ width: "21rem", borderRadius: "1.3rem" }}>
+						<Card.Img
+							variant="top"
+							src={Svg}
+							style={{ borderRadius: "1.3rem" }}
+						/>
+						{/* holder.js/100px180 */}
+						<Card.Body>
+							<Card.Text
+								style={{
+									fontSize: "1.5rem",
+								}}
+							>
+								Salem Dayfan
+							</Card.Text>
+							<Card.Title>Full Stack Developer</Card.Title>
+						</Card.Body>
+					</Card>
+				</div>
+				<div className="card1">
+					<Card style={{ width: "21rem", borderRadius: "1.3rem" }}>
+						<Card.Img
+							variant="top"
+							src={Svg2}
+							style={{ borderRadius: "1.3rem" }}
+						/>
+						{/* holder.js/100px180 */}
+						<Card.Body>
+							<Card.Text style={{ fontSize: "1.5rem" }}>
+								Abdalrazaq Altaih
+							</Card.Text>
+							<Card.Title>Full Stack Developer</Card.Title>
+						</Card.Body>
+					</Card>
+				</div>
+				<div className="card1">
+					<Card style={{ width: "21rem", borderRadius: "1.3rem" }}>
+						<Card.Img
+							variant="top"
+							src={Svg}
+							style={{ borderRadius: "1.3rem" }}
+						/>
+						{/* holder.js/100px180 */}
+						<Card.Body>
+							<Card.Text style={{ fontSize: "1.5rem" }}>Salem Dayfan</Card.Text>
+							<Card.Title>Full Stack Developer</Card.Title>
+						</Card.Body>
+					</Card>
+				</div>
 			</div>
 		</div>
 	);

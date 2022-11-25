@@ -32,11 +32,30 @@ flex-direction: column;
         width: 340px;
         height: auto;
         margin: 0 auto;
-    }.team-img img{
-        width: 280px;
+    }.team-img{
+
+        margin: 0 auto;
     }
+    .team-img img{
+        width: 220px;
+    }.card1{
+        position: relative;
+width: 250px;  
+height: auto;
+text-align: center;
+margin: 0 auto
+  }
     .card-img{
-        display: grid;
-        grid-template-columns: 1fr;
-    }
+        position: relative;
+        width: 300px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+  }.card1{
+    margin: 0 auto;
+    width: 240px;
+    height: 550px;
+  }
 }
