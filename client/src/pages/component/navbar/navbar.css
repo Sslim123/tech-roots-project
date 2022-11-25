@@ -1,43 +1,97 @@
-.header{
-    width: 90vw;
-    height: 20vh;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center ;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 100px;
-}.form-inline{
-    margin: 30px;
-    width: auto;
-    display: flex;
-    justify-content: space-around;
+
+a {
+  text-decoration: none;
 }
-button{
-    outline: none;
-    width: 161px;
-    height: 29;
-    margin-left: 25px;
-    border: none;
-    font-family: Fredoka;
-font-size: 24px;
-font-weight: 500;
-line-height: 29px;
-letter-spacing: 0em;
-text-align: center;
-color:  rgba(62, 62, 62, 1);
-background-color: white;
+li {
+  list-style-type: none;
 }
-button:hover{
-    background-color: green;
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 15vh;
+  box-shadow: rgba(50, 50, 93, 0.23) 0px 30px 30px -20px;
 }
-#active a{
-    color: green;
+.logo {
+  font-size: 30px;
 }
-.link1{
-    list-style: none;
+.nav-links {
     text-decoration: none;
+    display: flex;
+	margin-left: 5%;
+	list-style: none;
+	text-align: center;
+	width: 64vw;
+	justify-content: space-around;
+}
+
+.nav-links li {
+  
+  color: black;
+  font-size: 20px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.nav-links li:hover {
+   
+    background-color: #0fa10c;
+	border-radius: 20px;
+	transition: all 0.3s ease-out;
+	color: white;
+}
+
+.mobile-menu-icon {
+  display: none;
+}
+.navbar button {
+  border: none;
+  text-decoration: none;
+  font-size: 20px;
+  background: none;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    left: 35px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-links-mobile {
+    position: absolute;
+    display: block;
+    list-style: none;
+    box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    right: 0;
+    top: 10%;
+    transition: all 0.5s ease-in-out;
+    width: 60%;
+    background-color: white;
+  }
+  ul li {
+    padding: 12px;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+  }
+  .mobile-menu-icon {
+    position: absolute;
+    display: block;
+    right: 20px;
+  }
+  .hero h1 {
+    font-size: 50px;
+  }
 }

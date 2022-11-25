@@ -1,46 +1,39 @@
-import React, { useEffect, useState } from "react";
-import svg from "./logo block.svg";
+import React, { useState } from "react";
 import "./navbar.css";
-
 import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 
-function Navbar(props) {
-	/*I am using props to change the color of the navbar when the user vists a different page page*/
-
+const Navbar = () => {
+	const [Mobile, setMobile] = useState(false);
 	return (
-		<header className="header">
-			<img src={svg} alt="logo" />
-			<nav className="navbar navbar-light  justify-content-centre">
-				<button id={props.isActive === "homePage" ? "active" : undefined}>
-					<Link className="link1" to="/">
-						Home page
-					</Link>
-				</button>
-				<button id={props.isActive === "meetTheTeam" ? "active" : undefined}>
-					<Link className="link1" to="/meet-team-request">
-						Meet the Team
-					</Link>
-				</button>
-				<button id={props.isActive === "donationPage" ? "active" : undefined}>
-					<Link className="link1" to="/create-donator-requests">
-						Donate
-					</Link>
-				</button>
+		<>
+			<nav className="navbar">
+				<h3 className="logo">Logo</h3>
 
-				<button id={props.isActive === "requestPage" ? "active" : undefined}>
-					<Link className="link1" to="/create-laptop-requests">
-						Request
+				<ul
+					className={Mobile ? "nav-links-mobile" : "nav-links"}
+					onClick={() => setMobile(false)}
+				>
+					<Link to="/" className="home">
+						<li>Home</li>
 					</Link>
-				</button>
+					<Link to="/about" className="about">
+						<li>Donate</li>
+					</Link>
+					<Link to="/services" className="services">
+						<li>Requests</li>
+					</Link>
+					<Link to="/skills" className="skills">
+						<li>Meet the team</li>
+					</Link>
+				</ul>
 
-				<button id={props.isActive === "contactUs" ? "contactUs" : undefined}>
-					<Link className="link1" to="/meet-team-request">
-						Contact us
-					</Link>
+				<button className="mobile-menu-icon" onClick={() => setMobile(!Mobile)}>
+					{Mobile ? <ImCross /> : <FaBars />}
 				</button>
 			</nav>
-		</header>
+		</>
 	);
-}
-
+};
 export default Navbar;
