@@ -107,19 +107,23 @@ export function RequestStatus() {
 	};
 
 	const submitAddress = () => {
-		fetch(`/api/laptop_request/${id}`, {
-			method: "PUT",
-			body: JSON.stringify({
-				address: laptopRequestAddress,
-			}),
-			headers: { "content-type": "application/json" },
-		});
+		if (laptopRequestAddress != "") {
+			fetch(`/api/laptop_request/${id}`, {
+				method: "PUT",
+				body: JSON.stringify({
+					address: laptopRequestAddress,
+				}),
+				headers: { "content-type": "application/json" },
+			});
+			acceptRequest();
+		} else {
+			alert("Please enter an address");
+		}
 	};
 
-	const submitAndAccept = () => {
-		submitAddress();
-		acceptRequest();
-	};
+	// const submitAndAccept = () => {
+	// 	submitAddress();
+	// };
 
 	if (request !== null) {
 		if (request.status === "WAITING") {
@@ -169,7 +173,7 @@ export function RequestStatus() {
 
 							<div className="status-bt">
 								<ButtonComponent
-									handleClick={submitAndAccept}
+									handleClick={submitAddress}
 									text="Yes please!"
 								/>
 								<ButtonComponent
