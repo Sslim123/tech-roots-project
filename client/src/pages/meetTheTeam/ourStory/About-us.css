@@ -1,0 +1,61 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+.card-container{
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+width: 80%;
+height: 20%;
+display: flex;
+justify-content: space-around;
+flex-direction: column;
+
+}.card-img{
+    position: relative;
+    top: 70px;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+} Card{
+    background-color: red;
+    border-radius: 1.4em;
+}
+@media  screen and (max-width: 350px) {
+   
+    .card-container{
+        width: 340px;
+        height: auto;
+        margin: 0 auto;
+    }.team-img{
+
+        margin: 0 auto;
+    }
+    .team-img img{
+        width: 220px;
+    }.card1{
+        position: relative;
+width: 250px;  
+height: auto;
+text-align: center;
+margin: 0 auto
+  }
+    .card-img{
+        position: relative;
+        width: 300px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+  }.card1{
+    margin: 0 auto;
+    width: 240px;
+    height: 550px;
+  }
+}

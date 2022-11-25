@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+
 import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
@@ -8,6 +10,7 @@ import svg from "./logo block.svg";
 const Navbar = (props) => {
 	const [Mobile, setMobile] = useState(false);
 	return (
+
 		<>
 			<nav className="navbar">
 				<img className="logo" src={svg} alt="logo" />
@@ -54,6 +57,7 @@ const Navbar = (props) => {
 				</button>
 			</nav>
 		</>
+		
 	);
 };
 export default Navbar;

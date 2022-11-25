@@ -68,8 +68,9 @@ function DonatorForm() {
 
 	return (
 		<>
-			<Navbar isActive="donationPage" />
+			<Navbar isActive="donationPage" /> 
 			<BackgroundImage primaryText="Donate a Laptop" />
+
 			{navigate ? (
 				<Navigate to={`/laptop-donation-status/${donationId}`} />
 			) : (
