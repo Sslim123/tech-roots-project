@@ -121,10 +121,6 @@ export function RequestStatus() {
 		}
 	};
 
-	// const submitAndAccept = () => {
-	// 	submitAddress();
-	// };
-
 	if (request !== null) {
 		if (request.status === "WAITING") {
 			return (

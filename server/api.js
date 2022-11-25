@@ -8,6 +8,13 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+router.get("/", (_, res) => {
+	logger.debug("Welcoming everyone...");
+	res.json({ message: "Hello, world!" });
+});
+
+/* laptop donation api end points */
+
 router.get("/laptop_donation/:id", async (req, res) => {
 	try {
 		const result = await db.query(
@@ -31,116 +38,21 @@ router.get("/laptop_donation/:id", async (req, res) => {
 	}
 });
 
-router.get("/laptop_request/:id", async (req, res) => {
+router.get("/laptop_donation", async (req, res) => {
 	try {
-		const result = await db.query(
-			"SELECT * from laptop_request WHERE uuid = $1",
-			[req.params.id]
-		);
-		let laptopRequestId = result.rows[0].id;
-		let laptopRequest = {
-			id: result.rows[0].uuid,
-			firstName: result.rows[0].firstname,
-			lastName: result.rows[0].lastname,
-			email: result.rows[0].email,
-			phoneNumber: result.rows[0].phonenumber,
-			status: result.rows[0].laptop_request_status,
-		};
+		const result = await db.query("SELECT * from laptop_donation");
 
-		if (laptopRequest.status === "ACTIVE") {
-			const laptopAssignmentResult = await db.query(
-				"SELECT laptop_assignment.*, laptop_donation.uuid FROM laptop_assignment, laptop_donation WHERE laptop_request_id = $1 and laptop_donation.id = laptop_assignment.laptop_donation_id",
-				[laptopRequestId]
-			);
-
-			let laptopAssignment = {};
-
-			if (laptopAssignmentResult.rows.length > 0) {
-				laptopAssignment = {
-					status: laptopAssignmentResult.rows[0].status,
-					assignmentId: laptopAssignmentResult.rows[0].id,
-					donationID: laptopAssignmentResult.rows[0].uuid,
-				};
-			} else {
-				laptopAssignment = {
-					status: "WAITING",
-					assignmentId: null,
-					donationID: null,
-				};
-			}
-			laptopRequest.donationID = laptopAssignment.donationID;
-			laptopRequest.assignmentId = laptopAssignment.assignmentId;
-			laptopRequest.status = laptopAssignment.status;
-		} else {
-			laptopRequest.donationID = null;
-			laptopRequest.assignmentId = null;
-			laptopRequest.status = "CANCELLED";
-		}
-
-		res.send(laptopRequest);
-	} catch (e) {
-		console.error(e);
-		res.sendStatus(400);
-	}
-});
-
-router.get("/", (_, res) => {
-	logger.debug("Welcoming everyone...");
-	res.json({ message: "Hello, world!" });
-});
-
-router.post("/laptop_request", async (req, res) => {
-	let firstName = req.body.firstName;
-	let lastName = req.body.lastName;
-	let email = req.body.email;
-	let phoneNumber = req.body.phoneNumber;
-	let uuid = nanoid(10);
-
-	let laptopDonationResult = await db.query(
-		"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
-	);
-	let laptopDonation = {};
-	if (laptopDonationResult.rows.length > 0) {
-		laptopDonation = {
-			id: laptopDonationResult.rows[0].id,
-		};
-	}
-	const query =
-		" insert into laptop_request (firstname, lastname, email, phonenumber, uuid) values ($1, $2, $3, $4, $5) returning id, uuid";
-	db.query(query, [firstName, lastName, email, phoneNumber, uuid])
-		.then(async (queryResult) => {
-			if (laptopDonation.id) {
-				const assignmentQuery =
-					" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-				await db.query(assignmentQuery, [
-					laptopDonation.id,
-					queryResult.rows[0].id,
-				]);
-			}
-			let laptopRequest = {
-				id: queryResult.rows[0].uuid,
-			};
-			res.send(laptopRequest);
-		})
-		.catch((error) => {
-			console.error(error);
-			res.status(400).json({ success: " was not success" });
-		});
-});
-
-router.get("/laptop_request", async (req, res) => {
-	try {
-		const result = await db.query("SELECT * from laptop_request");
-		const laptopRequests = result.rows.map((row) => {
+		const laptopDonation = result.rows.map((row) => {
 			return {
-				firstName: row.firstname,
-				lastName: row.lastname,
+				name: row.name,
+				address: row.address,
+				numberOfLaptops: row.number_of_laptops,
+				phoneNumber: row.phone_number,
 				email: row.email,
-				phoneNumber: row.phonenumber,
+				deliveryOption: row.delivery_option,
 			};
 		});
-
-		res.json(laptopRequests);
+		res.json(laptopDonation);
 	} catch (e) {
 		console.error(e);
 		res.sendStatus(400);
@@ -208,56 +120,115 @@ router.post("/laptop_donation", (req, res) => {
 		});
 });
 
-router.get("/laptop_donation", async (req, res) => {
+/* laptop request api end points */
+router.get("/laptop_request/:id", async (req, res) => {
 	try {
-		const result = await db.query("SELECT * from laptop_donation");
+		const result = await db.query(
+			"SELECT * from laptop_request WHERE uuid = $1",
+			[req.params.id]
+		);
+		let laptopRequestId = result.rows[0].id;
+		let laptopRequest = {
+			id: result.rows[0].uuid,
+			firstName: result.rows[0].firstname,
+			lastName: result.rows[0].lastname,
+			email: result.rows[0].email,
+			phoneNumber: result.rows[0].phonenumber,
+			status: result.rows[0].laptop_request_status,
+		};
 
-		const laptopDonation = result.rows.map((row) => {
-			return {
-				name: row.name,
-				address: row.address,
-				numberOfLaptops: row.number_of_laptops,
-				phoneNumber: row.phone_number,
-				email: row.email,
-				deliveryOption: row.delivery_option,
-			};
-		});
-		res.json(laptopDonation);
+		if (laptopRequest.status === "ACTIVE") {
+			const laptopAssignmentResult = await db.query(
+				"SELECT laptop_assignment.*, laptop_donation.uuid FROM laptop_assignment, laptop_donation WHERE laptop_request_id = $1 and laptop_donation.id = laptop_assignment.laptop_donation_id",
+				[laptopRequestId]
+			);
+
+			let laptopAssignment = {};
+
+			if (laptopAssignmentResult.rows.length > 0) {
+				laptopAssignment = {
+					status: laptopAssignmentResult.rows[0].status,
+					assignmentId: laptopAssignmentResult.rows[0].id,
+					donationID: laptopAssignmentResult.rows[0].uuid,
+				};
+			} else {
+				laptopAssignment = {
+					status: "WAITING",
+					assignmentId: null,
+					donationID: null,
+				};
+			}
+			laptopRequest.donationID = laptopAssignment.donationID;
+			laptopRequest.assignmentId = laptopAssignment.assignmentId;
+			laptopRequest.status = laptopAssignment.status;
+		} else {
+			laptopRequest.donationID = null;
+			laptopRequest.assignmentId = null;
+			laptopRequest.status = "CANCELLED";
+		}
+
+		res.send(laptopRequest);
 	} catch (e) {
 		console.error(e);
 		res.sendStatus(400);
 	}
 });
 
-// post laptop assignment
-router.post("/laptop_assignment", (req, res) => {
-	let laptopRequestId = req.body.laptop_request_id;
-	let laptopDonationId = req.body.laptop_donation_id;
-	let status = req.body.status;
+router.get("/laptop_request", async (req, res) => {
+	try {
+		const result = await db.query("SELECT * from laptop_request");
+		const laptopRequests = result.rows.map((row) => {
+			return {
+				firstName: row.firstname,
+				lastName: row.lastname,
+				email: row.email,
+				phoneNumber: row.phonenumber,
+			};
+		});
 
+		res.json(laptopRequests);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
+});
+
+router.post("/laptop_request", async (req, res) => {
+	let firstName = req.body.firstName;
+	let lastName = req.body.lastName;
+	let email = req.body.email;
+	let phoneNumber = req.body.phoneNumber;
+	let uuid = nanoid(10);
+
+	let laptopDonationResult = await db.query(
+		"SELECT * FROM laptop_donation d WHERE (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1"
+	);
+	let laptopDonation = {};
+	if (laptopDonationResult.rows.length > 0) {
+		laptopDonation = {
+			id: laptopDonationResult.rows[0].id,
+		};
+	}
 	const query =
-		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 ) returning id";
-
-	db.query(query, [laptopRequestId, laptopDonationId, status])
-		.then((queryResult) => res.send(queryResult.rows[0]))
+		" insert into laptop_request (firstname, lastname, email, phonenumber, uuid) values ($1, $2, $3, $4, $5) returning id, uuid";
+	db.query(query, [firstName, lastName, email, phoneNumber, uuid])
+		.then(async (queryResult) => {
+			if (laptopDonation.id) {
+				const assignmentQuery =
+					" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
+				await db.query(assignmentQuery, [
+					laptopDonation.id,
+					queryResult.rows[0].id,
+				]);
+			}
+			let laptopRequest = {
+				id: queryResult.rows[0].uuid,
+			};
+			res.send(laptopRequest);
+		})
 		.catch((error) => {
 			console.error(error);
 			res.status(400).json({ success: " was not success" });
-		});
-});
-
-router.put("/laptop_assignment/:assignmentId", async (req, res) => {
-	const assignmentId = req.params.assignmentId;
-	const newStatus = req.body.status;
-
-	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [
-		newStatus,
-		assignmentId,
-	])
-		.then(() => res.send(`status ${assignmentId} updated!`))
-		.catch((e) => {
-			console.error(e);
-			res.status(404).send("status not found");
 		});
 });
 
@@ -290,6 +261,38 @@ router.put("/laptop_request/:id", async (req, res) => {
 				res.status(404).send("Request not found");
 			});
 	}
+});
+
+/*laptop_assignment api endpoints*/
+router.post("/laptop_assignment", (req, res) => {
+	let laptopRequestId = req.body.laptop_request_id;
+	let laptopDonationId = req.body.laptop_donation_id;
+	let status = req.body.status;
+
+	const query =
+		" insert into laptop_assignment (laptop_request_id, laptop_donation_id, status) values ($1, $2, $3 ) returning id";
+
+	db.query(query, [laptopRequestId, laptopDonationId, status])
+		.then((queryResult) => res.send(queryResult.rows[0]))
+		.catch((error) => {
+			console.error(error);
+			res.status(400).json({ success: " was not success" });
+		});
+});
+
+router.put("/laptop_assignment/:assignmentId", async (req, res) => {
+	const assignmentId = req.params.assignmentId;
+	const newStatus = req.body.status;
+
+	db.query("UPDATE laptop_assignment SET status = $1 WHERE id = $2", [
+		newStatus,
+		assignmentId,
+	])
+		.then(() => res.send(`status ${assignmentId} updated!`))
+		.catch((e) => {
+			console.error(e);
+			res.status(404).send("status not found");
+		});
 });
 
 router.delete("/laptop_assignment/:assignmentId", async (request, response) => {
