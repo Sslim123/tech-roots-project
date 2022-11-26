@@ -27,9 +27,56 @@ function LaptopForm() {
 			return null;
 		}
 	}
+	const isRequired = (value) => {
+		if (value === "") {
+			return false;
+		}
+		return true;
+	};
+
+	const isEmail = (value) => {
+		const emailRegex =
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return emailRegex.test(value);
+	};
+
+	const isPhoneNumber = (value) => {
+		const phoneNumberRegex = /^\d{10,}$/;
+		return phoneNumberRegex.test(value);
+	};
 
 	function submitForm(e) {
 		e.preventDefault();
+		if (
+			!(
+				isRequired(firstName) &&
+				isRequired(lastName) &&
+				isRequired(email) &&
+				isRequired(phoneNumber) &&
+				isEmail(email) &&
+				isPhoneNumber(phoneNumber)
+			)
+		) {
+			if (!isRequired(firstName)) {
+				document.getElementById("firstName").style.borderColor = "red";
+				return;
+			}
+			if (!isRequired(lastName)) {
+				document.getElementById("lastName").style.borderColor = "red";
+				return;
+			}
+			if (!isEmail(email)) {
+				alert("Please enter a valid email address");
+				document.getElementById("email").style.borderColor = "red";
+				return;
+			}
+			if (!isPhoneNumber(phoneNumber)) {
+				alert("Please enter a valid phone number");
+				document.getElementById("phoneNumber").style.borderColor = "red";
+				return;
+			}
+		}
+
 		setFirst("");
 		setLastName("");
 		setEmail("");
@@ -55,7 +102,7 @@ function LaptopForm() {
 
 	return (
 		<>
-			{/* <Navbar isActive="requestPage" /> */}
+			<Navbar isActive="requestPage" />
 			<BackgroundImage primaryText="Request a laptop" />
 			{navigate ? (
 				<Navigate to={`/laptop-request-status/${requestId}`} />
@@ -64,7 +111,9 @@ function LaptopForm() {
 					<form onSubmit={submitForm} className="form" name="laptopRequestForm">
 						<div className="form-container">
 							<div>
-								<label htmlFor="label1">First Name</label>
+								<label htmlFor="label1">
+									First Name <em>*</em>
+								</label>
 								<input
 									required
 									id="firstName"
@@ -77,7 +126,9 @@ function LaptopForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label2">Surname</label>
+								<label htmlFor="label2">
+									Surname <em>*</em>
+								</label>
 								<input
 									required
 									type="text"
@@ -90,7 +141,9 @@ function LaptopForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label3">Email address</label>
+								<label htmlFor="label3">
+									Email address <em>*</em>
+								</label>
 								<input
 									required
 									type="text"
@@ -103,7 +156,9 @@ function LaptopForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label4">Phone Number</label>
+								<label htmlFor="label4">
+									Phone Number <em>*</em>
+								</label>
 								<input
 									required
 									type="number"
