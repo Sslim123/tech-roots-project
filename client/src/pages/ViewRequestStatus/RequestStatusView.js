@@ -210,6 +210,7 @@ export function RequestStatus() {
 				}
 			}
 			if (request.status === "ACCEPTED") {
+				console.log(request);
 				return (
 					<>
 						<BackgroundImage primaryText="Thank You" />
@@ -217,8 +218,7 @@ export function RequestStatus() {
 							<h1>
 								Please let us know
 								{donation.deliveryOption === "SHIP"
-									? " when you have received your laptop at " +
-									  request.requestAddress
+									? " when you have received your laptop at " + request.address
 									: " when you have picked up your laptop from " +
 									  donation.address}
 							</h1>

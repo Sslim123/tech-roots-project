@@ -138,6 +138,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 			email: result.rows[0].email,
 			phoneNumber: result.rows[0].phonenumber,
 			status: result.rows[0].laptop_request_status,
+			address: result.rows[0].laptop_request_address,
 		};
 
 		if (laptopRequest.status === "ACTIVE") {
