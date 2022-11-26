@@ -4,7 +4,6 @@ import Svg from "./IMG_Salem.jpg";
 import Svg2 from "./IMG_Abed.jpg";
 import Svg3 from "./IMG_yawe.jpg";
 
-
 import Img from "./TechRootTeam.jpg";
 import "./About-us.css";
 export default function AboutUs() {
@@ -15,52 +14,49 @@ export default function AboutUs() {
 			</div>
 			<div className="card-img">
 				<div className="card1">
-					<Card className="cardImgBody" style={{ width: "21rem", borderRadius: "1.3rem" }}>
+					<Card className="cardImgBody">
 						<Card.Img
 							variant="top"
 							src={Svg}
 							style={{ borderRadius: "1.3rem" }}
 						/>
-						{/* holder.js/100px180 */}
-						<Card.Body>
-							<Card.Text
-								style={{
-									fontSize: "1.5rem",
-								}}
-							>
-								Salem Dayfan
-							</Card.Text>
-							<Card.Title>Full Stack Developer</Card.Title>
+						<Card.Body className="card-body">
+							<Card.Text className="text-card">Salem Dayfan</Card.Text>
+							<Card.Title className="title-card">
+								Full Stack Developer
+							</Card.Title>
 						</Card.Body>
 					</Card>
 				</div>
 				<div className="card1">
-					<Card className="cardImgBody" style={{ width: "21rem", borderRadius: "1.3rem" }}>
+					<Card className="cardImgBody">
 						<Card.Img
 							variant="top"
 							src={Svg2}
 							style={{ borderRadius: "1.3rem" }}
 						/>
 						{/* holder.js/100px180 */}
-						<Card.Body>
-							<Card.Text style={{ fontSize: "1.5rem" }}>
-								Abdalrazaq Altaih
-							</Card.Text>
-							<Card.Title>Full Stack Developer</Card.Title>
+						<Card.Body className="card-body">
+							<Card.Text className="text-card">Abdalrazaq Altaih</Card.Text>
+							<Card.Title className="title-card">
+								Full Stack Developer
+							</Card.Title>
 						</Card.Body>
 					</Card>
 				</div>
 				<div className="card1">
-					<Card className="cardImgBody" style={{ width: "21rem", borderRadius: "1.3rem" }}>
+					<Card className="cardImgBody">
 						<Card.Img
 							variant="top"
 							src={Svg3}
 							style={{ borderRadius: "1.3rem" }}
 						/>
 						{/* holder.js/100px180 */}
-						<Card.Body>
-							<Card.Text style={{ fontSize: "1.5rem" }}>Fareedh Yawe</Card.Text>
-							<Card.Title>Full Stack Developer</Card.Title>
+						<Card.Body className="card-body">
+							<Card.Text className="text-card">Fareedh Yawe</Card.Text>
+							<Card.Title className="title-card">
+								Full Stack Developer
+							</Card.Title>
 						</Card.Body>
 					</Card>
 				</div>
