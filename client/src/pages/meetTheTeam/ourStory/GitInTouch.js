@@ -33,7 +33,7 @@ function GitInTouch() {
 											href="https://github.com/Sslim123"
 											rel="noreferrer"
 										>
-											github.com/salem-dayfan
+											github.com/salem
 										</a>
 									</li>
 								</ul>
@@ -57,7 +57,7 @@ function GitInTouch() {
 											href="https://github.com/Fareedh-12"
 											rel="noreferrer"
 										>
-											github.com/yawe-fareed
+											github.com/yawe
 										</a>
 									</li>
 								</ul>
