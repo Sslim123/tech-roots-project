@@ -302,8 +302,30 @@ router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 router.delete("/laptop_assignment/:assignmentId", async (request, response) => {
 	const assignmentId = request.params.assignmentId;
 
-	db.query("DELETE FROM laptop_assignment WHERE id=$1", [assignmentId])
-		.then(() => response.send("removed"))
+	db.query(
+		"DELETE FROM laptop_assignment WHERE id=$1 returning laptop_request_id, laptop_donation_id",
+		[assignmentId]
+	)
+		.then(async (queryResult) => {
+			const nextDonation = await db.query(
+				"(SELECT * FROM laptop_donation d WHERE d.id > $1 and (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1)",
+				[queryResult.rows[0].laptop_donation_id]
+			);
+			if (nextDonation.rows != undefined && nextDonation.rows.length > 0) {
+				console.log(nextDonation.rows[0]);
+				const newAssignment = await db.query(
+					"insert into laptop_assignment (laptop_request_id, laptop_donation_id) values ($1, $2) returning id",
+					[queryResult.rows[0].laptop_request_id, nextDonation.rows[0].id]
+				);
+				console.log("inserted: ", newAssignment.rows[0]);
+				response.sendStatus(201);
+				return;
+			} else {
+				console.log("no more donations");
+				response.sendStatus(204);
+			}
+		})
+
 		.catch((e) => console.error(e));
 });
 

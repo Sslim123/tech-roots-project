@@ -85,7 +85,12 @@ export function RequestStatus() {
 	const rejectRequest = () => {
 		fetch(`/api/laptop_assignment/${request.assignmentId}`, {
 			method: "DELETE",
-		}).then(() => {
+		}).then((res) => {
+			if (res.status === 201) {
+				new Notification("You have been assigned another available laptop");
+			} else {
+				console.log("no new donation");
+			}
 			setNeedsReloading(!needsReloading);
 		});
 	};

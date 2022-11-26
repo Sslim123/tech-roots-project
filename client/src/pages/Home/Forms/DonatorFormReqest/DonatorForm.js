@@ -31,7 +31,6 @@ function DonatorForm() {
 		} else if (e.target.name === "numberOfLaptops") {
 			setNumberOfLaptops(e.target.value);
 		} else if (e.target.name === "deliveryOption") {
-			console.log(e.target.value);
 			setDeliveryOption(e.target.value);
 		} else {
 			return null;
@@ -56,11 +55,6 @@ function DonatorForm() {
 			return true;
 		}
 		return false;
-	};
-
-	const isPhoneNumber = (value) => {
-		const phoneNumberRegex = /^\d{10,}$/;
-		return phoneNumberRegex.test(value);
 	};
 
 	function submitForm(e) {
@@ -118,7 +112,7 @@ function DonatorForm() {
 	return (
 		<>
 			<Navbar isActive="donationPage" />
-			<BackgroundImage primaryText="Donate a Laptop" />
+			<BackgroundImage primaryText="Make a donation" />
 
 			{navigate ? (
 				<Navigate to={`/laptop-donation-status/${donationId}`} />
@@ -178,7 +172,6 @@ function DonatorForm() {
 									id="phoneNumber"
 									className="input_field"
 									onChange={handleClick}
-									required
 								/>
 							</div>
 							<div>
