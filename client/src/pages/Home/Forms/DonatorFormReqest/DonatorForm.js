@@ -38,8 +38,67 @@ function DonatorForm() {
 		}
 	}
 
+	const isRequired = (value) => {
+		if (value === "") {
+			return false;
+		}
+		return true;
+	};
+
+	const isEmail = (value) => {
+		const emailRegex =
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return emailRegex.test(value);
+	};
+
+	const isGreaterThanZero = (value) => {
+		if (value > 0) {
+			return true;
+		}
+		return false;
+	};
+
+	const isPhoneNumber = (value) => {
+		const phoneNumberRegex = /^\d{10,}$/;
+		return phoneNumberRegex.test(value);
+	};
+
 	function submitForm(e) {
 		e.preventDefault();
+		if (!isRequired(name)) {
+			alert("Please enter your name");
+			return;
+		}
+		if (!isRequired(address)) {
+			alert("Please enter your address");
+			return;
+		}
+		if (!isRequired(email)) {
+			alert("Please enter a your email");
+			return;
+		}
+		if (!isEmail(email)) {
+			alert("Please enter a valid email");
+			return;
+		}
+
+		if (!isRequired(numberOfLaptops)) {
+			alert("Please enter the number of laptops you are donating");
+			return;
+		}
+		if (!isGreaterThanZero(numberOfLaptops)) {
+			alert("Please enter a number greater than 0");
+			return;
+		}
+		if (!isRequired(phoneNumber)) {
+			alert("Please enter your phone number");
+			return;
+		}
+		if (!isPhoneNumber(phoneNumber)) {
+			alert("Please enter a valid phone number");
+			return;
+		}
+
 		setName("");
 		setEmail("");
 		setAddress("");
@@ -68,7 +127,7 @@ function DonatorForm() {
 
 	return (
 		<>
-			<Navbar isActive="donationPage" /> 
+			<Navbar isActive="donationPage" />
 			<BackgroundImage primaryText="Donate a Laptop" />
 
 			{navigate ? (
@@ -78,7 +137,9 @@ function DonatorForm() {
 					<form className="form" onSubmit={submitForm}>
 						<div className="form-container">
 							<div>
-								<label htmlFor="label1">Name</label>
+								<label htmlFor="label1">
+									Name <em>*</em>
+								</label>
 								<input
 									placeholder="Enter your name"
 									value={name}
@@ -89,7 +150,9 @@ function DonatorForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label2">Address</label>
+								<label htmlFor="label2">
+									Address <em>*</em>
+								</label>
 								<input
 									placeholder="Enter your address"
 									value={address}
@@ -99,8 +162,11 @@ function DonatorForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label3">Number of laptops</label>
+								<label htmlFor="label3">
+									Number of laptops <em>*</em>
+								</label>
 								<input
+									min="1"
 									type="number"
 									placeholder="0"
 									value={numberOfLaptops}
@@ -111,7 +177,7 @@ function DonatorForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label4">Contact number</label>
+								<label htmlFor="label4">Contact number </label>
 								<input
 									placeholder="Enter your contact number"
 									value={phoneNumber}
@@ -122,7 +188,9 @@ function DonatorForm() {
 								/>
 							</div>
 							<div>
-								<label htmlFor="label5">Email</label>
+								<label htmlFor="label5">
+									Email <em>*</em>
+								</label>
 								<input
 									placeholder="Enter your email"
 									value={email}
