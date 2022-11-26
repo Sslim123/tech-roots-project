@@ -2,13 +2,19 @@
     position: relative;
     top: 160px;
     width: 80vw;
-    height: 35vh;
     margin: 0 auto;
     display: flex;
+    align-items: center;
     flex-direction: column;
 }
 .our_story{
-    margin-top:  80px;
+    padding: 15px;
+    position: relative;
+    top:  80px;
+    bottom: 30px;
+}.our_story-img{
+    width: 100%;
+    min-height: 40%;
 }.our_story p{
     font-size: 1.2rem;
     padding-top: 30px;
