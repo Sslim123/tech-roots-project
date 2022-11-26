@@ -66,36 +66,26 @@ function DonatorForm() {
 	function submitForm(e) {
 		e.preventDefault();
 		if (!isRequired(name)) {
-			alert("Please enter your name");
+			document.getElementById("name").style.borderColor = "red";
 			return;
 		}
 		if (!isRequired(address)) {
-			alert("Please enter your address");
+			document.getElementById("address").style.borderColor = "red";
 			return;
 		}
 		if (!isRequired(email)) {
-			alert("Please enter a your email");
+			document.getElementById("email").style.borderColor = "red";
 			return;
 		}
+
 		if (!isEmail(email)) {
 			alert("Please enter a valid email");
 			return;
 		}
 
-		if (!isRequired(numberOfLaptops)) {
-			alert("Please enter the number of laptops you are donating");
-			return;
-		}
 		if (!isGreaterThanZero(numberOfLaptops)) {
+			document.getElementById("numberOfLaptops").style.borderColor = "red";
 			alert("Please enter a number greater than 0");
-			return;
-		}
-		if (!isRequired(phoneNumber)) {
-			alert("Please enter your phone number");
-			return;
-		}
-		if (!isPhoneNumber(phoneNumber)) {
-			alert("Please enter a valid phone number");
 			return;
 		}
 
@@ -144,6 +134,7 @@ function DonatorForm() {
 									placeholder="Enter your name"
 									value={name}
 									name="name"
+									id="name"
 									className="input_field"
 									onChange={handleClick}
 									required
@@ -156,6 +147,7 @@ function DonatorForm() {
 								<input
 									placeholder="Enter your address"
 									value={address}
+									id="address"
 									name="address"
 									className="input_field"
 									onChange={handleClick}
@@ -167,6 +159,7 @@ function DonatorForm() {
 								</label>
 								<input
 									min="1"
+									id="numberOfLaptops"
 									type="number"
 									placeholder="0"
 									value={numberOfLaptops}
@@ -182,6 +175,7 @@ function DonatorForm() {
 									placeholder="Enter your contact number"
 									value={phoneNumber}
 									name="phoneNumber"
+									id="phoneNumber"
 									className="input_field"
 									onChange={handleClick}
 									required
@@ -195,6 +189,7 @@ function DonatorForm() {
 									placeholder="Enter your email"
 									value={email}
 									name="email"
+									id="email"
 									className="input_field"
 									onChange={handleClick}
 									required
