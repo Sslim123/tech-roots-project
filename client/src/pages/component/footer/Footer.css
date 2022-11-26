@@ -1,51 +1,47 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
+* {
+	margin: 0%;
+	padding: 0%;
+	box-sizing: border-box;
 }
-.footer-container{
-  position: relative;
-  top: 100px;
-        margin-top: 5%;
+.footer-container {
+	position: relative;
+	top: 100px;
+	margin-top: 5%;
 
-        background-image: url(../image/footer.jpg);
-        background-repeat: no-repeat;
-        background-size: 100%;
-        background-position: center;
-        height: 152px;
-        margin: 0 auto;              
-    
+	background-image: url(../image/footer.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	height: 152px;
+	margin: 0 auto;
 }
-.footer-card{
-  width: 90vw;
-  margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.footer-card {
+	width: 90vw;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.footer-logo{
-    background-image: url(../image/footer-logo.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
-  height: 130px;
-    width: 300px;
-        
-       
-}@media screen and (max-width: 350px){
-  .footer-container{
-    position: relative;
-    height: 70px;
-    bottom: 1px;
-    background-image: url(../image/footer.jpg);
-        background-repeat: no-repeat;
-        background-size: 100%;
-        background-position: center;
-  }
-  .footer-logo{
-    background-image: url(../image/footer-logo.png);
-    background-size: 70%;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 70px;
-  }
+.footer-logo {
+	background-image: url(../image/footer-logo.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 130px;
+	width: 300px;
+}
+@media screen and (max-width: 750px) {
+	.footer-container {
+		position: relative;
+		height: 70px;
+		bottom: 1px;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-position: center;
+	}
+	.footer-logo {
+		background-size: 70%;
+		background-repeat: no-repeat;
+		background-position: center;
+		height: 70px;
+	}
 }
