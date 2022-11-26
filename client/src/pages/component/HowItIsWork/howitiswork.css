@@ -1,101 +1,134 @@
-body{
-    margin: 0%;
-    height: 0%;
-    box-sizing: border-box;
+body {
+	margin: 0%;
+	height: 0%;
+	box-sizing: border-box;
 }
-.howitwork-container{
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-   margin-bottom: 100px;
-   margin-top: 40px;
+.howitwork-container {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-bottom: 100px;
+	margin-top: 40px;
 }
 .howItWorkCard {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: auto;
-    display: flex;
-    margin: 0 auto;
-    align-items: center;
-
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: auto;
+	display: flex;
+	margin: 0 auto;
+	align-items: center;
 }
 
-.how-it-works-text{
-    text-align: center;
-    margin: 50px;
+.how-it-works-text h1 {
+	text-align: center;
+	margin: 50px;
+	width: 100%;
+	height: 65px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 44px;
+	line-height: 65px;
+
+	/* identical to box height */
+	text-align: center;
+
+	color: #0fa10c;
+	font-family: Fugaz One;
 }
-.body-span{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 40vh;
+.body-span {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 40vh;
 }
 .imgSvg img {
-    width: 75px;
-    background-color: rgb(90, 158, 90);
-    border-radius: 50%;
+	width: 75%;
+	border-radius: 100%;
 }
-.body-span .imgSvg{
-    width: 200px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    margin-bottom: -40px;
-    position: relative;
-    z-index: 2;
+.body-span .imgSvg {
+	width: 100px;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: green;
+	margin-bottom: -40px;
+	position: relative;
+	z-index: 2;
 }
-.body-span p{
-    width: 80vw;
-    height: 40vh;
-    text-align:center;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 55px -10px rgba(0, 0, 0, 0.25);
-    height: 204px;
-    width: 366px;
-    left: 1100px;
-    top: 1060px;
-    font-size: 16px;
-    border-radius: 20px;
-    padding: 120px 40px;
-    color: rgba(0, 0, 0, 1);
+.body-span p {
+	width: 80vw;
+	height: 40vh;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0px 0px 55px -10px rgba(0, 0, 0, 0.25);
+	height: 204px;
+	width: 366px;
+	left: 1100px;
+	top: 1060px;
+	font-size: 16px;
+	border-radius: 20px;
+	padding: 120px 40px;
+	color: rgba(0, 0, 0, 1);
 }
- @media screen and (max-width: 750px) {
-    .howitwork-container{
-        width: 100%;
-        height: auto;
+@media screen and (max-width: 750px) {
+	.howitwork-container {
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 0%;
+	}
+	.howItWorkCard {
+		display: grid;
+		grid-template-columns: 1fr;
+		width: 350px;
+		height: auto;
+		margin: 0 auto;
+	}
+    .how-it-works-text  {
+        text-align: center;
+        justify-content: center;
         display: flex;
-        flex-direction: column;
-        margin-bottom: 0%;
-    }.howItWorkCard{
-        display: grid;
-        grid-template-columns: 1fr;
-        width: 350px;
-        height: auto;       
-        margin: 0 auto; 
-   
-    }.body-span{
-        width: 350px;
-        height: 400px;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        margin-bottom: -30px;
+    
     }
+    .how-it-works-text h1 {
+        font-size: 28px;
 
-    .body-span p{
-        width: 330px;
-        height: 180px;
     }
-    .h2 img{
-        position: relative;
-        width: 270px;
-        height: 30px;
-    }.body-span .imgSvg{
-        width: 70px;
-        height: 60px;
-}}
+	.body-span {
+		justify-content: center;
+		text-align: center;
+		align-items: center;
+		display: flex;
+		width: 100%;
+		height: 300px;
+     
+	}
+
+	.body-span p {
+		width: 100%;
+		height: 180px;
+	}
+	.h2 img {
+		position: relative;
+		width: 270px;
+		height: 30px;
+	}
+	.body-span .imgSvg {
+		width: 70px;
+		height: 60px;
+	}
+}
