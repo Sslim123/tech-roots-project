@@ -50,6 +50,7 @@
 }
 
 .contactUs-link ul li a {
+	text-align: center;
 	font-family: Fredoka;
 	font-size: 24px;
 	font-weight: 400;
@@ -66,10 +67,22 @@
 	margin: 10px;
 }.contact-ul-container{
 	margin: 0 auto;
-	width: 27%;
-	height: 100px;
-}
+	width: 100%;
+	height: auto;
+	text-align: center;
 
+}
+.contact-ul-link {
+
+	
+	margin-right: 100px;
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	
+	width: 100%;
+}
 .contact-ul-link li {
 	margin-top: 15px;
     list-style:  none;
@@ -79,38 +92,41 @@
 	font-size: 25px;
     color: #787878;
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 750px) {
 	.contactUs-container{
-		width: 350px;
+		width: 100%;
 		height: 600px;
-		margin-bottom: 80px;
+		margin-bottom: 40px;
+		
 
 	}
-	.h1 {
+	.contactUs-main-card h1 {
 		position: relative;
-		width: 70px;
+		width: 100%;
 		top: 60px;
-		font-size: 1rem;
+		font-size: 2rem;
 		font-weight: normal;
 		text-align: center;
 	}.contactUs-link {
-		font-size: .5rem;
+		font-size: 3rem;
 		padding: 6px;
-		width: 340px;
+		width: 40px;
 		height: auto;
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 10px;
 		margin-bottom: 110px;
+		justify-content: center;
+		text-align: center;
 		
 	}.contact-ul-link{
-		width: 330px;
+		width: 100%;
 		height: 80px;
 		margin: 10px;
 
 	}
 	.contact-ul-container{
-		width: 330px;
+		width: 100%;
 		height: 60px;
 		margin: 30px;
 		font-size: .1rem;
@@ -120,7 +136,5 @@
 		font-size: .2rem;
 		padding: 20px;
 	}
-	.fa-brands .contact-icon{
-		color: green;
-	}
+	
 }
