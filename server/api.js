@@ -8,6 +8,13 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+router.get("/", (_, res) => {
+	logger.debug("Welcoming everyone...");
+	res.json({ message: "Hello, world!" });
+});
+
+/* laptop donation api end points */
+
 router.get("/laptop_donation/:id", async (req, res) => {
 	try {
 		const result = await db.query(
@@ -31,6 +38,92 @@ router.get("/laptop_donation/:id", async (req, res) => {
 	}
 });
 
+router.get("/laptop_donation", async (req, res) => {
+	try {
+		const result = await db.query("SELECT * from laptop_donation");
+
+		const laptopDonation = result.rows.map((row) => {
+			return {
+				name: row.name,
+				address: row.address,
+				numberOfLaptops: row.number_of_laptops,
+				phoneNumber: row.phone_number,
+				email: row.email,
+				deliveryOption: row.delivery_option,
+			};
+		});
+		res.json(laptopDonation);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
+});
+
+router.post("/laptop_donation", (req, res) => {
+	// create a database table for
+	let name = req.body.name;
+	let address = req.body.address;
+	let numberOfLaptops = req.body.numberOfLaptops;
+	let phoneNumber = req.body.phoneNumber;
+	let email = req.body.email;
+	let deliveryOption = req.body.deliveryOption;
+	let uuid = nanoid(10);
+
+	const query =
+		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option, uuid) values ($1, $2, $3, $4, $5, $6, $7) returning id, number_of_laptops, uuid";
+
+	db.query(query, [
+		name,
+		address,
+		numberOfLaptops,
+		phoneNumber,
+		email,
+		deliveryOption,
+		uuid,
+	])
+		.then(async (queryResult) => {
+			console.log(queryResult.rows[0]);
+			const unAssignedRequests = await db.query(
+				"SELECT id, uuid FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED'"
+			);
+			console.log(unAssignedRequests.rows);
+
+			let numberOfLaptops = queryResult.rows[0].number_of_laptops;
+			/* comparing the number of requests to the number of laptops donated 
+			Then mapping the number of requests the available laptops*/
+			if (unAssignedRequests.rows.length > 0) {
+				for (let requestId in unAssignedRequests.rows) {
+					if (numberOfLaptops > 0) {
+						// console.log(requestId.id);
+						const assignmentQuery =
+							" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
+
+						db.query(assignmentQuery, [
+							queryResult.rows[0].id,
+							unAssignedRequests.rows[requestId].id,
+						]).then(() => {
+							// emit event
+							io.emit(
+								`laptop_request:statusChanged${unAssignedRequests.rows[requestId].uuid}`,
+								{
+									laptopRequestId: unAssignedRequests.rows[requestId].uuid,
+								}
+							);
+						});
+
+						numberOfLaptops--;
+					}
+				}
+			}
+			res.status(200).json({ id: queryResult.rows[0].uuid });
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(400).json({ success: " was not success" });
+		});
+});
+
+/* laptop request api end points */
 router.get("/laptop_request/:id", async (req, res) => {
 	try {
 		const result = await db.query(
@@ -84,9 +177,23 @@ router.get("/laptop_request/:id", async (req, res) => {
 	}
 });
 
-router.get("/", (_, res) => {
-	logger.debug("Welcoming everyone...");
-	res.json({ message: "Hello, world!" });
+router.get("/laptop_request", async (req, res) => {
+	try {
+		const result = await db.query("SELECT * from laptop_request");
+		const laptopRequests = result.rows.map((row) => {
+			return {
+				firstName: row.firstname,
+				lastName: row.lastname,
+				email: row.email,
+				phoneNumber: row.phonenumber,
+			};
+		});
+
+		res.json(laptopRequests);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 
 router.post("/laptop_request", async (req, res) => {
@@ -128,107 +235,38 @@ router.post("/laptop_request", async (req, res) => {
 		});
 });
 
-router.get("/laptop_request", async (req, res) => {
-	try {
-		const result = await db.query("SELECT * from laptop_request");
-		const laptopRequests = result.rows.map((row) => {
-			return {
-				firstName: row.firstname,
-				lastName: row.lastname,
-				email: row.email,
-				phoneNumber: row.phonenumber,
-			};
-		});
-
-		res.json(laptopRequests);
-	} catch (e) {
-		console.error(e);
-		res.sendStatus(400);
+router.put("/laptop_request/:id", async (req, res) => {
+	if (req.body.status !== undefined) {
+		const laptopRequest = {
+			id: req.params.id,
+			status: "CANCELLED",
+		};
+		db.query(
+			"UPDATE laptop_request SET laptop_request_status = $1 WHERE uuid = $2",
+			[laptopRequest.status, laptopRequest.id]
+		)
+			.then(() => res.send(`status ${laptopRequest.id} updated!`))
+			.catch((e) => {
+				console.error(e);
+				res.status(404).send("Request not found");
+			});
+	} else if (req.body.address !== undefined) {
+		// console.log("update address");
+		db.query(
+			"UPDATE laptop_request SET laptop_request_address = $1 WHERE uuid = $2",
+			[req.body.address, req.params.id]
+		)
+			.then(() =>
+				res.send({ message: `address ${req.params.id} has been set!` })
+			)
+			.catch((e) => {
+				console.error(e);
+				res.status(404).send("Request not found");
+			});
 	}
 });
 
-router.post("/laptop_donation", (req, res) => {
-	// create a database table for
-	let name = req.body.name;
-	let address = req.body.address;
-	let numberOfLaptops = req.body.numberOfLaptops;
-	let phoneNumber = req.body.phoneNumber;
-	let email = req.body.email;
-	let deliveryOption = req.body.deliveryOption;
-	let uuid = nanoid(10);
-
-	const query =
-		" insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option, uuid) values ($1, $2, $3, $4, $5, $6, $7) returning id, number_of_laptops, uuid";
-
-	db.query(query, [
-		name,
-		address,
-		numberOfLaptops,
-		phoneNumber,
-		email,
-		deliveryOption,
-		uuid,
-	])
-		.then(async (queryResult) => {
-			console.log(queryResult.rows[0]);
-			const unAssignedRequests = await db.query(
-				"SELECT id FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment)"
-			);
-			console.log(unAssignedRequests.rows);
-
-			let numberOfLaptops = queryResult.rows[0].number_of_laptops;
-			/* comparing the number of requests to the number of laptops donated 
-			Then mapping the number of requests the available laptops*/
-			if (unAssignedRequests.rows.length > 0) {
-				for (let requestId in unAssignedRequests.rows) {
-					if (numberOfLaptops > 0) {
-						// console.log(requestId.id);
-						const assignmentQuery =
-							" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)";
-
-						db.query(assignmentQuery, [queryResult.rows[0].id, row.id]).then(
-							() => {
-								// emit event
-								io.emit("laptop_request:statusChanged", {
-									laptopRequestId: row.id,
-								});
-							}
-						);
-
-						numberOfLaptops--;
-					}
-				}
-			}
-			res.status(200).json({ id: queryResult.rows[0].uuid });
-		})
-		.catch((error) => {
-			console.error(error);
-			res.status(400).json({ success: " was not success" });
-		});
-});
-
-router.get("/laptop_donation", async (req, res) => {
-	try {
-		const result = await db.query("SELECT * from laptop_donation");
-
-		const laptopDonation = result.rows.map((row) => {
-			return {
-				name: row.name,
-				address: row.address,
-				numberOfLaptops: row.number_of_laptops,
-				phoneNumber: row.phone_number,
-				email: row.email,
-				deliveryOption: row.delivery_option,
-			};
-		});
-		res.json(laptopDonation);
-	} catch (e) {
-		console.error(e);
-		res.sendStatus(400);
-	}
-});
-
-// post laptop assignment
+/*laptop_assignment api endpoints*/
 router.post("/laptop_assignment", (req, res) => {
 	let laptopRequestId = req.body.laptop_request_id;
 	let laptopDonationId = req.body.laptop_donation_id;
@@ -257,23 +295,6 @@ router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 		.catch((e) => {
 			console.error(e);
 			res.status(404).send("status not found");
-		});
-});
-
-router.put("/laptop_request/:id", async (req, res) => {
-	const laptopRequest = {
-		id: req.params.id,
-		status: "CANCELLED",
-	};
-
-	db.query(
-		"UPDATE laptop_request SET laptop_request_status = $1 WHERE uuid = $2",
-		[laptopRequest.status, laptopRequest.id]
-	)
-		.then(() => res.send(`status ${laptopRequest.id} updated!`))
-		.catch((e) => {
-			console.error(e);
-			res.status(404).send("Request not found");
 		});
 });
 
