@@ -186,6 +186,7 @@ router.get("/laptop_request", async (req, res) => {
 				lastName: row.lastname,
 				email: row.email,
 				phoneNumber: row.phonenumber,
+				status: row.laptop_request_status,
 			};
 		});
 
