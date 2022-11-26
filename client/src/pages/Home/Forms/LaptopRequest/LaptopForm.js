@@ -46,6 +46,7 @@ function LaptopForm() {
 	};
 
 	function submitForm(e) {
+		e.preventDefault();
 		if (
 			!(
 				isRequired(firstName) &&
@@ -58,21 +59,24 @@ function LaptopForm() {
 		) {
 			if (!isRequired(firstName)) {
 				document.getElementById("firstName").style.borderColor = "red";
+				return;
 			}
 			if (!isRequired(lastName)) {
 				document.getElementById("lastName").style.borderColor = "red";
+				return;
 			}
 			if (!isEmail(email)) {
+				alert("Please enter a valid email address");
 				document.getElementById("email").style.borderColor = "red";
+				return;
 			}
 			if (!isPhoneNumber(phoneNumber)) {
+				alert("Please enter a valid phone number");
 				document.getElementById("phoneNumber").style.borderColor = "red";
+				return;
 			}
-			alert("Please fill out all the fields correctly");
-			return;
 		}
 
-		e.preventDefault();
 		setFirst("");
 		setLastName("");
 		setEmail("");
