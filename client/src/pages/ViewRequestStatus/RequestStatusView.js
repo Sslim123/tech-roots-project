@@ -19,9 +19,9 @@ export function RequestStatus() {
 	useEffect(() => {
 		Notification.requestPermission();
 		socket.on("connect", () => {
-			console.log("conncted");
+			console.log("connected");
 		});
-		socket.on("laptop_request:statusChanged", ({ laptopRequestId }) => {
+		socket.on(`laptop_request:statusChanged${id}`, ({ laptopRequestId }) => {
 			setNeedsReloading((previousNeedsReloading) => {
 				return (
 					!previousNeedsReloading,

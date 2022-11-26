@@ -84,7 +84,7 @@ router.post("/laptop_donation", (req, res) => {
 		.then(async (queryResult) => {
 			console.log(queryResult.rows[0]);
 			const unAssignedRequests = await db.query(
-				"SELECT id FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED'"
+				"SELECT id, uuid FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED'"
 			);
 			console.log(unAssignedRequests.rows);
 
@@ -103,9 +103,12 @@ router.post("/laptop_donation", (req, res) => {
 							unAssignedRequests.rows[requestId].id,
 						]).then(() => {
 							// emit event
-							io.emit("laptop_request:statusChanged", {
-								laptopRequestId: unAssignedRequests.rows[requestId].id,
-							});
+							io.emit(
+								`laptop_request:statusChanged${unAssignedRequests.rows[requestId].uuid}`,
+								{
+									laptopRequestId: unAssignedRequests.rows[requestId].uuid,
+								}
+							);
 						});
 
 						numberOfLaptops--;
