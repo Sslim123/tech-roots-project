@@ -13,7 +13,6 @@
 --  values ('Tandy', 'Nicole', 'tandy@cyf.com', '0748484877', 'fake-uuid-4');
 
 
-
 --  -- laptop donation data
 
 -- --  insert into laptop_donation (name, address, number_of_laptops, phone_number, email, delivery_option,uuid) 
