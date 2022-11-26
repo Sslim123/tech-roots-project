@@ -9,8 +9,8 @@ import "./howitiswork.css";
 function HowIsWORK() {
 	return (
 		<div className="howitwork-container">
-			<div className="h2">
-				<img src={Img} />
+			<div className="how-it-works-text">
+				<h1> How It works</h1>
 			</div>
 			<div className="howItWorkCard">
 				<div className="body-span">
