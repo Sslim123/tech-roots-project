@@ -83,6 +83,7 @@
 		"nanoid": "^3.0.0",
 		"pg": "^8.8.0",
 		"react-icons": "^4.6.0",
+		"react-qr-code": "^2.0.8",
 		"redirect": "^0.2.0",
 		"socket.io": "^4.5.4",
 		"winston": "^3.8.1"

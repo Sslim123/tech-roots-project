@@ -7,7 +7,9 @@ function OurStory() {
 	return (
 		<div className="our_container">
 			<div className="our_story">
-				<img src={Jpg} />
+				<div className="our_story-img">
+					<img src={Jpg} />
+				</div>
 				<p>
 					Now you are, and here is our story. We are a group of 3 trainees who
 					met in 2021, through Code Your Future. This is our first project
