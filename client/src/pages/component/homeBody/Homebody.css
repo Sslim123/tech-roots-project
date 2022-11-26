@@ -7,25 +7,29 @@
 	background-image: url(../image/home-body.jpg);
 	background-repeat: no-repeat;
 	width: 100%;
-	height: 480px;
-	background-size: 100%;
+	height: 600px;
+	background-size: contain;
 	background-position: center ;
-	margin: 0 auto;
+	margin: 0 ;
 }
 
 .body-main-container{
-	width: 90vw;
+	width: 100%;
 	display: flex;
 	justify-content: center;
-	margin: 0 auto;	
+	margin: 0%;
 }
 
 .body-main-card {
-	position: relative;
+	display: flex;
     box-sizing: border-box;
     }
 .body-main-container {
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
 }
 
 .body-main-card {
@@ -33,8 +37,8 @@
 
 	display: flex;
 	max-width: 800px;
-	width: 100vw;
-	height: 40vh;
+	width: 100%;
+	height: 100%;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
@@ -102,3 +106,44 @@
 	text-decoration: none;
 	color: #ffffff;
 }
+@media screen and (max-width: 1300px) {
+	.homebody-container{
+		width: 100%;
+		height: 500px;
+	} }
+
+	@media screen and (max-width: 750px) {
+		.homebody-container{
+			width: 100%;
+			height: 300px;
+			margin-top: -75px;
+		} 
+		.Home-main-text {
+			margin-top: 50px;
+			width: 100%;
+			color: #ffffff;
+			font-family: Fugaz One;
+			font-size: 20px;
+		}
+		.text-home-2{
+			margin-top: 25px;
+			color: black;
+			width: 80%;
+			
+		}
+		.home-bt-card{
+			margin-top: -40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 80%;
+			height: auto;
+			
+		}
+		.home-bt{
+			width: 150px;
+			margin-top: 40px;
+			margin: 20px 10px 0px 10px;
+		}
+	}
+	
