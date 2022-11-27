@@ -37,7 +37,7 @@
 
 @media screen and (max-width: 350px) {
 	.card-container {
-		width: 330px;
+		width: 300px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -48,7 +48,8 @@
     
 	.team-img img {
         position: relative;
-		width: 50%;
+		top:   40px;
+		width: 60%;
 	}
     
 	.card-img {
@@ -62,7 +63,7 @@
 	}
 	.card1 {
         position: relative;
-		width: 320px;
+		width: 300px;
         height: auto;
         margin: 0 auto;
 	}.cardImgBody {
@@ -72,16 +73,17 @@
 		flex-direction: row;
 	}
 	.cardImgBody img {
+		
 		width: 30%;
 	}
 	.text-card {
         position: relative;
-        width: 65%;
+        width: 70%;
         font-size: .7rem;
         text-align: start;
         font-weight: bold;
 	}.title-card{
-        width: 70%;
+        width: 75%;
         font-size: .7rem;
         font-weight: 100;
     }

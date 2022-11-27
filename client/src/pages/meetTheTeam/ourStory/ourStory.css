@@ -22,13 +22,11 @@
 	padding-top: 30px;
 }
 @media screen and (max-width: 350px) {
-	.our_container {
-		width: 330px;
-		height: 600px;
-	}
+	
 	.our_story {
-		width: 330px;
-		height: 500px;
+		width: 300px;
+		height: auto;
+		background-color: green;
 	}
 	.our_story-img {
 		text-align: center;
@@ -42,6 +40,7 @@
 	}
 	.our_story p {
 		width: 100%;
+		padding: 10px;
 		font-weight: lighter;
 		font-size: 0.9rem;
 	}
