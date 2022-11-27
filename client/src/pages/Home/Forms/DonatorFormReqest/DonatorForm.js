@@ -188,13 +188,17 @@ function DonatorForm() {
 									required
 								/>
 							</div>
-							<div>
+							<div className="status-form-input">
 								<p>How would you like the laptop to be transferred?</p>
 								<select name="deliveryOption" onChange={handleClick}>
-									<option value="PICKUP" name="deliveryOption">
+									<option
+										className="option"
+										value="PICKUP"
+										name="deliveryOption"
+									>
 										Pick up at my address
 									</option>
-									<option value="SHIP" name="deliveryOption">
+									<option className="option" value="SHIP" name="deliveryOption">
 										Ship to receivers address
 									</option>
 								</select>

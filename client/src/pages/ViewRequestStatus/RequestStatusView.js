@@ -240,11 +240,7 @@ export function RequestStatus() {
 			if (request.status === "FULFILLED") {
 				return (
 					<>
-						<div className="status-thankYou-main-picture">
-							<div className="thankYou-p">
-								<h1>Thank you!</h1>
-							</div>
-						</div>
+						<BackgroundImage primaryText="Thank You" />
 						<div className="text-status">
 							<h1>
 								Sweet! You now have your laptop. Time to start working on your

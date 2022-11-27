@@ -51,6 +51,7 @@
 		margin-top: 10px;
 	}
 	.primary-text {
+		margin-top: -10px;
 		color: #ffffff;
 		font-family: Fugaz One;
 		font-size: 32px;
@@ -61,11 +62,12 @@
 	}
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 440px) {
 	.main-card {
 		margin-top: -10px;
 	}
 	.primary-text {
+		margin-top: -50px;
 		color: #ffffff;
 		font-family: Fugaz One;
 		font-size: 22px;
