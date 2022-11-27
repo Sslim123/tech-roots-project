@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker/locale/en_GB"
 describe('add a laptop request', () => {
     it('allows a user to add a laptop request', () => {
         cy.visit('http://localhost:3000/')
-        cy.contains('Register for a laptop').click()
+        cy.contains('Requests').click()
         const firstName = faker.name.firstName();
         cy.get('input[name=firstName]').type(firstName)
         cy.get('input[name=lastName]').type(faker.name.lastName())
