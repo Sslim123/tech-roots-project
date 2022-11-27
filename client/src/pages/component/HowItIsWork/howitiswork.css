@@ -83,6 +83,8 @@ body {
 	.howitwork-container {
 		width: 100%;
 		height: auto;
+	
+		height: 1320px;
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 0%;
