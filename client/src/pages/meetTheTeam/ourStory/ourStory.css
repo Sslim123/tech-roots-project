@@ -1,6 +1,4 @@
 .our_container {
-	position: relative;
-	top: 160px;
 	width: 80vw;
 	margin: 0 auto;
 	display: flex;
@@ -13,29 +11,44 @@
 	top: 80px;
 	bottom: 30px;
 }
-.our_story-img {
+.our_story-text {
 	width: 100%;
-	min-height: 40%;
+}
+.our_story-text h1 {
+	font-family: "Fugaz One";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 52px;
+	line-height: 76px;
+
+	color: #0fa10c;
 }
 .our_story p {
 	font-size: 1.2rem;
 	padding-top: 30px;
 }
-@media screen and (max-width: 540px) {
+
+@media screen and (max-width: 750px) {
+	.our_container {
+		width: 330px;
+		height: 600px;
+	}
+
 	.our_story {
 		width: 540px;
 		height: auto;
 	}
-	.our_story-img {
+	.our_story-text {
 		text-align: center;
 		font-weight: lighter;
 		width: 100%;
-		max-height: 40%;
+
 	}
-	.our_story-img img {
-		width: 40%;
-		text-align: center;
+	.our_story-text h1 {
+		font-size: 28px;
+
 	}
+
 	.our_story p {
 		width: 100%;
 		padding: 10px;

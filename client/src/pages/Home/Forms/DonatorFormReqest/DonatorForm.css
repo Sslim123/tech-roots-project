@@ -40,8 +40,8 @@ select {
 		text-align: center;
 		align-items: center;
 	}
-    .status-form-input p{
-        margin-top: 12px;
-        width: 55%;
-    }
+	.status-form-input p {
+		margin-top: 12px;
+		width: 75%;
+	}
 }

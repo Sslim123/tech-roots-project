@@ -1,17 +1,17 @@
 import React from "react";
-import Svg from "./Getintouch.jpg";
+
 import "./GetInTouch.css";
 
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-function GitInTouch() {
+function GitInTouch(props) {
 	return (
 		<div>
 			<div className="getTouch-container">
-				
-				<div className="getTouch-main-card">
-				<div className="get-touch-img">
-					<img src={Svg} />
+
+				<div className="get-touch-text">
+					<h1>{props.GetInTouchText}</h1>
+
 				</div>
 					<div className="getTouch-card">
 						<div className="getTouch-link">

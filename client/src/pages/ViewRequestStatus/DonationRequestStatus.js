@@ -15,9 +15,9 @@ function DonationRequestStatues() {
 				</h1>
 			</div>
 			<div className="status-bt">
-				<button>
-					<Link to="/">Back Home</Link>
-				</button>
+				<Link to="/">
+					<button>Back Home</button>
+				</Link>
 			</div>
 		</div>
 	);
