@@ -8,6 +8,13 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+const sendSocketNotification = (uuid, firstname) => {
+	io.to(getRequestRoomName(uuid)).emit("laptop_request:statusChanged", {
+		laptopRequestId: uuid,
+		firstName: firstname,
+	});
+};
+
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
@@ -102,12 +109,9 @@ router.post("/laptop_donation", (req, res) => {
 							unAssignedRequest.id,
 						]).then(() => {
 							// emit event
-							io.to(getRequestRoomName(unAssignedRequest.uuid)).emit(
-								`laptop_request:statusChanged`,
-								{
-									laptopRequestId: unAssignedRequest.uuid,
-									firstName: unAssignedRequest.firstname,
-								}
+							sendSocketNotification(
+								unAssignedRequest.uuid,
+								unAssignedRequest.firstname
 							);
 						});
 
@@ -323,34 +327,23 @@ router.delete("/laptop_assignment/:assignmentId", async (request, response) => {
 				unAssignedRequests.rows != undefined &&
 				unAssignedRequests.rows.length > 0
 			) {
-				let getNumberOfLaptops = await db.query(
-					"SELECT number_of_laptops FROM laptop_donation WHERE id = $1",
-					[queryResult.rows[0].laptop_donation_id]
-				);
-				let numberOfLaptops = getNumberOfLaptops.rows[0].number_of_laptops;
-
-				for (let unAssignedRequest of unAssignedRequests.rows) {
-					if (numberOfLaptops > 0) {
-						await db
-							.query(
-								" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)",
-								[queryResult.rows[0].laptop_donation_id, unAssignedRequest.id]
-							)
-							.then(() => {
-								io.to(getRequestRoomName(unAssignedRequest.uuid)).emit(
-									`laptop_request:statusChanged`,
-									{
-										laptopRequestId: unAssignedRequest.uuid,
-										firstName: unAssignedRequest.firstname,
-									}
-								);
-								console.log(
-									`donation ${queryResult.rows[0].laptop_donation_id} assigned to request ${unAssignedRequest.id}`
-								);
-							});
-						numberOfLaptops--;
-					}
-				}
+				let unAssignedRequest = unAssignedRequests.rows[0];
+				console.log("****************************");
+				console.log(unAssignedRequest);
+				await db
+					.query(
+						" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)",
+						[queryResult.rows[0].laptop_donation_id, unAssignedRequest.id]
+					)
+					.then(() => {
+						sendSocketNotification(
+							unAssignedRequest.uuid,
+							unAssignedRequest.firstname
+						);
+						console.log(
+							`donation ${queryResult.rows[0].laptop_donation_id} assigned to request ${unAssignedRequest.id}`
+						);
+					});
 			} else {
 				console.log("no request to assign, donation waiting for next request");
 			}
