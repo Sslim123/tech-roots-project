@@ -8,7 +8,6 @@ import { initSocket } from "./socket";
 const server = http.createServer(app);
 initSocket(server);
 
-
 server.on("listening", () => {
 	const addr = server.address();
 	const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;

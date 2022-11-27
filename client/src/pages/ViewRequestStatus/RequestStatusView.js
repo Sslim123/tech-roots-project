@@ -21,17 +21,16 @@ export function RequestStatus() {
 		socket.on("connect", () => {
 			console.log("connected");
 		});
-		socket.on(`laptop_request:statusChanged${id}`, ({ laptopRequestId }) => {
-			setNeedsReloading((previousNeedsReloading) => {
-				return (
-					!previousNeedsReloading,
-					new Notification("Good news, we've found you a laptop!")
-				);
-			});
-
-			console.log("statusChanged", laptopRequestId);
-		});
-		socket.emit("test", { requestId: id });
+		socket.on(
+			`laptop_request:statusChanged`,
+			({ laptopRequestId, firstName }) => {
+				setNeedsReloading((previousNeedsReloading) => !previousNeedsReloading);
+				new Notification(`Good news ${firstName}, we've found you a laptop!`);
+				console.log("Notification sent to ", firstName);
+				console.log("statusChanged", laptopRequestId);
+			}
+		);
+		socket.emit("laptop_request:subscribe", { requestId: id });
 		return () => {
 			socket.off("connect");
 			socket.off("laptop_request:statusChanged");

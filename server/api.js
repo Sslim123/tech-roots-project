@@ -1,6 +1,6 @@
 import { request } from "express";
 import { Router } from "express";
-import { io } from "./socket";
+import { io, getRequestRoomName } from "./socket";
 import db from "./db";
 import { nanoid } from "nanoid";
 
@@ -84,7 +84,7 @@ router.post("/laptop_donation", (req, res) => {
 		.then(async (queryResult) => {
 			console.log(queryResult.rows[0]);
 			const unAssignedRequests = await db.query(
-				"SELECT id, uuid FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED'"
+				"SELECT id, uuid, firstname FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED'"
 			);
 			console.log(unAssignedRequests.rows);
 
@@ -92,7 +92,7 @@ router.post("/laptop_donation", (req, res) => {
 			/* comparing the number of requests to the number of laptops donated 
 			Then mapping the number of requests the available laptops*/
 			if (unAssignedRequests.rows.length > 0) {
-				for (let requestId in unAssignedRequests.rows) {
+				for (let unAssignedRequest of unAssignedRequests.rows) {
 					if (numberOfLaptops > 0) {
 						// console.log(requestId.id);
 						const assignmentQuery =
@@ -100,13 +100,14 @@ router.post("/laptop_donation", (req, res) => {
 
 						db.query(assignmentQuery, [
 							queryResult.rows[0].id,
-							unAssignedRequests.rows[requestId].id,
+							unAssignedRequest.id,
 						]).then(() => {
 							// emit event
-							io.emit(
-								`laptop_request:statusChanged${unAssignedRequests.rows[requestId].uuid}`,
+							io.to(getRequestRoomName(unAssignedRequest.uuid)).emit(
+								`laptop_request:statusChanged`,
 								{
-									laptopRequestId: unAssignedRequests.rows[requestId].uuid,
+									laptopRequestId: unAssignedRequest.uuid,
+									firstName: unAssignedRequest.firstname,
 								}
 							);
 						});
