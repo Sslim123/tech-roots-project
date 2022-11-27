@@ -1,5 +1,4 @@
 import React from "react";
-import Jpg from "./OurStory.jpg";
 import "./ourStory.css";
 //import GitInTouch from "./GitInTouch";
 
@@ -7,8 +6,10 @@ function OurStory() {
 	return (
 		<div className="our_container">
 			<div className="our_story">
-				<div className="our_story-img">
-					<img src={Jpg} />
+				<div className="our_story-text">
+					<div className="our-story-h1">
+						<h1>Our Story</h1>
+					</div>
 				</div>
 				<p>
 					Now you are, and here is our story. We are a group of 3 trainees who

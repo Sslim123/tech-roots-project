@@ -18,7 +18,7 @@
 	align-items: center;
 	display: flex;
 }
-#not-exist{
+#not-exist {
 	display: flex;
 	flex-direction: column;
 }
@@ -45,7 +45,7 @@
 .text-status {
 	display: flex;
 	width: 100%;
-	height: 150px;
+	height: auto;
 	text-align: center;
 	justify-content: center;
 	align-items: center;
@@ -55,7 +55,7 @@
 	display: flex;
 	text-align: center;
 	width: 600px;
-	height: 150px;
+	height: auto;
 	font-family: "Fredoka";
 	font-style: normal;
 	font-weight: 400;
@@ -74,7 +74,7 @@
 	align-items: center;
 }
 .status-bt button {
-	width: 303px;
+	width: 323px;
 	height: 57px;
 	background: #0fa20c;
 	border-radius: 28px;
@@ -96,12 +96,7 @@
 .status-but-link:hover {
 	text-decoration: none;
 	color: #ffffff;
-}.qrCode{
-	width: 300px;
-	margin: 0 auto;
 }
-
-
 
 /* responsive */
 
@@ -111,7 +106,6 @@
 		height: 450px;
 	}
 }
-
 
 @media screen and (max-width: 1600px) {
 	.status-thankYou-main-picture {
@@ -127,30 +121,9 @@
 	}
 }
 
-
-
-@media screen and (max-width: 740px) {
-	.status-thankYou-main-picture {
-		height: 175px;
-	}
-	.thankYou-p h1 {
-		margin-top: 20px;
-	}
-	.status-bt button {
-		width: 180px;
-		height: 57px;
-	}
-}
-
 /* phone */
-@media screen and (max-width: 300px) {
-	.status-thankYou-main-picture {
-		height: 80px;
-		width: 100%;
-	}
-}
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 750px) {
 	.status-thankYou-main-picture {
 		height: 150px;
 		width: 100%;
@@ -163,20 +136,21 @@
 	}
 	.text-status {
 		width: 100%;
-		height: 250px;
 	}
 	.text-status h1 {
-		margin-top: 30px;
-
+		font-size: 18px;
 		width: 100%;
 		height: 300px;
 	}
-	.status-bt button {
-		width: 120px;
-		height: 57px;
-	}
+
 	.status-bt {
-		height: 200px;
+		display: flex;
+		flex-direction: column;
+		position: none;
+		margin-top: -150px;
+	}
+	.status-bt button {
+		width: 332px;
 	}
 	.status-bt button:hover {
 		background-color: #2693f9;

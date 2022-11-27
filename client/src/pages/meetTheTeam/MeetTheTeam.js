@@ -12,10 +12,8 @@ function MeetTheTeam() {
 			<Navbar />
 			<AboutUs />
 			<OurStory />
-			<GitInTouch />
-			<div className="get-footer">
-				<Footer />
-			</div>
+			<GitInTouch GetInTouchText="Get In Touch" />
+			<Footer />
 		</div>
 	);
 }
