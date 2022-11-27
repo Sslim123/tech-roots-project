@@ -24,20 +24,18 @@
 	flex-direction: row;
 	justify-content: space-between;
 	margin: 0 auto;
-}.cardImgBody{
-     width: 21rem;
-      border-radius: 1.3rem;
-
 }
-.card-body{
-
-    font-size: 1.5rem;
+.cardImgBody {
+	width: 21rem;
+	border-radius: 1.3rem;
+}
+.card-body {
+	font-size: 1.5rem;
 }
 
-
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 540px) {
 	.card-container {
-		width: 300px;
+		width: 530px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -45,55 +43,57 @@
 		margin: 0 auto;
 		text-align: center;
 	}
-    
+
 	.team-img img {
-        position: relative;
-		top:   40px;
+		position: relative;
+		top: 40px;
 		width: 60%;
 	}
-    
+
 	.card-img {
-        position: relative;
-		width: 330px;
-        height: auto;
+		position: relative;
+		width: 530px;
+		height: auto;
 		display: flex;
 		flex-direction: column;
-        justify-content: space-between;
+		justify-content: space-between;
 		gap: 20px;
 	}
 	.card1 {
-        position: relative;
-		width: 300px;
-        height: auto;
-        margin: 0 auto;
-	}.cardImgBody {
-        width: 100%;
-        padding: 10px;
+		position: relative;
+		width: 530px;
+		height: auto;
+		margin: 0 auto;
+	}
+	.cardImgBody {
+		margin: 0 auto;
+		width: 90%;
+		padding: 10px;
 		display: flex;
 		flex-direction: row;
 	}
 	.cardImgBody img {
-		
-		width: 30%;
+		width: 40%;
+		height: 50%;
 	}
 	.text-card {
-        position: relative;
-        width: 70%;
-        font-size: .7rem;
-        text-align: start;
-        font-weight: bold;
-	}.title-card{
-        width: 75%;
-        font-size: .7rem;
-        font-weight: 100;
-    }
+		position: relative;
+		width: 70%;
+		font-size: 0.8rem;
+		text-align: start;
+		font-weight: bold;
+	}
+	.title-card {
+		width: 75%;
+		font-size: 0.8rem;
+		font-weight: 100;
+	}
 	.card-body {
-        position: relative;
-        text-align: start;
-        display: flex;
-        flex-direction: column ;
-        width: 100vw;
+		position: relative;
+		text-align: start;
+		display: flex;
+		flex-direction: column;
+		width: 100vw;
 		height: 20%;
 	}
-	
 }
