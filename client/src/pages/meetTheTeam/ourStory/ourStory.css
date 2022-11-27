@@ -27,27 +27,32 @@
 	font-size: 1.2rem;
 	padding-top: 30px;
 }
+
 @media screen and (max-width: 750px) {
 	.our_container {
 		width: 330px;
 		height: 600px;
 	}
+
 	.our_story {
-		width: 330px;
-		height: 500px;
+		width: 540px;
+		height: auto;
 	}
 	.our_story-text {
 		text-align: center;
 		font-weight: lighter;
 		width: 100%;
+
 	}
 	.our_story-text h1 {
 		font-size: 28px;
+
 	}
 
 	.our_story p {
 		width: 100%;
+		padding: 10px;
 		font-weight: lighter;
-		font-size: 0.9rem;
+		font-size: 1rem;
 	}
 }
