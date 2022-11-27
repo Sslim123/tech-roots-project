@@ -74,7 +74,7 @@ label {
 	color: white;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 750px) {
 	.form-container input {
 		box-sizing: border-box;
 		width: 226px;
