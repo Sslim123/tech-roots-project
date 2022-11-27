@@ -84,31 +84,36 @@
 	font-size: 25px;
 	color: #787878;
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 540px) {
 	.getTouch-container {
-		text-align: center;
-		width: 300px;
+		width: 540px;
 		height: auto;
-		margin-bottom: 50px;
 	}
 	.getTouch-main-card {
-		width: 300px;
+		width: 530px;
+		height: 600px;
+		position: relative;
+		bottom: 40px;
 	}
 	.get-touch-img {
+		margin: 0 auto;
+		text-align: center;
 		position: relative;
 		top: 30px;
 	}
 	.get-touch-img img {
-		width: 60%;
+		width: 70%;
 	}
 	.getTouch-link {
 		padding: 6px;
-		width: 300px;
-		height: auto;
+		width: 350px;
+		height: 500px;
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 10px;
-		margin-bottom: 80px;
+		margin: 0 auto;
+		position: relative;
+		bottom: 520px;
 	}
 	.getTouch-ul-link {
 		display: flex;
