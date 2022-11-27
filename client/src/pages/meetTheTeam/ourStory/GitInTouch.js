@@ -8,10 +8,11 @@ function GitInTouch() {
 	return (
 		<div>
 			<div className="getTouch-container">
+				
+				<div className="getTouch-main-card">
 				<div className="get-touch-img">
 					<img src={Svg} />
 				</div>
-				<div className="getTouch-main-card">
 					<div className="getTouch-card">
 						<div className="getTouch-link">
 							<div>
@@ -23,7 +24,7 @@ function GitInTouch() {
 											href="https://www.linkedin.com/in/salem-dayfan-0a9399206"
 											rel="noreferrer"
 										>
-											linked.in/salem-dayfan
+											linked.in/salem
 										</a>
 									</li>
 									<li className="fa-brands fa-github">
@@ -47,7 +48,7 @@ function GitInTouch() {
 											href="https://www.linkedin.com/in/yawe-fareed"
 											rel="noreferrer"
 										>
-											linked.in/yawe-fareed
+											linked.in/yawe
 										</a>
 									</li>
 									<li className="fa-brands fa-linkedin">
