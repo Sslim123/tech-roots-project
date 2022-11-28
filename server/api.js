@@ -8,6 +8,13 @@ import logger from "./utils/logger";
 
 const router = Router();
 
+const sendSocketNotification = (uuid, firstname) => {
+	io.to(getRequestRoomName(uuid)).emit("laptop_request:statusChanged", {
+		laptopRequestId: uuid,
+		firstName: firstname,
+	});
+};
+
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
@@ -86,7 +93,6 @@ router.post("/laptop_donation", (req, res) => {
 			const unAssignedRequests = await db.query(
 				"SELECT id, uuid, firstname FROM laptop_request  WHERE id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED'"
 			);
-			console.log(unAssignedRequests.rows);
 
 			let numberOfLaptops = queryResult.rows[0].number_of_laptops;
 			/* comparing the number of requests to the number of laptops donated 
@@ -103,12 +109,9 @@ router.post("/laptop_donation", (req, res) => {
 							unAssignedRequest.id,
 						]).then(() => {
 							// emit event
-							io.to(getRequestRoomName(unAssignedRequest.uuid)).emit(
-								`laptop_request:statusChanged`,
-								{
-									laptopRequestId: unAssignedRequest.uuid,
-									firstName: unAssignedRequest.firstname,
-								}
+							sendSocketNotification(
+								unAssignedRequest.uuid,
+								unAssignedRequest.firstname
 							);
 						});
 
@@ -303,6 +306,7 @@ router.put("/laptop_assignment/:assignmentId", async (req, res) => {
 
 router.delete("/laptop_assignment/:assignmentId", async (request, response) => {
 	const assignmentId = request.params.assignmentId;
+	console.log("deleting assignment with id: " + assignmentId);
 
 	db.query(
 		"DELETE FROM laptop_assignment WHERE id=$1 returning laptop_request_id, laptop_donation_id",
@@ -313,8 +317,39 @@ router.delete("/laptop_assignment/:assignmentId", async (request, response) => {
 				"(SELECT * FROM laptop_donation d WHERE d.id > $1 and (SELECT COUNT(*) FROM laptop_assignment a WHERE a.laptop_donation_id = d.id) < d.number_of_laptops ORDER BY d.id LIMIT 1)",
 				[queryResult.rows[0].laptop_donation_id]
 			);
+			const unAssignedRequests = await db.query(
+				"SELECT id, uuid, firstname FROM laptop_request  WHERE id > $1 and id NOT IN (SELECT laptop_request_id FROM laptop_assignment) and laptop_request_status != 'CANCELLED' ",
+				[queryResult.rows[0].laptop_request_id]
+			);
+
+			// assign next request to the rejected donation
+			if (
+				unAssignedRequests.rows != undefined &&
+				unAssignedRequests.rows.length > 0
+			) {
+				let unAssignedRequest = unAssignedRequests.rows[0];
+				console.log("****************************");
+				console.log(unAssignedRequest);
+				await db
+					.query(
+						" insert into laptop_assignment (laptop_donation_id, laptop_request_id) values ($1, $2)",
+						[queryResult.rows[0].laptop_donation_id, unAssignedRequest.id]
+					)
+					.then(() => {
+						sendSocketNotification(
+							unAssignedRequest.uuid,
+							unAssignedRequest.firstname
+						);
+						console.log(
+							`donation ${queryResult.rows[0].laptop_donation_id} assigned to request ${unAssignedRequest.id}`
+						);
+					});
+			} else {
+				console.log("no request to assign, donation waiting for next request");
+			}
+
+			// assign next donation to the request that rejected the donation
 			if (nextDonation.rows != undefined && nextDonation.rows.length > 0) {
-				console.log(nextDonation.rows[0]);
 				const newAssignment = await db.query(
 					"insert into laptop_assignment (laptop_request_id, laptop_donation_id) values ($1, $2) returning id",
 					[queryResult.rows[0].laptop_request_id, nextDonation.rows[0].id]
