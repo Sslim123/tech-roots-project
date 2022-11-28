@@ -238,7 +238,7 @@ export function RequestStatus() {
 							</Link>
 
 							<ButtonComponent
-								text="Thanks, I've got it"
+								text="Yes, sure!"
 								handleClick={receivedRequest}
 							/>
 						</div>
@@ -250,10 +250,21 @@ export function RequestStatus() {
 					<>
 						<BackgroundImage primaryText="Thank You!" />
 						<div className="text-status">
-							<h1>
-								Sweet! You now have your laptop. Time to start working on your
-								application to Code Your Future?
-							</h1>
+							<h1>Sweet! Would you like to leave a Review for us?</h1>
+						</div>
+						<div className="review-bt">
+							<div className="center-review">
+								<label className="container">
+									Yes
+									<input type="radio" checked="checked" name="radio" />
+									<span className="checkmark"></span>
+								</label>
+								<label className="container">
+									No
+									<input type="radio" name="radio" />
+									<span className="checkmark"></span>
+								</label>
+							</div>
 						</div>
 						<div className="status-bt">
 							<Link className="status-but-link" to="/">
@@ -283,17 +294,6 @@ export function RequestStatus() {
 		return (
 			<>
 				<BackgroundImage primaryText="Ops! this page does not exist " />
-
-				<div className="status-bt">
-					<Link className="status-but-link" to="/">
-						<button id="tr">Back Home </button>
-					</Link>
-				</div>
-				<div className="qrCode">
-					  <h2>Scan the QRCode</h2>
-					<br />
-					<QRCode value="https://laptop-loop.herokuapp.com" />
-				</div>
 			</>
 		);
 	}

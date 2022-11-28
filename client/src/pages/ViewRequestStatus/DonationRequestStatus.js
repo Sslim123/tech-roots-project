@@ -6,7 +6,7 @@ import BackgroundImage from "../component/BackgroundImageComponent/BackgroundIma
 function DonationRequestStatues() {
 	return (
 		<div>
-			<BackgroundImage primaryText="Thank you for your donation" />
+			<BackgroundImage primaryText="Thank you for your donation!" />
 
 			<div className="text-status">
 				<h1>
