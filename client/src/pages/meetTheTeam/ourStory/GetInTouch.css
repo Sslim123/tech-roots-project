@@ -4,19 +4,11 @@
 	box-sizing: border-box;
 }
 .getTouch-container {
-
 	width: 80%;
 	height: 400px;
 	margin: 0 auto;
 }
-.get-touch-text {
-	width: 100%;
-	height: auto;
-	margin-top: 90px;
-
-}
 .getTouch-main-card {
-
 	margin-top: 20px;
 
 	width: 100%;
@@ -88,6 +80,27 @@
 	font-size: 25px;
 	color: #787878;
 }
+.get-touch-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	height: 70%;
+	margin-top: 90px;
+}
+.qrCode {
+	width: 60%;
+	height: 50%;
+	text-align: center;
+}
+.qrCode h2 {
+	font-size: 1.5rem;
+}
+.qrCoder {
+	position: relative;
+	text-align: end;
+	background-color: blue;
+}
 
 @media screen and (max-width: 750px) {
 	.getTouch-container {
@@ -125,6 +138,5 @@
 	.getTouch-ul-link {
 		width: 100%;
 		height: 100%;
-
 	}
 }

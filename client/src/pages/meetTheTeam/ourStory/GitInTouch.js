@@ -1,5 +1,5 @@
 import React from "react";
-
+import QRCode from "react-qr-code";
 import "./GetInTouch.css";
 
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -10,6 +10,15 @@ function GitInTouch(props) {
 			<div className="getTouch-container">
 				<div className="get-touch-text">
 					<h1>{props.GetInTouchText}</h1>
+					<div className="qrCode">
+						<h2>QR code</h2>
+						<div className="code-qr">
+							<QRCode
+								className="qrCoder"
+								value="https://laptop-loop.herokuapp.com"
+							/>
+						</div>
+					</div>
 				</div>
 				<div className="getTouch-card">
 					<div className="getTouch-link">
