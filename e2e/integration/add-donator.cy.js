@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker/locale/en_GB"
 
 describe('add a donator', () => {
     it('allows a user to add a donator', () => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('/')
         cy.contains('Donate').click()
         const donatorName = faker.name.fullName()
         cy.get('input[name=name]').type(donatorName)
@@ -13,7 +13,7 @@ describe('add a donator', () => {
         const deliveryOptions = ['PICKUP', 'SHIP']
         cy.get('select[name=deliveryOption]').select(deliveryOptions[Math.floor(Math.random() * deliveryOptions.length)])
         cy.get('form').submit()
-        cy.visit('http://localhost:3000/list-requests')
+        cy.visit('/list-requests')
         cy.contains('Donator List Table').click()
         cy.get('table').should('include.text', donatorName)
     })
