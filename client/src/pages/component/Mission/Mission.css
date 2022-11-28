@@ -12,7 +12,6 @@
 	height: 100%;
 	background-size: 100%;
 	background-position: center;
-	margin: 0 auto;
 	box-sizing: border-box;
 }
 .mission-card {
@@ -71,9 +70,10 @@
 		align-items: center;
         justify-content: center;
 		text-align: center;
-		margin-left: 10px;
+		margin-left: 0px;
 		position: absolute;
 		top: 150px;
+		
 	}
 	.mission-card {
 		position: relative;
@@ -81,6 +81,10 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+	
 		
 	}
 	.mission-title { 
@@ -91,9 +95,11 @@
 		line-height: 65px;
 	}
 	.mission-text {
+		display: flex;
+		text-align: center;
+		justify-content: center;
 		width: 80%;
 		height: 80%;
-		position: relative;
 		margin: 50px;
 	
 	}
