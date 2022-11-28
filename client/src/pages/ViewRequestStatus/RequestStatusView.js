@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import io from "socket.io-client";
-import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 import BackgroundImage from "../component/BackgroundImageComponent/BackgroundImage";
 import "./StatusView.css";
@@ -293,9 +292,7 @@ export function RequestStatus() {
 				<div className="qrCode">
 					  <h2>Scan the QRCode</h2>
 					<br />
-					
 					<QRCode value="https://laptop-loop.herokuapp.com" />
-					
 				</div>
 			</>
 		);
