@@ -22,14 +22,11 @@
 	margin: 0 auto;
 }
 .cardImgBody {
-
 	width: 315px;
-
 	border-radius: 1.3rem;
 }
 .card-body {
 	font-size: 1.5rem;
-
 }
 .team-text {
 	display: flex;
@@ -47,9 +44,8 @@
 }
 
 @media screen and (max-width: 750px) {
-
 	.card-container {
-		width: 530px;
+		width: 330px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -57,7 +53,6 @@
 		margin: 0 auto;
 		text-align: center;
 	}
-
 	.team-text {
 		display: flex;
 		width: 100%;
@@ -71,14 +66,11 @@
 	.team-img {
 		position: relative;
 		width: 50%;
-
 	}
 
 	.card-img {
 		position: relative;
-
 		width: 330px;
-
 		height: auto;
 		display: flex;
 		flex-direction: column;
@@ -87,40 +79,31 @@
 	}
 	.card1 {
 		position: relative;
-
 		width: 320px;
-
 		height: auto;
 		margin: 0 auto;
 	}
 	.cardImgBody {
-
 		width: 100%;
-
 		padding: 10px;
 		display: flex;
 		flex-direction: row;
 	}
 	.cardImgBody img {
-		width: 40%;
-		height: 50%;
+		width: 30%;
 	}
 	.text-card {
-
 		width: 65%;
 		font-size: 0.7rem;
-
 		text-align: start;
 		font-weight: bold;
 	}
 	.title-card {
-
 		width: 70%;
 		font-size: 0.7rem;
 		font-weight: 100;
 	}
 	.card-body {
-
 		text-align: start;
 		display: flex;
 		flex-direction: column;
