@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
 import io from "socket.io-client";
 import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
@@ -137,6 +138,15 @@ export function RequestStatus() {
 							list. We will send you a notification when a laptop becomes
 							available.
 						</h1>
+						<div className="qrCode">
+							<h2> QR code</h2>
+							<QRCode
+								className="qrCoder"
+								value={
+									"https://laptop-loop.herokuapp.com/laptop-request-status" + id
+								}
+							/>
+						</div>
 					</div>
 					<div className="status-bt">
 						<Link className="status-but-link" to="/">
