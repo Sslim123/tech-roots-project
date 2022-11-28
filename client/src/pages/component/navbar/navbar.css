@@ -62,7 +62,10 @@
 	color: white;
 }
 .active li {
-	color: green;
+	color: #0fa10c;
+	text-decoration: underline black;
+	text-underline-offset: 4px;
+	
 }
 
 .mobile-menu-icon {

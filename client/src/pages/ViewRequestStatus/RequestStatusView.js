@@ -162,7 +162,7 @@ export function RequestStatus() {
 				if (donation.deliveryOption === "SHIP") {
 					return (
 						<>
-							<BackgroundImage primaryText="Good News" />
+							<BackgroundImage primaryText="Good News!!!" />
 							<div className="text-status">
 								<h1>
 									You have been assigned a laptop. Please confirm your address
@@ -197,7 +197,7 @@ export function RequestStatus() {
 				if (donation.deliveryOption === "PICKUP") {
 					return (
 						<>
-							<BackgroundImage primaryText="Good News" />
+							<BackgroundImage primaryText="Good News!!!" />
 							<div className="text-status">
 								<h1>
 									You have been assigned a laptop. Please confirm you can pick
@@ -222,7 +222,7 @@ export function RequestStatus() {
 				console.log(request);
 				return (
 					<>
-						<BackgroundImage primaryText="Thank You" />
+						<BackgroundImage primaryText="Thank You!" />
 						<div className="text-status">
 							<h1>
 								Please let us know
@@ -248,7 +248,7 @@ export function RequestStatus() {
 			if (request.status === "FULFILLED") {
 				return (
 					<>
-						<BackgroundImage primaryText="Thank You" />
+						<BackgroundImage primaryText="Thank You!" />
 						<div className="text-status">
 							<h1>
 								Sweet! You now have your laptop. Time to start working on your
