@@ -236,9 +236,9 @@
 
 	.status-bt {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		position: none;
-		margin-top: -150px;
+	
 	}
 	.status-bt button {
 		width: 332px;
