@@ -207,12 +207,12 @@ export function RequestStatus() {
 
 							<div className="status-bt">
 								<ButtonComponent
-									handleClick={submitAddress}
-									text="Yes please!"
-								/>
-								<ButtonComponent
 									handleClick={rejectRequest}
 									text="No thank you!"
+								/>
+								<ButtonComponent
+									handleClick={submitAddress}
+									text="Yes please!"
 								/>
 							</div>
 						</>
