@@ -137,15 +137,16 @@ export function RequestStatus() {
 							list. We will send you a notification when a laptop becomes
 							available.
 						</h1>
-						<div className="qrCode">
-							<h2> QR code</h2>
-							<QRCode
-								className="qrCoder"
-								value={
-									"https://laptop-loop.herokuapp.com/laptop-request-status" + id
-								}
-							/>
-						</div>
+					</div>
+					<div className="qrCode">
+						<h2> Scan to follow up on your request</h2>
+						<QRCode
+							className="qrCoder"
+							value={
+								"https://laptop-loop.herokuapp.com/laptop-request-status" + id
+							}
+							size={128}
+						/>
 					</div>
 					<div className="status-bt">
 						<Link className="status-but-link" to="/">
