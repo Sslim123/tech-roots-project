@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./StatusView.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BackgroundImage from "../component/BackgroundImageComponent/BackgroundImage";
 
 function DonationRequestStatues() {
+	const [donation, setDonation] = useState("");
+	const { id } = useParams();
+
+	useEffect(() => {
+		fetch(`/api/laptop_donation/${id}`)
+			.then((res) => res.json())
+			.then((donation) => {
+				setDonation(donation);
+			});
+	}, [id]);
+	console.log(donation);
+
+	if (donation === null || donation === undefined || donation === "") {
+		return (
+			<div>
+				<BackgroundImage primaryText="Oops, seems the donation doesn't exist" />
+			</div>
+		);
+	}
 	return (
 		<div>
 			<BackgroundImage primaryText="Thank you for your donation!" />
