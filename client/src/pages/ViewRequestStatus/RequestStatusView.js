@@ -169,16 +169,18 @@ export function RequestStatus() {
 									can be shared so it can be sent to you.
 								</h1>
 							</div>
-							<div style={{ display: "flex" }}>
-								<label htmlFor="addressField">Please enter your address:</label>
-								<input
-									name="addressField"
-									id="addressField"
-									value={laptopRequestAddress}
-									placeholder="Please enter your address"
-									className="input_field"
-									onChange={handleChange}
-								/>
+							<div className="address-field">
+								<label htmlFor="addressField">
+									Please enter your address:
+									<input
+										name="addressField"
+										id="addressField"
+										value={laptopRequestAddress}
+										placeholder="Enter your address"
+										className="input_field"
+										onChange={handleChange}
+									/>
+								</label>
 							</div>
 
 							<div className="status-bt">

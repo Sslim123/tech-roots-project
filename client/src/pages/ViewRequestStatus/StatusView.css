@@ -42,7 +42,16 @@
 
 	color: #ffffff;
 }
-
+.address-field{
+	width: 70%;
+	margin: 0 auto;
+}
+.address-field label{
+	display: flex;
+}
+.address-field input{
+	margin-left: 20px;
+}
 .review-bt{
     width: 70%;
 	margin: auto;
@@ -222,7 +231,7 @@
 	.text-status h1 {
 		font-size: 18px;
 		width: 100%;
-		height: 300px;
+		
 	}
 
 	.status-bt {
@@ -237,4 +246,16 @@
 	.status-bt button:hover {
 		background-color: #2693f9;
 	}
+
+	
+.address-field label{
+	font-size: 18px;
+	display: block;
+	margin-bottom: 200px;
+}
+::placeholder {
+  font-size: 1em;
+  padding: 5px;
+}
+
 }
