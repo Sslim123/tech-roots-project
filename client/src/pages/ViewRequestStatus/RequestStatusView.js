@@ -18,7 +18,13 @@ export function RequestStatus() {
 	// this helps get the id from the router
 	const { id } = useParams();
 	useEffect(() => {
-		Notification.requestPermission();
+		if ("Notification" in window) {
+			Notification.requestPermission();
+		} else {
+			alert(
+				"This browser does not support desktop notifications, please keep your qr code to follow the status of your request"
+			);
+		}
 		socket.on("connect", () => {
 			console.log("connected");
 		});
@@ -26,7 +32,9 @@ export function RequestStatus() {
 			`laptop_request:statusChanged`,
 			({ laptopRequestId, firstName }) => {
 				setNeedsReloading((previousNeedsReloading) => !previousNeedsReloading);
-				new Notification(`Good news ${firstName}, we've found you a laptop!`);
+				if ("Notification" in window && Notification.permission === "granted") {
+					new Notification(`Good news ${firstName}, we've found you a laptop!`);
+				}
 				console.log("Notification sent to ", firstName);
 				console.log("statusChanged", laptopRequestId);
 			}
@@ -87,7 +95,9 @@ export function RequestStatus() {
 			method: "DELETE",
 		}).then((res) => {
 			if (res.status === 201) {
-				new Notification("You have been assigned another available laptop");
+				if ("Notification" in window && Notification.permission === "granted") {
+					new Notification("You have been assigned another available laptop");
+				}
 			} else {
 				console.log("no new donation");
 			}
