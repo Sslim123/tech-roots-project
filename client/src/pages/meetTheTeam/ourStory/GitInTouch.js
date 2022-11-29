@@ -88,7 +88,7 @@ function GitInTouch(props) {
 					</div>
 				</div>
 			</div>
-			<div className="qrCode">
+			<div className="qrCode" style={{ marginTop: "50px" }}>
 				<h2>Scan me</h2>
 				<div className="code-qr">
 					<QRCode

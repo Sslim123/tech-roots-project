@@ -34,6 +34,8 @@ export function RequestStatus() {
 				setNeedsReloading((previousNeedsReloading) => !previousNeedsReloading);
 				if ("Notification" in window && Notification.permission === "granted") {
 					new Notification(`Good news ${firstName}, we've found you a laptop!`);
+				} else {
+					alert(`Good news ${firstName}, we've found you a laptop!`);
 				}
 				console.log("Notification sent to ", firstName);
 				console.log("statusChanged", laptopRequestId);
@@ -104,6 +106,8 @@ export function RequestStatus() {
 			if (res.status === 201) {
 				if ("Notification" in window && Notification.permission === "granted") {
 					new Notification("You have been assigned another available laptop");
+				} else {
+					alert("You have been assigned another available laptop");
 				}
 			} else {
 				console.log("no new donation");
