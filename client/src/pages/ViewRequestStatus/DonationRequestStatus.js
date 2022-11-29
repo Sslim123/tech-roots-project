@@ -5,19 +5,33 @@ import BackgroundImage from "../component/BackgroundImageComponent/BackgroundIma
 
 function DonationRequestStatues() {
 	const [donation, setDonation] = useState("");
+
 	const { id } = useParams();
 
 	useEffect(() => {
 		fetch(`/api/laptop_donation/${id}`)
-			.then((res) => res.json())
+			.then((res) => {
+				console.log(res);
+				if (res.status === 404) {
+					setDonation(null);
+					return;
+				} else {
+					return res.json();
+				}
+			})
 			.then((donation) => {
+				console.log(donation);
 				setDonation(donation);
 			});
 	}, [id]);
 	console.log(donation);
 
 	if (donation === null || donation === undefined || donation === "") {
-		return (
+		return donation === "" ? (
+			<div>
+				<BackgroundImage primaryText="loading..." />
+			</div>
+		) : (
 			<div>
 				<BackgroundImage primaryText="Oops, seems the donation doesn't exist" />
 			</div>

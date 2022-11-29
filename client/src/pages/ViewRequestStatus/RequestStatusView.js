@@ -10,7 +10,7 @@ import ButtonComponent from "../component/ButtonComponent/ButtonComponent";
 const socket = io(window.origin, { path: "/api/socket.io" });
 
 export function RequestStatus() {
-	const [request, setRequest] = useState(null);
+	const [request, setRequest] = useState("");
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
 	const [laptopRequestAddress, setLaptopRequestAddress] = useState(null);
@@ -48,11 +48,18 @@ export function RequestStatus() {
 
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
-			.then((res) => res.json())
+			.then((res) => {
+				if (res.status === 404) {
+					setRequest(null);
+					return;
+				}
+				return res.json();
+			})
 			.then((laptopRequest) => {
 				setRequest(laptopRequest);
 			});
 	}, [id, needsReloading]);
+	console.log(request);
 
 	// gets laptop donation from the request
 
@@ -136,7 +143,7 @@ export function RequestStatus() {
 		}
 	};
 
-	if (request !== null) {
+	if (request !== null && request !== "" && request !== undefined) {
 		if (request.status === "WAITING") {
 			return (
 				<div>
@@ -153,7 +160,7 @@ export function RequestStatus() {
 						<QRCode
 							className="qrCoder"
 							value={
-								"https://laptop-loop.herokuapp.com/laptop-request-status" + id
+								"https://laptop-loop.herokuapp.com/laptop-request-status/" + id
 							}
 							size={128}
 						/>
@@ -304,10 +311,14 @@ export function RequestStatus() {
 			);
 		}
 	} else {
-		return (
+		return request === undefined ? (
 			<>
 				<BackgroundImage primaryText="Ops! this page does not exist " />
 			</>
+		) : (
+			<div>
+				<BackgroundImage primaryText="Loading..." />
+			</div>
 		);
 	}
 }

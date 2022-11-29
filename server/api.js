@@ -41,7 +41,7 @@ router.get("/laptop_donation/:id", async (req, res) => {
 		res.json(laptopDonation);
 	} catch (e) {
 		console.error(e);
-		res.sendStatus(400);
+		res.sendStatus(404);
 	}
 });
 
@@ -178,7 +178,7 @@ router.get("/laptop_request/:id", async (req, res) => {
 		res.send(laptopRequest);
 	} catch (e) {
 		console.error(e);
-		res.sendStatus(400);
+		res.sendStatus(404);
 	}
 });
 
