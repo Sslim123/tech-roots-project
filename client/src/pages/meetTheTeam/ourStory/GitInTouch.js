@@ -10,15 +10,6 @@ function GitInTouch(props) {
 			<div className="getTouch-container">
 				<div className="get-touch-text">
 					<h1>{props.GetInTouchText}</h1>
-					<div className="qrCode">
-						<h2>QR code</h2>
-						<div className="code-qr">
-							<QRCode
-								className="qrCoder"
-								value="https://laptop-loop.herokuapp.com"
-							/>
-						</div>
-					</div>
 				</div>
 				<div className="getTouch-card">
 					<div className="getTouch-link">
@@ -95,6 +86,16 @@ function GitInTouch(props) {
 							</ul>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div className="qrCode">
+				<h2>Scan me</h2>
+				<div className="code-qr">
+					<QRCode
+						className="qrCoder"
+						value="https://laptop-loop.herokuapp.com"
+						size={128}
+					/>
 				</div>
 			</div>
 		</div>

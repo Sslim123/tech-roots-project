@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 import "./navbar.css";
@@ -10,7 +9,6 @@ import svg from "./logo block.svg";
 const Navbar = (props) => {
 	const [Mobile, setMobile] = useState(false);
 	return (
-
 		<>
 			<nav className="navbar">
 				<img className="logo" src={svg} alt="logo" />
@@ -48,7 +46,7 @@ const Navbar = (props) => {
 						className="services"
 						activeClassName="active-nav-links"
 					>
-						<li>Requests</li>
+						<li>Request</li>
 					</NavLink>
 				</ul>
 
@@ -57,7 +55,6 @@ const Navbar = (props) => {
 				</button>
 			</nav>
 		</>
-		
 	);
 };
 export default Navbar;

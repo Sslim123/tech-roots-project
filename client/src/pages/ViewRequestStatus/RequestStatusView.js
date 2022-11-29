@@ -10,7 +10,7 @@ import ButtonComponent from "../component/ButtonComponent/ButtonComponent";
 const socket = io(window.origin, { path: "/api/socket.io" });
 
 export function RequestStatus() {
-	const [request, setRequest] = useState(null);
+	const [request, setRequest] = useState("");
 	const [donation, setDonation] = useState(null);
 	const [needsReloading, setNeedsReloading] = useState(false);
 	const [laptopRequestAddress, setLaptopRequestAddress] = useState(null);
@@ -18,7 +18,13 @@ export function RequestStatus() {
 	// this helps get the id from the router
 	const { id } = useParams();
 	useEffect(() => {
-		Notification.requestPermission();
+		if ("Notification" in window) {
+			Notification.requestPermission();
+		} else {
+			alert(
+				"This browser does not support desktop notifications, please keep your qr code to follow the status of your request"
+			);
+		}
 		socket.on("connect", () => {
 			console.log("connected");
 		});
@@ -26,7 +32,9 @@ export function RequestStatus() {
 			`laptop_request:statusChanged`,
 			({ laptopRequestId, firstName }) => {
 				setNeedsReloading((previousNeedsReloading) => !previousNeedsReloading);
-				new Notification(`Good news ${firstName}, we've found you a laptop!`);
+				if ("Notification" in window && Notification.permission === "granted") {
+					new Notification(`Good news ${firstName}, we've found you a laptop!`);
+				}
 				console.log("Notification sent to ", firstName);
 				console.log("statusChanged", laptopRequestId);
 			}
@@ -40,11 +48,18 @@ export function RequestStatus() {
 
 	useEffect(() => {
 		fetch(`/api/laptop_request/${id}`)
-			.then((res) => res.json())
+			.then((res) => {
+				if (res.status === 404) {
+					setRequest(null);
+					return;
+				}
+				return res.json();
+			})
 			.then((laptopRequest) => {
 				setRequest(laptopRequest);
 			});
 	}, [id, needsReloading]);
+	console.log(request);
 
 	// gets laptop donation from the request
 
@@ -87,7 +102,9 @@ export function RequestStatus() {
 			method: "DELETE",
 		}).then((res) => {
 			if (res.status === 201) {
-				new Notification("You have been assigned another available laptop");
+				if ("Notification" in window && Notification.permission === "granted") {
+					new Notification("You have been assigned another available laptop");
+				}
 			} else {
 				console.log("no new donation");
 			}
@@ -126,7 +143,7 @@ export function RequestStatus() {
 		}
 	};
 
-	if (request !== null) {
+	if (request !== null && request !== "" && request !== undefined) {
 		if (request.status === "WAITING") {
 			return (
 				<div>
@@ -137,15 +154,16 @@ export function RequestStatus() {
 							list. We will send you a notification when a laptop becomes
 							available.
 						</h1>
-						<div className="qrCode">
-							<h2> QR code</h2>
-							<QRCode
-								className="qrCoder"
-								value={
-									"https://laptop-loop.herokuapp.com/laptop-request-status" + id
-								}
-							/>
-						</div>
+					</div>
+					<div className="qrCode">
+						<h2> Scan to follow up on your request</h2>
+						<QRCode
+							className="qrCoder"
+							value={
+								"https://laptop-loop.herokuapp.com/laptop-request-status/" + id
+							}
+							size={128}
+						/>
 					</div>
 					<div className="status-bt">
 						<Link className="status-but-link" to="/">
@@ -169,16 +187,18 @@ export function RequestStatus() {
 									can be shared so it can be sent to you.
 								</h1>
 							</div>
-							<div style={{ display: "flex" }}>
-								<label htmlFor="addressField">Please enter your address:</label>
-								<input
-									name="addressField"
-									id="addressField"
-									value={laptopRequestAddress}
-									placeholder="Please enter your address"
-									className="input_field"
-									onChange={handleChange}
-								/>
+							<div className="address-field">
+								<label htmlFor="addressField">
+									Please enter your address:
+									<input
+										name="addressField"
+										id="addressField"
+										value={laptopRequestAddress}
+										placeholder="Enter your address"
+										className="input_field"
+										onChange={handleChange}
+									/>
+								</label>
 							</div>
 
 							<div className="status-bt">
@@ -238,7 +258,7 @@ export function RequestStatus() {
 							</Link>
 
 							<ButtonComponent
-								text="Thanks, I've got it"
+								text="Yes, sure!"
 								handleClick={receivedRequest}
 							/>
 						</div>
@@ -250,10 +270,21 @@ export function RequestStatus() {
 					<>
 						<BackgroundImage primaryText="Thank You!" />
 						<div className="text-status">
-							<h1>
-								Sweet! You now have your laptop. Time to start working on your
-								application to Code Your Future?
-							</h1>
+							<h1>Sweet! Would you like to leave a Review for us?</h1>
+						</div>
+						<div className="review-bt">
+							<div className="center-review">
+								<label className="container">
+									Yes
+									<input type="radio" checked="checked" name="radio" />
+									<span className="checkmark"></span>
+								</label>
+								<label className="container">
+									No
+									<input type="radio" name="radio" />
+									<span className="checkmark"></span>
+								</label>
+							</div>
 						</div>
 						<div className="status-bt">
 							<Link className="status-but-link" to="/">
@@ -280,21 +311,14 @@ export function RequestStatus() {
 			);
 		}
 	} else {
-		return (
+		return request === undefined ? (
 			<>
 				<BackgroundImage primaryText="Ops! this page does not exist " />
-
-				<div className="status-bt">
-					<Link className="status-but-link" to="/">
-						<button id="tr">Back Home </button>
-					</Link>
-				</div>
-				<div className="qrCode">
-					  <h2>Scan the QRCode</h2>
-					<br />
-					<QRCode value="https://laptop-loop.herokuapp.com" />
-				</div>
 			</>
+		) : (
+			<div>
+				<BackgroundImage primaryText="Loading..." />
+			</div>
 		);
 	}
 }
