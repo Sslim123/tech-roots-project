@@ -1,6 +1,6 @@
 # Description of Laptop loop
 
-Laptop loop is an opportunity for people seeking asylum to receive digital support in the form of laptops. We aim to connect people with other people or organisations that are offering to donate laptops, and at the same time ensure that donated laptops will be given to those who are in need. We understand many asylum seekers experience a lot of barriers and hardships and this is our attempt to curb digital poverty in the asylum system. 
+Laptop loop gives asylum seekers an opportunity to receive digital support in the form of laptops. We aim to connect people with other people or organisations that are offering to donate laptops, and at the same time ensure that donated laptops will be given to those who are in need. We understand many asylum seekers experience a lot of barriers and hardships and this is our attempt to curb digital poverty in the asylum system. 
 
 Main features of the application are:
 - Ability to donate a laptop
