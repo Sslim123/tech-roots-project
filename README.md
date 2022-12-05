@@ -14,7 +14,7 @@ Main features of the application are:
 - Status changing of the laptop request 
 
 # Context of Laptop loop
-Laptop loop is the application we developed in a period 4 weeks as our Code Your Future final project. We found this project meaningful because we were once asyulum seekers and we know about the problem of  digital poverty within the system. The team involed in the development of this product include:
+We developed Laptop loopw within a period 4 weeks as our Code Your Future final project. We found this project meaningful because we were once asyulum seekers and we have once face the challenge of digital poverty while waiting for our legal right to remain in the UK. The team involed in the development of this product include:
 
 # Linkedin links
 1. Fareedh Yawe - https://www.linkedin.com/in/yawe-fareed/
