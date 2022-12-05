@@ -1,3 +1,33 @@
+# Description of Laptop loop
+
+Laptop loop is an opportunity for people seeking asylum to receive digital support in the form of laptops. We aim to connect people with other people or organisations that are offering to donate laptops, and at the same time ensure that donated laptops will be given to those who are in need. We understand many asylum seekers experience a lot of barriers and hardships and this is our attempt to curb digital poverty in the asylum system. 
+
+Main features of the application are:
+- Ability to donate a laptop
+- Abilty to donate multiple laptops
+- Ability to request a laptop
+- Ability for the admin to see requests and donations available
+- Automatic assignment of laptops available to requests
+- Automatic reassigment of canceled assignments to other requests
+- Abitity to reject a specific laptop
+- Browser notifications on laptop assignment to the request
+- Status changing of the laptop request 
+
+# Context of Laptop loop
+Laptop loop is the application we developed in a period 4 weeks as our Code Your Future final project. We found this project meaningful because we were once asyulum seekers and we know about the problem of  digital poverty within the system. The team involed in the development of this product include:
+
+# Linkedin links
+1. Fareedh Yawe - https://www.linkedin.com/in/yawe-fareed/
+2. Abdalrazaq Altaih - https://www.linkedin.com/in/abdalrazaq94t/
+3. Salem Dayfan - https://www.linkedin.com/in/salem-dayfan-0a9399206/
+
+# Github links: 
+1. Fareedh Yawe - https://github.com/Fareedh-12
+2. Abdalrazaq Altaih - https://github.com/Abdalrazaq94
+3. Salem Dayfan - https://github.com/Sslim123
+
+
+
 # Starter Kit
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
