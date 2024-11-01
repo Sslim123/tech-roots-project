@@ -17,7 +17,7 @@ function FormSubmit() {
 			}),
 			headers: { "content-type": "application/json" },
 		});
-	}, []);
+	});
 	function handleClick(e) {
 		if (e.target.name === "firstName") {
 			setFirst(e.target.value);
@@ -37,11 +37,10 @@ function FormSubmit() {
 		setFirst("");
 		setSecond("");
 		setEmail("");
-		a;
 	}
 	function messageAlert() {
 		alert(
-			"thank you for your completing the request form. your request have been recived "
+			"thank you for your completing the request form. your request have been received "
 		);
 	}
 	return (

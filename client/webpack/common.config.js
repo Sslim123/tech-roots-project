@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	entry: "./client/src/index.js",
+
 	module: {
 		rules: [
 			{
@@ -24,12 +26,13 @@ module.exports = {
 			},
 		],
 	},
+
 	output: {
 		publicPath: "/",
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			favicon: "./client/src/favicon.ico",
+			// favicon: "./client/src/favicon.ico",
 			template: "./client/src/index.html",
 		}),
 	],

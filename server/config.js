@@ -5,6 +5,6 @@ const config = {
 	connectionTimeoutMillis: 5000,
 	ssl: dbUrl.includes("localhost") ? false : { rejectUnauthorized: false },
 };
-module.exports = {
+export default {
 	config,
 };

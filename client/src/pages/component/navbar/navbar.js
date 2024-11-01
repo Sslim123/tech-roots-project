@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "./navbar.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import svg from "./logo block.svg";

@@ -1,5 +1,5 @@
 import React from "react";
-import Img from "./icon-laptop.jpg";
+//import Img from "./icon-laptop.jpg";
 import Svg3 from "./icon-contact-detail.svg";
 import Svg2 from "./icon-team-detail.svg";
 import Svg1 from "./icon-pick-up.svg";
@@ -15,7 +15,7 @@ function HowIsWORK() {
 			<div className="howItWorkCard">
 				<div className="body-span">
 					<div className="imgSvg">
-						<img src={Svg3} />
+						<img src={Svg3} alt=" " />
 					</div>
 					<p>
 						Fill out a form to request a laptop
@@ -26,7 +26,7 @@ function HowIsWORK() {
 				</div>
 				<div className="body-span">
 					<div className="imgSvg">
-						<img src={Svg2} />
+						<img src={Svg2} alt=" " />
 					</div>
 					<p>
 						If you requested a laptop you will be notified as soon as you are
@@ -35,12 +35,12 @@ function HowIsWORK() {
 				</div>
 				<div className="body-span">
 					<div className="imgSvg">
-						<img src={Svg1} />
+						<img src={Svg1} alt=" " />
 					</div>
 					<p>
 						{" "}
-						The laptop is delivered to the requestor or picked up at the donor's
-						address
+						The laptop is delivered to the requestor or picked up at the donor
+						is address
 					</p>
 				</div>
 			</div>

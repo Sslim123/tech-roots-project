@@ -1,5 +1,4 @@
 import http from "http";
-
 import app from "./app";
 import { connectDb, disconnectDb } from "./db";
 import config from "./utils/config";

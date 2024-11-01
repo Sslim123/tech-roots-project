@@ -1,4 +1,4 @@
-import { request } from "express";
+//import { request } from "express";
 import { Router } from "express";
 import { io, getRequestRoomName } from "./socket";
 import db from "./db";
@@ -25,7 +25,7 @@ router.get("/", (_, res) => {
 router.get("/laptop_donation/:id", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * from laptop_donation WHERE uuid = $1",
+			"SELECT * from laptop_donation WHERE  uuid = $1",
 			[req.params.id]
 		);
 
