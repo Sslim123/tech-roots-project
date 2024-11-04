@@ -15,6 +15,9 @@
 		"database": "postgres",
 		"username": "postgres"
 	},
-	"cSpell.words": ["noreferrer"],
+	"cSpell.words": [
+		"noreferrer",
+		"scroller"
+	],
 	"liveServer.settings.port": 3001
 }
