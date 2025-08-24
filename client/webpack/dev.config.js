@@ -1,17 +1,23 @@
 const { merge } = require("webpack-merge");
+const common = require("./common.config.js");
+const path = require('path');
 
-const common = require("./common.config");
 
 module.exports = merge(common, {
+	mode: "development",
 	devtool: "inline-source-map",
 	devServer: {
-		historyApiFallback: {
-			disableDotRule: true,
+		static: {
+			directory: path.resolve(__dirname, '../dist'),
 		},
+		historyApiFallback: true,
+		hot: true,
+		open: true,
 		port: 3000,
-		proxy: {
-			"/api": "http://localhost:3100",
-		},
+		proxy: [{
+			context: ['/api'],
+			target: 'http://localhost:3000'
+		}],
 	},
-	mode: "development",
 });
+

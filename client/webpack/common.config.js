@@ -1,13 +1,19 @@
-/* eslint-disable no-undef */
+const entry = "./client/src/index.js";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path")
 
 module.exports = {
-	entry: "./client/src/index.js",
-
+	entry,
+	output: {
+		path: path.resolve(__dirname, "../dist"),
+		filename: "bundle.[contenthash].js",
+		publicPath: "/",  // ✅ important for React Router
+		clean: true,
+	},
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader",
@@ -26,14 +32,12 @@ module.exports = {
 			},
 		],
 	},
-
-	output: {
-		publicPath: "/",
+	resolve: {
+		extensions: ['.js', '.jsx'],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			// favicon: "./client/src/favicon.ico",
-			template: "./client/src/index.html",
+			template: './client/src/index.html',
 		}),
 	],
-};
+}

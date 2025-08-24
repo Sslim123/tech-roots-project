@@ -1,8 +1,7 @@
-//import { request } from "express";
-import { Router } from "express";
+import Router  from "express";
 import { io, getRequestRoomName } from "./socket";
 import db from "./db";
-import { nanoid } from "nanoid";
+const { nanoid } = require("nanoid");
 
 import logger from "./utils/logger";
 
@@ -61,6 +60,7 @@ router.get("/laptop_donation", async (req, res) => {
 		});
 		res.json(laptopDonation);
 	} catch (e) {
+		// eslint-disable-next-line no-console
 		console.error(e);
 		res.sendStatus(400);
 	}

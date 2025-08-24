@@ -1,12 +1,10 @@
-const { Pool } = require("pg");
-const { config } = require("./config");
-const fs = require("fs");
+import Pool from "pg";
+import config  from "./config";
+import readFileSync from "fs";
 
-const createSchema = fs
-	.readFileSync(require.resolve("./db_setup.sql"))
+const createSchema = readFileSync(require.resolve("./db_setup.sql"))
 	.toString();
-const populateDb = fs
-	.readFileSync(require.resolve("./db_populate.sql"))
+const populateDb = readFileSync(require.resolve("./db_populate.sql"))
 	.toString();
 const pool = new Pool(config);
 

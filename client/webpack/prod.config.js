@@ -1,11 +1,10 @@
 const HtmlWebpackTagsPlugin = require("html-webpack-tags-plugin");
 const path = require("path");
-const { merge } = require("webpack-merge");
-
+const { merge }  = require("webpack-merge");
 const common = require("./common.config");
-const { devDependencies } = require("../../package.json");
+const  { dependencies }   = require("../../package.json");
 
-module.exports = merge(common, {
+export default merge(common, {
 	devtool: "source-map",
 	mode: "production",
 	optimization: {
@@ -20,9 +19,11 @@ module.exports = merge(common, {
 			},
 		},
 	},
-	output: {
-		filename: "[name].[contenthash].js",
-		path: path.resolve(__dirname, "../../dist/static"),
+		output: {
+    filename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, "../../dist/static"),
+    publicPath: "/", // ✅ keep consistent with common
+    clean: true,
 	},
 	plugins: [
 		new HtmlWebpackTagsPlugin({
@@ -32,9 +33,10 @@ module.exports = merge(common, {
 			].map(({ packageName, variableName }) => ({
 				attributes: { crossorigin: "" },
 				external: { packageName, variableName },
-				path: `https://unpkg.com/${packageName}@${devDependencies[packageName]}/umd/${packageName}.production.min.js`,
+				path: `https://unpkg.com/${packageName}@${dependencies[packageName]}/umd/${packageName}.production.min.js`,
 			})),
 			usePublicPath: false,
 		}),
 	],
+
 });

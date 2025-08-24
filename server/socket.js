@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Server } from "socket.io";
 import logger from "./utils/logger";
 
